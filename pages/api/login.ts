@@ -29,8 +29,10 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
       await client.close();
       return;
     }
-    const hash = crypto.pbkdf2Sync(password, login.salt, 100000, 64, "sha512").toString("hex");
-    
+    const hash = crypto
+      .pbkdf2Sync(password, login.salt, 100000, 64, "sha512")
+      .toString("hex");
+
     if (login?.hash !== hash) {
       res.status(401).json({ error: "Invalid credential" });
     }
