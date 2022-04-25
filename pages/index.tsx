@@ -8,7 +8,7 @@ export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     return {
       props: {
-        user: req.session.user,
+        user: req.session.user ?? {},
       },
     };
   },
@@ -25,7 +25,7 @@ export default function Home({ user }) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Hello {user.login}</h1>
+        <h1 className={styles.title}>Hello {user.login ?? 'Guest'}</h1>
 
         <p className={styles.description}>
           Get started by editing{" "}
