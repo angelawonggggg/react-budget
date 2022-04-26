@@ -4,7 +4,8 @@ import styles from "../styles/Home.module.css";
 
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
-import { User } from "./api/user";
+import { User } from "models/auth";
+
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     return {
@@ -26,7 +27,9 @@ export default function Home({ user }: { user: User }) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Hello {user.login ?? "Guest"}</h1>
+        <h1 className={styles.title}>
+          Hello {user.isLoggedIn ? user.username : "Guest"}
+        </h1>
 
         <p className={styles.description}>
           Get started by editing{" "}

@@ -1,4 +1,4 @@
-import type { User } from "./user";
+import type { User } from "models/auth";
 
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "lib/session";
