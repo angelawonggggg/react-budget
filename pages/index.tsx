@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
+import { User } from "models/auth";
+
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     return {
@@ -17,7 +19,7 @@ export const getServerSideProps = withIronSessionSsr(
   sessionOptions
 );
 
-export default function Home({ user }) {
+export default function Home({ user } : { user: User }) {
   const Wrapper = styled.section`
     width: 30vw;
     margin-left: auto;
@@ -29,6 +31,7 @@ export default function Home({ user }) {
     text-decoration: underline;
     cursor: pointer;
   `;
+
 
   return (
     <div className={styles.container}>
