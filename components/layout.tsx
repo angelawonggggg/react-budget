@@ -1,13 +1,11 @@
-import Navbar from "./navbar"
+import Navbar from "./navbar";
 
-
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-      <div className="content">
-          <Navbar/> 
-          { children } 
-
-      </div>
-  
+    <div className="content">
+      <Navbar />
+      <div className="main">{children}</div>
+      
+    </div>
   );
 }
