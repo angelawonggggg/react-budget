@@ -3,6 +3,9 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   * {
      font-family: sans-serif;
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
   }
 
   .main {
@@ -48,7 +51,9 @@ const GlobalStyle = createGlobalStyle`
  .card {
     width: 50%;
  }
+
+
+
 `;
 
-
-export default GlobalStyle
+export default GlobalStyle;
