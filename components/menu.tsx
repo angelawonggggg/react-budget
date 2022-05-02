@@ -36,7 +36,7 @@ const CloseMenuIcon = styled(LargeClose)`
 const sideVariants = {
   open: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: 1,
     },
   },
