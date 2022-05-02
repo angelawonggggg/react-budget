@@ -1,3 +1,5 @@
+@import url(https://weloveiconfonts.com/api/?family=entypo);
+
 html,
 body {
   padding: 0;
@@ -11,3 +13,10 @@ a {
   text-decoration: none;
 }
 
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
