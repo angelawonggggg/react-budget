@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { useState } from "react";
+
 import Menu from "./menu";
+
 const Navbar = styled.nav`
   padding: 1rem;
   display: flex;
@@ -20,36 +21,13 @@ const Logo = styled.a`
   border-bottom: 5px dotted;
 `;
 
-const Icon = styled.img`
-  width: 1.5rem;
-  height: 1.5rem;
-  position: absolute;
-  left: 1rem;
-`;
-
 export default function Header() {
-  const [showMenu, useShowMenu] = useState(false);
-
-  const handleShowMenu = () => {
-    if (!showMenu) {
-      useShowMenu(true);
-    } else {
-      useShowMenu(false);
-    }
-  };
-
   return (
     <Navbar>
-      {!showMenu ? (
-        <Icon onClick={handleShowMenu} src="icons/menu.png" alt="menu" />
-      ) : (
-        <Icon onClick={handleShowMenu} src="icons/close.png" alt="close" />
-      )}
-
+      <Menu />
       <Link href="/">
         <Logo>Budget</Logo>
       </Link>
-      {showMenu && <Menu handleShowMenu={handleShowMenu} />}
     </Navbar>
   );
 }

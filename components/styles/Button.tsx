@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-const Button = styled.button`
+import { motion } from "framer-motion";
+const Button = styled(motion.button)`
     display: block;
     background: #138BFC;
     color: white;
@@ -16,7 +16,18 @@ const DelButton = styled(Button)`
 `;
 
 export const BasicButton = ({ children, action }) => {
-  return <Button onClick={action}>{children}</Button>;
+  return (
+    <Button
+      whileHover={{
+        scale: 1.2,
+        transition: { duration: 1 },
+      }}
+      whileTap={{ scale: 0.9 }}
+      onClick={action}
+    >
+      {children}
+    </Button>
+  );
 };
 
 export const DeleteButton = ({ children, action }) => {
