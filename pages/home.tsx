@@ -1,6 +1,5 @@
 import Head from "next/head";
-
-
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -9,8 +8,7 @@ export default function Home() {
         <title>Budget | Home</title>
       </Head>
 
-      <h1>Home</h1>
-
+      <motion.h1 animate={{}}>Home</motion.h1>
     </div>
   );
 }

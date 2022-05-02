@@ -14,6 +14,8 @@ export default function DoughnutChart() {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: false,
       position: "right",
@@ -35,9 +37,5 @@ export default function DoughnutChart() {
     },
   };
 
-  return (
-    <div>
-      <Doughnut data={data} width={80} height={40} options={options} />
-    </div>
-  );
+  return <Doughnut data={data} width={80} height={40} options={options} />;
 }

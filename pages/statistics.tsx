@@ -4,13 +4,12 @@ import DoughnutChart from "../components/doughnutChart";
 import Bar from "../components/barChart";
 import { useState } from "react";
 import {
-  MainCard,
-  SmallCard,
+  ChartContainer,
   Wrapper,
   IconWrapper,
 } from "../components/styles/Container";
 import { Icon } from "../components/styles/Icon";
-import { BiBarChartAlt2, BiDoughnutChart } from 'react-icons/bi';
+import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
@@ -19,13 +18,12 @@ export default function Statistics() {
   const showDonutChart = () => {
     setIsShowDonut(true);
     setIsShowBar(false);
-  }
+  };
 
   const showBarChart = () => {
     setIsShowBar(true);
     setIsShowDonut(false);
-  }
-
+  };
 
   return (
     <div>
@@ -34,24 +32,28 @@ export default function Statistics() {
       </Head>
       <h1>Statistics</h1>
 
-      <MainCard>
+      <ChartContainer>
         <LineChart />
-      </MainCard>
+      </ChartContainer>
 
       <IconWrapper>
-        <Icon onClick={showDonutChart} color={isShowDonut ? "black": "gray"}><BiDoughnutChart /></Icon>
-        <Icon onClick={showBarChart} color={isShowBar ? "black": "gray"}><BiBarChartAlt2 /></Icon>
+        <Icon onClick={showDonutChart} color={isShowDonut ? "black" : "gray"}>
+          <BiDoughnutChart />
+        </Icon>
+        <Icon onClick={showBarChart} color={isShowBar ? "black" : "gray"}>
+          <BiBarChartAlt2 />
+        </Icon>
       </IconWrapper>
 
-        <Wrapper>
-          <MainCard className={isShowDonut ? "show" : "hide"}>
-            <DoughnutChart />
-          </MainCard>
+      <Wrapper>
+        <ChartContainer className={isShowDonut ? "show" : "hide"}>
+          <DoughnutChart />
+        </ChartContainer>
 
-          <MainCard className={isShowBar ? "show" : "hide"}>
-            <Bar />
-          </MainCard>
-        </Wrapper>
+        <ChartContainer className={isShowBar ? "show" : "hide"}>
+          <Bar />
+        </ChartContainer>
+      </Wrapper>
     </div>
   );
 }
