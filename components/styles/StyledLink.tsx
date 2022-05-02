@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import {motion} from "framer-motion"
 
 const StyledLink = styled.a`
   margin: 0.5rem 0 0 1rem;
