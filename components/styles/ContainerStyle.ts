@@ -20,6 +20,7 @@ export const BigCard = styled(motion.section)`
   position: absolute;
   top: 2rem;
   left: 5vw;
+  padding: 1rem 2rem;
   background-color: white;
   box-shadow: 2px 2px 2px grey;
   border-radius: 15px;

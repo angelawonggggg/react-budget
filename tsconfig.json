@@ -25,7 +25,7 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js"
-  ],
+, "components/TransactionForm.jsx", "components/AddTransaction.jsx"  ],
   "exclude": [
     "node_modules"
   ]

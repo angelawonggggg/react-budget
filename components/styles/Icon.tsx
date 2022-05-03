@@ -4,16 +4,14 @@ import { VscGrabber, VscChromeClose, VscTriangleLeft } from "react-icons/vsc";
 // import { BsPatchPlusFill } from "react-icons/bs";
 
 export const Icon = styled.span`
-    font-size: 20px;
-    margin: 0 5px;
-    color: ${ (props) => props?.color || "gray" };
-`
+  font-size: 20px;
+  margin: 0 5px;
+  color: ${(props) => props?.color || "gray"};
+`;
 
 export const IconFocus = styled.span`
-    color: black;
-`
-
-
+  color: black;
+`;
 
 export const MenuIcon = styled(VscGrabber)`
   transform: scale(2);
@@ -21,6 +19,8 @@ export const MenuIcon = styled(VscGrabber)`
 
 export const LargeCloseIcon = styled(VscChromeClose)`
   transform: scale(1.5);
+  position: absolute;
+  right: 2rem;
 `;
 export const MoveBackIcon = styled(VscTriangleLeft)`
   transform: scale(2);
