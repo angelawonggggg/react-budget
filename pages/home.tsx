@@ -1,14 +1,18 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
-
+import styled from "styled-components";
+import AddTransaction from "components/AddTransaction";
 export default function Home() {
   return (
     <div>
       <Head>
         <title>Budget | Home</title>
       </Head>
+      <div>date</div>
+      <div>0 TRANSACTIONS</div>
+      <div>content</div>
 
-      <motion.h1 animate={{}}>Home</motion.h1>
+      <AddTransaction />
     </div>
   );
 }

@@ -22,11 +22,14 @@ const Logo = styled.a`
 `;
 
 export default function Header() {
+  
   return (
     <Navbar>
       <Menu />
       <Link href="/">
         <Logo>Budget</Logo>
+
+        {/* Swapping elements */}
       </Link>
     </Navbar>
   );

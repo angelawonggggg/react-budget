@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { AnimatePresence, motion, useCycle } from "framer-motion";
-import { MenuIcon, LargeClose } from "components/styles/Icon";
+import { motion, useCycle } from "framer-motion";
+import { MenuIcon, LargeCloseIcon } from "components/styles/Icon";
 import { HeaderMenuLink } from "../components/styles/StyledLink";
 
 const Navbar = styled(motion.nav)`
@@ -28,7 +28,8 @@ const HeaderMenuIcon = styled(MenuIcon)`
   left: 1rem;
 `;
 
-const CloseMenuIcon = styled(LargeClose)`
+const CloseMenuIcon = styled(LargeCloseIcon)`
+  transform: scale(2);
   position: absolute;
   left: 1rem;
 `;
@@ -54,28 +55,27 @@ export default function Menu() {
 
   return (
     <main>
-      <AnimatePresence>
-        {open && (
-          <Navbar
-            onClick={cycleOpen}
-            initial={{ width: 0 }}
-            animate={{
-              width: 320,
-            }}
+      {open && (
+        <Navbar
+          onClick={cycleOpen}
+          initial={{ width: 0 }}
+          animate={{
+            width: 320,
+          }}
+        >
+          <RouterList
+            className="container"
+            initial="closed"
+            animate="open"
+            variants={sideVariants}
           >
-            <RouterList
-              className="container"
-              initial="closed"
-              animate="open"
-              variants={sideVariants}
-            >
-              {links.map(({ href, children }) => (
-                <HeaderMenuLink href={href} children={children} />
-              ))}
-            </RouterList>
-          </Navbar>
-        )}
-      </AnimatePresence>
+            {links.map(({ href, children }) => (
+              <HeaderMenuLink href={href} children={children} />
+            ))}
+          </RouterList>
+        </Navbar>
+      )}
+
       {!open ? (
         <HeaderMenuIcon onClick={cycleOpen} />
       ) : (
