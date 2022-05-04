@@ -30,6 +30,13 @@ const itemVariants = {
   open: { opacity: 1 },
 };
 
+export const SpecialLink = styled.a`
+text-decoration: underline;
+cursor: pointer;
+color: #138BFC;
+`;
+
+
 export const RouterLink = ({ href, children }) => (
   <Link href={href}>
     <StyledLink>{children}</StyledLink>

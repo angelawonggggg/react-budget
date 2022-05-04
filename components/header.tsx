@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-
-import Menu from "./menu";
+import Menu from "./Menu";
 
 const Navbar = styled.nav`
   padding: 1rem;
@@ -22,7 +21,6 @@ const Logo = styled.a`
 `;
 
 export default function Header() {
-  
   return (
     <Navbar>
       <Menu />

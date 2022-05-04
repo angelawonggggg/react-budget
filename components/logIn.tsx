@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export default function logIn() {
-
   return (
     <div>
       <h1>Log in to your account</h1>

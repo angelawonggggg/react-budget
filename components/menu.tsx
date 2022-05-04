@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion, useCycle } from "framer-motion";
 import { MenuIcon, LargeCloseIcon } from "components/styles/Icon";
-import { HeaderMenuLink } from "../components/styles/StyledLink";
+import { HeaderMenuLink } from "./styles/StyledLink";
 
 const Navbar = styled(motion.nav)`
   margin: 20px 0;

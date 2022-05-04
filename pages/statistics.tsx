@@ -1,11 +1,10 @@
 import Head from "next/head";
-import LineChart from "../components/lineChart";
-import DoughnutChart from "../components/doughnutChart";
-import Bar from "../components/barChart";
+import LineChart from "../components/LineChart";
+import DoughnutChart from "../components/DoughnutChart";
+import Bar from "../components/BarChart";
 import { useState } from "react";
 import {
   ChartContainer,
-  Wrapper,
   IconWrapper,
 } from "../components/styles/Container";
 import { Icon } from "../components/styles/Icon";
@@ -45,7 +44,7 @@ export default function Statistics() {
         </Icon>
       </IconWrapper>
 
-      <Wrapper>
+      
         <ChartContainer className={isShowDonut ? "show" : "hide"}>
           <DoughnutChart />
         </ChartContainer>
@@ -53,7 +52,7 @@ export default function Statistics() {
         <ChartContainer className={isShowBar ? "show" : "hide"}>
           <Bar />
         </ChartContainer>
-      </Wrapper>
+     
     </div>
   );
 }

@@ -4,11 +4,12 @@ import styled from "styled-components"
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function NotFound() {
-    const NotFound = styled.section`
-        text-align: center;
-    `
 
+const NotFound = styled.section`
+text-align: center;
+`
+
+export default function PageNotFound() {
     const router = useRouter();
 
     useEffect(() => {

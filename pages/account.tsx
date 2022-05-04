@@ -1,20 +1,23 @@
 import Head from "next/head";
-import styled from "styled-components";
-import { BasicButton, DeleteButton } from "components/styles/Button";
+import AddAccount from "components/AddAccount";
+import { BasicButton } from "components/styles/Button";
 
 export default function Account() {
-  const handleTest = () => {
-    console.log("click");
-  };
-
+  const count = 0;
   return (
     <div>
       <Head>
         <title>Budget | Account</title>
       </Head>
-      <h1>Account</h1>
-      <BasicButton action={handleTest}>Click</BasicButton>
-      <DeleteButton action={handleTest}>Delete</DeleteButton>
+
+      <div>
+        <h1>Account</h1>
+        <h3>You have {count} account</h3>
+        <BasicButton action="">Add an account</BasicButton>
+      </div>
+
+
+      <AddAccount />
     </div>
   );
 }
