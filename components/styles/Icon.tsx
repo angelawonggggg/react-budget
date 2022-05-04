@@ -2,7 +2,7 @@ import styled from "styled-components";
 import motion from "framer-motion";
 import { VscGrabber, VscChromeClose, VscTriangleLeft } from "react-icons/vsc";
 // import { BsPatchPlusFill } from "react-icons/bs";
-
+import { MdOutlineStickyNote2 } from "react-icons/md";
 export const Icon = styled.span`
   font-size: 20px;
   margin: 0 5px;
@@ -24,6 +24,11 @@ export const LargeCloseIcon = styled(VscChromeClose)`
 `;
 export const MoveBackIcon = styled(VscTriangleLeft)`
   transform: scale(2);
+`;
+export const NoteIcon = styled(MdOutlineStickyNote2)`
+  transform: scale(2);
+  color: grey;
+  margin: 0 0.5rem;
 `;
 
 // export const AddItemsIcon = styled(motion.img)`
