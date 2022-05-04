@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
 
   input {
    padding: 5px;
+
   }
 
   input:focus {
