@@ -20,8 +20,10 @@ const NoteBox = styled(Box)`
 `;
 
 const TextFieldBox = styled(TextField)`
-  width: 100%;
+  width: 50%;
   padding: 30;
+  height: 7rem;
+
 `;
 
 export const DatePicker = ({ control }) => {
