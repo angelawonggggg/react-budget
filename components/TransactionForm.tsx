@@ -7,7 +7,11 @@ const TranForm = styled.form`
   flex-direction: column;
 `;
 
-export default function TransactionForm({ postType, setCardOpen }) {
+type Form = {
+  postType: string;
+  setCardOpen: function;
+};
+export default function TransactionForm({ postType, setCardOpen }: Form) {
   const {
     register,
     handleSubmit,
@@ -15,7 +19,7 @@ export default function TransactionForm({ postType, setCardOpen }) {
     control,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     console.log(postType, data);
     setCardOpen(false);
   };

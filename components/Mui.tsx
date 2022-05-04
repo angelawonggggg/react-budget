@@ -23,10 +23,13 @@ const TextFieldBox = styled(TextField)`
   width: 50%;
   padding: 30;
   height: 7rem;
-
 `;
 
-export const DatePicker = ({ control }) => {
+type Control = {
+  control: function;
+};
+
+export const DatePicker = ({ control }: Control) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Controller
