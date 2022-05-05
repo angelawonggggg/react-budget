@@ -12,7 +12,7 @@ import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
-  const [isShowBar, setIsShowBar] = useState(false);
+  const [isShowBar, setIsShowBar] = useState(true);
 
   const showDonutChart = () => {
     setIsShowDonut(true);

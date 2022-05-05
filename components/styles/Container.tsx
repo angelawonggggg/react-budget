@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { TiDelete } from "react-icons/ti";
+import { TiEdit } from "react-icons/ti";
 
-type PopupContainer = {
+type AccountDetail = {
   title: string;
-  items: Array<string>;  
+  balance: number;
+  onEdit: (event: React.MouseEvent<SVGAElement>) => void;
 }
 
 export const ChartContainer = styled.div`
@@ -20,7 +21,7 @@ export const IconWrapper = styled.div`
   margin: 15px 10px;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,45 +31,69 @@ const Wrapper = styled.div`
   margin-right: auto;
   border: solid 1px #ccc;
   border-radius: 5px;
-  padding: 10px 15px;
-  position: relative;
+  padding: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
 `;
 
-const Title = styled.h1`
-  font-size: 15px;
-  text-align: center;
-  padding: 5px 0;
+export const PageTopWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px;
+  `;
 
-`;
+const AccountCard = styled.div`
+display: flex;
+align-items: baseline;
+flex-direction: column;
+margin-left: auto;
+margin-right: auto;
+padding: 10px;
+background: powderblue;
+border-radius: 5px;
+max-width: 500px;
+position: relative;
+  `;
 
-const DeleteIcon = styled.div`
+const AccountCardIcon = styled.div`
   position: absolute;
   right: 10px;
-  top: 10px;
+  font-size: 0.8em;
 
   &:hover {
-    color: gray;
-`
-
-const Item = styled.div`
-  width: 100%;
-  padding: 10px 5px;
-
-  &:hover {
-    background-color: #ccc;
     cursor: pointer;
   }
 `;
 
-export const PopupContainer = ( {title, items}: PopupContainer )  => (
-  <div>
-    <Wrapper>
-    <DeleteIcon><TiDelete /></DeleteIcon>
-      <Title>{title}</Title>
-        {" "}
-        {items?.map((item, id) => (
-          <Item key={id}>{item}</Item>
-        ))}
-    </Wrapper>
-  </div>
+const AccountDetailName = styled.h1`
+  font-size: 15px;
+  display: block;
+`;
+
+const Balance = styled.div`
+  font-size: 15px;
+  margin-top: 10px;
+`
+
+
+
+export const AccountDetailCard = ({ title, balance, onEdit }: AccountDetail) => (
+ 
+  <AccountCard>
+         <AccountCardIcon>
+      <TiEdit onClick={onEdit}/>
+    </AccountCardIcon>
+    
+    <AccountDetailName>{title}</AccountDetailName>
+    <Balance>{"Balance: $" + balance}</Balance>
+  </AccountCard>
+
 );
+
+
+
+
+

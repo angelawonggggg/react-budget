@@ -1,0 +1,115 @@
+import { TiDelete } from "react-icons/ti";
+import styled from "styled-components";
+
+type PopupForm = {
+  title: string;
+  items: Array<string>;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClose: (event: React.MouseEvent<HTMLInputElement>) => void;
+};
+
+type AccountForm = {
+  account: string;
+  balance: number;
+};
+
+
+const Title = styled.h1`
+  font-size: 15px;
+  text-align: center;
+  padding: 5px 0;
+`;
+
+export const CloseIcon = styled.div`
+position: absolute;
+right: 10px;
+top: 10px;
+
+&:hover {
+  color: gray;
+`;
+
+const Select = styled.select`
+  width: 80%;
+  padding: 5px;
+`;
+
+const Item = styled.option`
+  width: 100%;
+  padding: 10px 5px;
+
+  &:hover {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+`;
+
+const Label = styled.label`
+  font-size: 12px;
+  margin: 5px 0;
+`;
+
+const Input = styled.input`
+  width: 80%;
+  padding: 5px;
+`;
+
+const PopupCard = styled.div`
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  background-color: white;
+  padding: 40px;
+  transform: translateY(-50%);
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.75);
+`;
+
+export const PopupForm = ({ title, items, onInputChange, onClose}: PopupForm) => (
+  <Overlay>
+    <PopupCard>
+      <CloseIcon onClick={onClose}>
+        <TiDelete />
+      </CloseIcon>
+
+      <Title>{title}</Title>
+      <Label> Account type </Label>
+      <Select>
+        {items?.map((item, id) => (
+          <Item key={id} value={item}>
+            {item}
+          </Item>
+        ))}
+      </Select>
+      <Label> Balance </Label>
+      <Input type="number" onChange={onInputChange}></Input>
+      <button>Submit</button>
+    </PopupCard>
+  </Overlay>
+);
+
+export const EditAccountForm = ({account, balance }: AccountForm ) => (
+  <Overlay>
+    <PopupCard>
+    <CloseIcon >
+        <TiDelete />
+      </CloseIcon>
+      <Title>{account}</Title>
+      <Label>Current Balance</Label>
+      <div>{"$" + balance}</div>
+      <Label>New Balance </Label>
+      <Input></Input>
+      <button>Submit</button>
+      </PopupCard>
+  </Overlay>
+);
