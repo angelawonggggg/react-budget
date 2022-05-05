@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { type } from "os";
+
+
+type Link = {
+  href: string;
+  children: string;
+};
 
 const StyledLink = styled.a`
   margin: 0.5rem 0 0 1rem;
@@ -37,10 +42,7 @@ export const SpecialLink = styled.a`
   color: #138bfc;
 `;
 
-type Link = {
-  href: string;
-  children: string;
-};
+
 
 export const RouterLink = ({ href, children }: Link) => (
   <Link href={href}>
