@@ -19,9 +19,9 @@ const Title = styled.div``;
 
 const TypeTitle = styled.div`
   margin: 0 1rem;
+  background: ${(props) => props?.color || "gray"};
 `;
 export default function AddTransaction() {
-  const [open, cycleOpen] = useCycle(false, true);
   const animation = useAnimation();
   const [type, setType] = useState("Expense");
   const [cardOpen, setCardOpen] = useState(false);
@@ -56,9 +56,24 @@ export default function AddTransaction() {
               <Title>New Transaction</Title>
             </HeadArea>
             <HeadArea>
-              <TypeTitle onClick={handleType}>Expense</TypeTitle>
-              <TypeTitle onClick={handleType}>Income</TypeTitle>
-              <TypeTitle onClick={handleType}>Transfer</TypeTitle>
+              <TypeTitle
+                onClick={handleType}
+                color={type === "Expense" ? "gray" : "none"}
+              >
+                Expense
+              </TypeTitle>
+              <TypeTitle
+                onClick={handleType}
+                color={type === "Income" ? "gray" : "none"}
+              >
+                Income
+              </TypeTitle>
+              <TypeTitle
+                onClick={handleType}
+                color={type === "Transfer" ? "gray" : "none"}
+              >
+                Transfer
+              </TypeTitle>
             </HeadArea>
             {type === "Expense" && (
               <TransactionForm setCardOpen={setCardOpen} postType="Expense" />
