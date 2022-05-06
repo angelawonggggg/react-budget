@@ -14,31 +14,39 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import { Select, MenuItem } from "@material-ui/core";
-
+import { v4 as uuidv4 } from "uuid";
+const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+type FormControlData = { control: any; name: string; data: string[] };
 type FormControl = { control: any; name: string };
 
 const NoteBox = styled(Box)`
-  position: relative;
+  margin: 1rem 0;
 `;
 
 const TextFieldBox = styled(TextField)`
-  width: 50%;
-  padding: 30;
-  height: 7rem;
+  width: 100%;
+  margin: 1rem 0;
+  height: 6rem;
 `;
-// padding: 30;
-// height: 7rem;
+const DropDownBox = styled(Select)`
+  margin: 1rem 0;
+`;
 
+const AmountBox = styled(OutlinedInput)`
+  margin: 1rem 0;
+  height: 3rem;
+`;
 export const DatePicker = ({ control, name }: FormControl) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Controller
         name={name}
         control={control}
+        defaultValue={utc}
         render={({ field: { ref, ...rest } }) => (
           <KeyboardDatePicker
             margin="normal"
-            format="MM/dd/yyyy"
+            format="dd/MM/yyyy"
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -78,7 +86,7 @@ export const AmountInput = ({ control, name }: FormControl) => {
       render={({ field }) => (
         <FormControl fullWidth sx={{ m: 1 }} {...field}>
           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-          <OutlinedInput
+          <AmountBox
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="Amount"
           />
@@ -88,18 +96,22 @@ export const AmountInput = ({ control, name }: FormControl) => {
   );
 };
 
-export const DropDown = ({ control, name }: FormControl) => {
+export const DropDown = ({ control, name, data }: FormControlData) => {
   return (
     <Controller
       render={({ field }) => (
-        <Select {...field}>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        <DropDownBox {...field}>
+          {data &&
+            data.map((title: string) => (
+              <MenuItem key={uuidv4} value={title}>
+                {title}
+              </MenuItem>
+            ))}
+        </DropDownBox>
       )}
       name={name}
       control={control}
+      defaultValue={data[0]}
     />
   );
 };
