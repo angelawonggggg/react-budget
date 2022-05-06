@@ -5,7 +5,7 @@ type AccountDetail = {
   title: string;
   balance: number;
   onEdit: (event: React.MouseEvent<SVGAElement>) => void;
-}
+};
 
 export const ChartContainer = styled.div`
   position: relative;
@@ -43,20 +43,20 @@ export const PageTopWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 15px;
-  `;
+`;
 
 const AccountCard = styled.div`
-display: flex;
-align-items: baseline;
-flex-direction: column;
-margin-left: auto;
-margin-right: auto;
-padding: 10px;
-background: powderblue;
-border-radius: 5px;
-max-width: 500px;
-position: relative;
-  `;
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  background: powderblue;
+  border-radius: 5px;
+  max-width: 500px;
+  position: relative;
+`;
 
 const AccountCardIcon = styled.div`
   position: absolute;
@@ -76,24 +76,20 @@ const AccountDetailName = styled.h1`
 const Balance = styled.div`
   font-size: 15px;
   margin-top: 10px;
-`
+`;
 
 
-
-export const AccountDetailCard = ({ title, balance, onEdit }: AccountDetail) => (
- 
+export const AccountDetailCard = ({
+  title,
+  balance,
+  onEdit,
+}: AccountDetail) => (
   <AccountCard>
-         <AccountCardIcon>
-      <TiEdit onClick={onEdit}/>
+    <AccountCardIcon>
+      <TiEdit onClick={onEdit} />
     </AccountCardIcon>
-    
+
     <AccountDetailName>{title}</AccountDetailName>
     <Balance>{"Balance: $" + balance}</Balance>
   </AccountCard>
-
 );
-
-
-
-
-

@@ -15,11 +15,25 @@ const HeadArea = styled.div`
   flex-direction: row;
   justify-content: center;
 `;
-const Title = styled.div``;
+
+const SubTitleArea = styled(HeadArea)`
+  margin: 2rem 0;
+`;
+
+const Title = styled.div`
+  color: grey;
+`;
 
 const TypeTitle = styled.div`
   margin: 0 1rem;
-  background: ${(props) => props?.color || "gray"};
+  padding: 0.5rem 1rem;
+`;
+
+const ActiveTitle = styled(TypeTitle)`
+  border-radius: 25px;
+  border: 1px solid grey;
+  background-color: grey;
+  color: white;
 `;
 export default function AddTransaction() {
   const animation = useAnimation();
@@ -28,7 +42,6 @@ export default function AddTransaction() {
 
   const handleType = (e: any) => {
     setType(e.target.innerHTML);
- 
   };
   const handleCardOpen = () => {
     if (!cardOpen) {
@@ -56,26 +69,23 @@ export default function AddTransaction() {
               <LargeCloseIcon onClick={handleCardOpen} />
               <Title>New Transaction</Title>
             </HeadArea>
-            <HeadArea>
-              <TypeTitle
-                onClick={handleType}
-                color={type === "Expense" ? "gray" : "none"}
-              >
-                Expense
-              </TypeTitle>
-              <TypeTitle
-                onClick={handleType}
-                color={type === "Income" ? "gray" : "none"}
-              >
-                Income
-              </TypeTitle>
-              <TypeTitle
-                onClick={handleType}
-                color={type === "Transfer" ? "gray" : "none"}
-              >
-                Transfer
-              </TypeTitle>
-            </HeadArea>
+            <SubTitleArea>
+              {type === "Expense" ? (
+                <ActiveTitle onClick={handleType}>Expense</ActiveTitle>
+              ) : (
+                <TypeTitle onClick={handleType}>Expense</TypeTitle>
+              )}
+              {type === "Income" ? (
+                <ActiveTitle onClick={handleType}>Income</ActiveTitle>
+              ) : (
+                <TypeTitle onClick={handleType}>Income</TypeTitle>
+              )}
+              {type === "Transfer" ? (
+                <ActiveTitle onClick={handleType}>Transfer</ActiveTitle>
+              ) : (
+                <TypeTitle onClick={handleType}>Transfer</TypeTitle>
+              )}
+            </SubTitleArea>
             {type === "Expense" && (
               <TransactionForm setCardOpen={setCardOpen} postType="Expense" />
             )}
