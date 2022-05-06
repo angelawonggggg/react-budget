@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { TiEdit } from "react-icons/ti";
+import Link from "next/link";
 
 type AccountDetail = {
   title: string;
   balance: number;
-  onEdit: (event: React.MouseEvent<SVGAElement>) => void;
-}
+  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+};
 
 export const ChartContainer = styled.div`
   position: relative;
@@ -19,6 +20,27 @@ export const ChartContainer = styled.div`
 export const IconWrapper = styled.div`
   text-align: end;
   margin: 15px 10px;
+`;
+
+const NetWorthWrapper = styled.div`
+  background-color: whitesmoke;
+  width: 80%;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  max-width: 450px;
+`;
+
+const SmallText = styled.p`
+  color: ${(props) => props?.color || "silver"};
+  text-align: center;
+  font-size: 12px;
+`;
+
+const MainText = styled.p`
+  text-align: center;
+  font-size: 25px;
+  margin: 5px 0;
 `;
 
 export const Wrapper = styled.div`
@@ -43,25 +65,26 @@ export const PageTopWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 15px;
-  `;
+`;
 
 const AccountCard = styled.div`
-display: flex;
-align-items: baseline;
-flex-direction: column;
-margin-left: auto;
-margin-right: auto;
-padding: 10px;
-background: powderblue;
-border-radius: 5px;
-max-width: 500px;
-position: relative;
-  `;
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  background: powderblue;
+  border-radius: 5px;
+  max-width: 600px;
+  position: relative;
+  box-shadow: darkgrey 1px 1px 4px;
+`;
 
 const AccountCardIcon = styled.div`
   position: absolute;
   right: 10px;
-  font-size: 0.8em;
+  font-size: 1em;
 
   &:hover {
     cursor: pointer;
@@ -71,29 +94,36 @@ const AccountCardIcon = styled.div`
 const AccountDetailName = styled.h1`
   font-size: 15px;
   display: block;
+  cursor: pointer;
 `;
 
 const Balance = styled.div`
   font-size: 15px;
   margin-top: 10px;
-`
+  cursor: pointer;
+`;
 
-
-
-export const AccountDetailCard = ({ title, balance, onEdit }: AccountDetail) => (
- 
+export const AccountDetailCard = ({
+  title,
+  balance,
+  toggleEditForm,
+}: AccountDetail) => (
   <AccountCard>
-         <AccountCardIcon>
-      <TiEdit onClick={onEdit}/>
+    <AccountCardIcon>
+      <TiEdit onClick={toggleEditForm} />
     </AccountCardIcon>
-    
-    <AccountDetailName>{title}</AccountDetailName>
-    <Balance>{"Balance: $" + balance}</Balance>
+    <Link href="/accounts/1">
+      <div>
+        <AccountDetailName>{title}</AccountDetailName>
+        <Balance>{"Balance: $" + balance}</Balance>
+      </div>
+    </Link>
   </AccountCard>
-
 );
 
-
-
-
-
+export const NetWorthCard = ({ total }: any) => (
+  <NetWorthWrapper>
+    <SmallText>Net Worth</SmallText>
+    <MainText>{"$" + total}</MainText>
+  </NetWorthWrapper>
+);

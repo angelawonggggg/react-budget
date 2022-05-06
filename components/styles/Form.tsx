@@ -11,6 +11,7 @@ type PopupForm = {
 type AccountForm = {
   account: string;
   balance: number;
+  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
 };
 
 
@@ -27,10 +28,11 @@ top: 10px;
 
 &:hover {
   color: gray;
+  cursor: pointer;
 `;
 
 const Select = styled.select`
-  width: 80%;
+  width: 100%;
   padding: 5px;
 `;
 
@@ -50,7 +52,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 80%;
+  width: 100%;
   padding: 5px;
 `;
 
@@ -68,6 +70,7 @@ const PopupCard = styled.div`
 const Overlay = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 999;
   width: 100vw;
   height: 100vh;
@@ -98,18 +101,25 @@ export const PopupForm = ({ title, items, onInputChange, onClose}: PopupForm) =>
   </Overlay>
 );
 
-export const EditAccountForm = ({account, balance }: AccountForm ) => (
+export const EditAccountForm = ({account, balance, toggleEditForm }: AccountForm ) => (
   <Overlay>
     <PopupCard>
-    <CloseIcon >
+    <CloseIcon onClick={toggleEditForm}>
         <TiDelete />
       </CloseIcon>
       <Title>{account}</Title>
       <Label>Current Balance</Label>
       <div>{"$" + balance}</div>
-      <Label>New Balance </Label>
-      <Input></Input>
-      <button>Submit</button>
+      <Label>Add Income </Label>
+      <Input type="number"></Input>
+
+      <Label>Add Debit </Label>
+      <Input type="number"></Input>
+
+      <Label>Notes </Label>
+      <Input type="Text"></Input>
+
+      <button >Submit</button>
       </PopupCard>
   </Overlay>
 );

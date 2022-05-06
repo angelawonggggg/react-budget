@@ -45,7 +45,7 @@ const sideVariants = {
 
 const links = [
   { children: "Home", href: "/home", id: 1 },
-  { children: "Account", href: "/account", id: 2 },
+  { children: "Accounts", href: "/accounts", id: 2 },
   { children: "Statistics", href: "/statistics", id: 3 },
   { children: "Setting", href: "/setting", id: 4 },
 ];
