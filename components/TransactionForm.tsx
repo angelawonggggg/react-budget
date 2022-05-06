@@ -32,7 +32,6 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
 
   const categoryState = () => {
     const categoryChange = watch("category");
-
     if (categoryChange) {
       const target = SmallCategoriesData.find(
         (target) => target.name === categoryChange
@@ -43,8 +42,6 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
 
   useEffect(() => {
     categoryState();
-    console.log(categoryName);
-    console.log(CategoriesData);
   }, [watch("category")]);
 
   return (
