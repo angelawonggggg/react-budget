@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { DatePicker, NoteInput, AmountInput, DropDown } from "./Mui";
 import { BasicButton } from "./styles/Button";
-import AddAccount from "./AddAccount";
+import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
+import { useState, useEffect } from "react";
 
 type Form = {
   postType: string;
@@ -15,6 +16,8 @@ const TranForm = styled.form`
 `;
 
 export default function TransactionForm({ postType, setCardOpen }: Form) {
+  const [categoryName, setCategoryName] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -22,18 +25,36 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
     control,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => {
+  const HandleSubmit = (data: any) => {
     console.log(postType, data);
     setCardOpen(false);
   };
 
+  const categoryState = () => {
+    const categoryChange = watch("category");
+
+    if (categoryChange) {
+      const target = SmallCategoriesData.find(
+        (target) => target.name === categoryChange
+      );
+      setCategoryName(target.content);
+    }
+  };
+
+  useEffect(() => {
+    categoryState();
+    console.log(categoryName);
+    console.log(CategoriesData);
+  }, [watch("category")]);
+
   return (
-    <TranForm onSubmit={handleSubmit(onSubmit)}>
+    <TranForm onSubmit={handleSubmit(HandleSubmit)}>
       <h1>{postType}</h1>
       <h2>${watch("amount")}</h2>
       <AmountInput control={control} name={"amount"} />
-      <DropDown control={control} name={"category"} />
-      <DropDown control={control} name={"accountType"} />
+      <DropDown control={control} name={"category"} data={CategoriesData} />
+      <DropDown control={control} name={"categoryDetail"} data={categoryName} />
+      <DropDown control={control} name={"accountType"} data={AccountTypeData} />
       <NoteInput control={control} name={"textDetails"} />
       <DatePicker control={control} name={"date"} />
       <BasicButton children={"SUBMIT"} />

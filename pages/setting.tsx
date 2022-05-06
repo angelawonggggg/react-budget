@@ -1,18 +1,8 @@
 import Head from "next/head";
 
-const bigCategories = [
-  "miscellaneous",
-  "entertainment",
-  "Food & drinks",
-  "Housing",
-  "Income",
-  "Lifezstyle",
-  "Savings",
-  "Transportation",
-];
 
 export default function Setting() {
-  console.log(bigCategories);
+
   return (
     <div>
       <Head>
