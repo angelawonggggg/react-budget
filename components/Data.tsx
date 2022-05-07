@@ -23,6 +23,7 @@ export const CategoriesData: string[] = [
 export const SmallCategoriesData = [
   {
     name: "Miscellaneous",
+    image: "/icons/plus.png",
     content: [
       "Bank Cost",
       "Clothes",
@@ -33,6 +34,7 @@ export const SmallCategoriesData = [
   },
   {
     name: "Entertainment",
+    image: "/icons/plus.png",
     content: [
       "Bowling",
       "Cinema",
@@ -49,10 +51,12 @@ export const SmallCategoriesData = [
   },
   {
     name: "Food",
+    image: "/icons/plus.png",
     content: ["Candy", "Coffee", "Drinks", "Food", "Groceries", "Restaurant"],
   },
   {
     name: "Housing",
+    image: "/icons/plus.png",
     content: [
       "Electricity",
       "Housing",
@@ -67,7 +71,20 @@ export const SmallCategoriesData = [
     ],
   },
   {
+    name: "Income",
+    image: "/icons/plus.png",
+    content: [
+      "ChildBenefit",
+      "Income",
+      "Interest",
+      "Investments",
+      "Pension",
+      "Salary",
+    ],
+  },
+  {
     name: "Lifestyle",
+    image: "/icons/plus.png",
     content: [
       "ChildCare",
       "Dentist",
@@ -81,10 +98,12 @@ export const SmallCategoriesData = [
   },
   {
     name: "Savings",
+    image: "/icons/plus.png",
     content: ["Savings"],
   },
   {
     name: "Transportation",
+    image: "/icons/plus.png",
     content: [
       "CarInsurance",
       "CarLoan",
