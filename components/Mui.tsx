@@ -24,11 +24,7 @@ type FormControlData = {
   name: string;
   data: string[];
 };
-type FormControl = { control: any; name: string; label: string };
-
-const NoteBox = styled(Box)`
-  margin: 1rem 0;
-`;
+type FormControl = { control: any; name: string };
 
 const DropDownBox = styled(Select)`
   width: 100%;
@@ -38,6 +34,10 @@ const AmountBox = styled(OutlinedInput)`
   margin: 1rem 0;
   height: 3rem;
 `;
+const RadioOptionBox = styled(FormControlLabel)`
+  width: 8rem;
+`;
+
 export const DatePicker = ({ control, name }: FormControl) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -60,19 +60,13 @@ export const DatePicker = ({ control, name }: FormControl) => {
   );
 };
 
-export const NoteInput = ({ control, name, label }: FormControl) => {
+export const NoteInput = ({ control, name }: FormControl) => {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
-        <TextField
-          {...field}
-          multiline
-          rows={3}
-          label={label}
-          variant="outlined"
-        />
+        <TextField {...field} multiline rows={3} variant="outlined" />
       )}
     />
   );
@@ -122,17 +116,17 @@ export const RadioSector = ({ control, name, data }: FormControlData) => {
       control={control}
       defaultValue={data[0]}
       render={({ field }) => (
-        <RadioGroup aria-labelledby="demo-radio-buttons-group-label" {...field}>
+        <RadioGroup {...field}>
           {data &&
             data.map((title: string) => (
-              <FormControlLabel
+              <RadioOptionBox
                 key={uuidv4}
                 control={<Radio />}
                 label={title}
                 value={title}
               >
                 {title}
-              </FormControlLabel>
+              </RadioOptionBox>
             ))}
         </RadioGroup>
       )}

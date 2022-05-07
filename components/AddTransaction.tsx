@@ -1,15 +1,10 @@
 import styled from "styled-components";
-import { LargeCloseIcon } from "components/styles/Icon";
+import { LargeCloseIcon, MotionIcon } from "components/styles/Icon";
 import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
 import TransactionForm from "components/TransactionForm";
-const PlusLogo = styled(motion.img)`
-  width: 3.5rem;
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-`;
+
 const HeadArea = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,6 +15,11 @@ const SubTitleArea = styled(HeadArea)`
   margin: 2rem 0;
 `;
 
+const PlusIcon = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+`;
 const Title = styled.div`
   color: grey;
 `;
@@ -36,7 +36,6 @@ const ActiveTitle = styled(TypeTitle)`
   color: white;
 `;
 export default function AddTransaction() {
-  const animation = useAnimation();
   const [type, setType] = useState("Expense");
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -48,12 +47,7 @@ export default function AddTransaction() {
       setCardOpen(true);
     } else setCardOpen(false);
   };
-  async function sequence() {
-    await animation.start({ rotate: -90 });
-    await animation.start({ scale: 1.5 });
-    await animation.start({ rotate: 0 });
-    animation.start({ scale: 1 });
-  }
+
   return (
     <main>
       {cardOpen && (
@@ -99,12 +93,9 @@ export default function AddTransaction() {
         </AnimatePresence>
       )}
       {!cardOpen && (
-        <PlusLogo
-          src="icons/plus.png"
-          whileHover={sequence}
-          animate={animation}
-          onClick={handleCardOpen}
-        />
+        <PlusIcon>
+          <MotionIcon image={"icons/plus.png"} action={handleCardOpen} />
+        </PlusIcon>
       )}
     </main>
   );

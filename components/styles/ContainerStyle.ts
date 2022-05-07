@@ -24,7 +24,7 @@ export const BigCard = styled(motion.section)`
   background-color: white;
   box-shadow: 2px 2px 2px grey;
   border-radius: 15px;
-  height: 100vh;
+  height: 70rem;
   width: 90vw;
   z-index: 2;
 `;

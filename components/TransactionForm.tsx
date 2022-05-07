@@ -11,6 +11,7 @@ import { BasicButton } from "./styles/Button";
 import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
 import { useState, useEffect } from "react";
 import { BoxWithTextAndInput } from "./styles/ContainerStyle";
+import { MotionIcon } from "components/styles/Icon";
 type Form = {
   postType: string;
   setCardOpen: any;
@@ -32,21 +33,30 @@ const AmountTitle = styled.div`
   height: 3rem;
 `;
 const SubTitle = styled.div`
-  width: 20vw;
+  width: 30vw;
 `;
 const AmountHighlight = styled.div`
   font-weight: 600;
   font-size: 36px;
 `;
-const RadioSectorBox = styled.div`
+const RadioBox = styled.div`
+  padding: 2rem;
   position: absolute;
-  right: 1rem;
-  
+  left: 0;
+  width: 90vw;
+  height: 20rem;
+  box-shadow: 2px 2px 2px grey;
+  border-radius: 15px;
+  top: 25rem;
+  background-color: white;
+  z-index: 10;
+  border: 1px solid grey;
 `;
 
 export default function TransactionForm({ postType, setCardOpen }: Form) {
   const [categoryName, setCategoryName] = useState([]);
-
+  const [categoryIcon, setcategoryIcon] = useState("");
+  const [categoryDetail, setCategoryDetail] = useState(false);
   const {
     register,
     handleSubmit,
@@ -59,13 +69,24 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
     setCardOpen(false);
   };
 
+  const HandleCategory = () => {
+    if (!categoryDetail) {
+      setCategoryDetail(true);
+    } else {
+      setCategoryDetail(false);
+    }
+  };
+
   const categoryState = () => {
-    const categoryChange = watch("category");
-    if (categoryChange) {
-      const target = SmallCategoriesData.find(
-        (target) => target.name === categoryChange
-      );
+    const target = SmallCategoriesData.find(
+      (target) => target.name === watch("category")
+    );
+
+    if (target.content && target.image) {
       setCategoryName(target.content);
+      setcategoryIcon(target.image);
+    } else {
+      console.log("No such type");
     }
   };
 
@@ -75,8 +96,6 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
 
   return (
     <TranForm onSubmit={handleSubmit(HandleSubmit)}>
-      <h1>{postType}</h1>
-
       <AmountTitle>
         $<AmountHighlight>{watch("amount")}</AmountHighlight>
       </AmountTitle>
@@ -85,14 +104,27 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
       <BoxWithTextAndInput>
         <SubTitle>CATEGORY:</SubTitle>
         <DropDown control={control} name={"category"} data={CategoriesData} />
-        <RadioSectorBox>
-          <RadioSector
-            control={control}
-            name={"categoryDetail"}
-            data={categoryName}
-          />
-        </RadioSectorBox>
       </BoxWithTextAndInput>
+
+      {categoryIcon && (
+        <BoxWithTextAndInput>
+          <MotionIcon image={categoryIcon} action={HandleCategory} />
+          <div>{watch("categoryDetail")}</div>
+        </BoxWithTextAndInput>
+      )}
+
+      {categoryDetail && (
+        <div onClick={HandleCategory}>
+          <RadioBox>
+            <RadioSector
+              control={control}
+              name={"categoryDetail"}
+              data={categoryName}
+            />
+          </RadioBox>
+        </div>
+      )}
+
       <BoxWithTextAndInput>
         <NoteInput control={control} name={"textDetails"} label={"NOTE"} />
       </BoxWithTextAndInput>
@@ -105,7 +137,7 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
         />
       </BoxWithTextAndInput>
 
-      <BasicButton children={"SUBMIT"} />
+      <BasicButton children={"Add"} />
     </TranForm>
   );
 }
