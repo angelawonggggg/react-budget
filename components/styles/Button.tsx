@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { ButtonType } from "../../utils/type";
 
-type Button = {
-  children: string;
-};
 
 const Button = styled(motion.button)`
     display: block;
@@ -21,7 +19,7 @@ const DelButton = styled(Button)`
 `;
 
 
-export const BasicButton = ({ children }: Button) => {
+export const BasicButton = ({ children }: ButtonType) => {
   return (
     <Button
       whileHover={{
@@ -35,6 +33,6 @@ export const BasicButton = ({ children }: Button) => {
   );
 };
 
-export const DeleteButton = ({ children }: Button) => {
+export const DeleteButton = ({ children }: ButtonType) => {
   return <DelButton>{children}</DelButton>;
 };

@@ -4,6 +4,7 @@ import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { NextApiRequest, NextApiResponse } from "next";
 
+
 export default withIronSessionApiRoute(registerRoute, sessionOptions);
 import { MongoClient } from "mongodb";
 import crypto from "crypto";

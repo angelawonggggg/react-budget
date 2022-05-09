@@ -1,9 +1,15 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddAccount from "components/AddAccount";
-import AccountDetail from "components/AccountDetail";
+import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
 import { EditAccountForm } from "components/styles/Form";
+
+interface Accounts {
+  id: number;
+  name: string;
+  balance: number;
+}
 
 export default function Account() {
   const count = 1;
@@ -12,6 +18,13 @@ export default function Account() {
   const total = 100;
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowEditPopup, setIsShowEditPopup] = useState(false);
+  const [accounts, setAccounts] = useState<Accounts[]>([]);
+
+  useEffect(() => {
+    fetch("/api/accounts")
+      .then((res) => res.json())
+      .then((data) => setAccounts(data.accounts));
+  });
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
@@ -21,26 +34,35 @@ export default function Account() {
     setIsShowEditPopup(!isShowEditPopup);
   };
 
-
-
   return (
     <div>
       <Head>
         <title>Budget | Account</title>
       </Head>
 
-       <PageTopWrapper>
-         <NetWorthCard total={total}/>
-        <h3>You have {count} account</h3>
+      <PageTopWrapper>
+        <NetWorthCard total={total} />
         <button onClick={togglePopupForm}>Add an account</button>
-       
-       </PageTopWrapper>
-       
-      
+      </PageTopWrapper>
+
       {isShowPopup && <AddAccount closePopup={togglePopupForm} />}
-      
-      <AccountDetail toggleEditForm={toggleEditForm}/>
-      {isShowEditPopup && <EditAccountForm account={account} balance={balance} toggleEditForm={toggleEditForm}/>}
+
+      {accounts?.map?.((account, idx) => (
+        <AccountDetails
+          key={idx}
+          toggleEditForm={toggleEditForm}
+          name={account.name}
+          balance={account.balance}
+        />
+      ))}
+
+      {isShowEditPopup && (
+        <EditAccountForm
+          account={account}
+          balance={balance}
+          toggleEditForm={toggleEditForm}
+        />
+      )}
     </div>
   );
 }

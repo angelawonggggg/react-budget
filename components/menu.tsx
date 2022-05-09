@@ -69,8 +69,8 @@ export default function Menu() {
             animate="open"
             variants={sideVariants}
           >
-            {links.map(({ href, children }) => (
-              <HeaderMenuLink href={href} children={children} />
+            {links.map(({ href, children }, idx) => (
+              <HeaderMenuLink key={idx} href={href} children={children} />
             ))}
           </RouterList>
         </Navbar>

@@ -1,7 +1,10 @@
 import Head from "next/head";
 import styled from "styled-components";
 
-export default function signUp() {
+
+
+export default function signUp(props: Props) {
+
   const Wrapper = styled.section`
     margin-left: 35px;
 `;
@@ -20,7 +23,12 @@ export default function signUp() {
           <button>Submit</button>
         </form>
       </Wrapper>
+
+
+
   
     </div>
   );
 }
+
+

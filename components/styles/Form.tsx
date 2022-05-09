@@ -1,18 +1,6 @@
 import { TiDelete } from "react-icons/ti";
 import styled from "styled-components";
-
-type PopupForm = {
-  title: string;
-  items: Array<string>;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClose: (event: React.MouseEvent<HTMLInputElement>) => void;
-};
-
-type AccountForm = {
-  account: string;
-  balance: number;
-  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
-};
+import { PopupForm, AccountForm } from "../../utils/type";
 
 
 const Title = styled.h1`
@@ -78,7 +66,7 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-export const PopupForm = ({ title, items, onInputChange, onClose}: PopupForm) => (
+export const GetPopupForm = ({ title, items, onInputChange, onClose}: PopupForm) => (
   <Overlay>
     <PopupCard>
       <CloseIcon onClick={onClose}>

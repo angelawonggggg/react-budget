@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { TiEdit } from "react-icons/ti";
 import Link from "next/link";
-
-type AccountDetail = {
-  title: string;
-  balance: number;
-  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
-};
+import { AccountDetail } from "../../utils/type"
 
 export const ChartContainer = styled.div`
   position: relative;
@@ -104,7 +99,7 @@ const Balance = styled.div`
 `;
 
 export const AccountDetailCard = ({
-  title,
+  name,
   balance,
   toggleEditForm,
 }: AccountDetail) => (
@@ -114,7 +109,7 @@ export const AccountDetailCard = ({
     </AccountCardIcon>
     <Link href="/accounts/1">
       <div>
-        <AccountDetailName>{title}</AccountDetailName>
+        <AccountDetailName>{name}</AccountDetailName>
         <Balance>{"Balance: $" + balance}</Balance>
       </div>
     </Link>

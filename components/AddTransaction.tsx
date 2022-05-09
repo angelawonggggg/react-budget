@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
 import TransactionForm from "components/TransactionForm";
+
 const PlusLogo = styled(motion.img)`
   width: 3.5rem;
   position: absolute;

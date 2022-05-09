@@ -30,7 +30,7 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
           <StyledForm.CloseIcon onClick={closePopup}>
             <TiDelete />
           </StyledForm.CloseIcon>
-          <StyledForm.PopupForm
+          <StyledForm.GetPopupForm
             title={title}
             items={items}
             onInputChange={(event: React.ChangeEvent<HTMLInputElement>) => {
