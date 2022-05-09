@@ -12,6 +12,7 @@ const Button = styled(motion.button)`
     border: 2px solid #138BFC;
     border-radius: 3px;
     cursor: pointer;
+    height: 2.5rem;
   }`;
 
 const DelButton = styled(Button)`
@@ -23,10 +24,10 @@ export const BasicButton = ({ children }: ButtonType) => {
   return (
     <Button
       whileHover={{
-        scale: 1.2,
-        transition: { duration: 1 },
+        scale: 1.05,
+        transition: { duration: 0.1 },
       }}
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.5 }}
     >
       {children}
     </Button>

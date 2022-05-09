@@ -74,6 +74,8 @@ const AccountCard = styled.div`
   max-width: 600px;
   position: relative;
   box-shadow: darkgrey 1px 1px 4px;
+  max-width: 500px;
+  position: relative;
 `;
 
 const AccountCardIcon = styled.div`

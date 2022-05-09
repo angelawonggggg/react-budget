@@ -1,10 +1,17 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { DatePicker, NoteInput, AmountInput, DropDown } from "./Mui";
+import {
+  DatePicker,
+  NoteInput,
+  AmountInput,
+  DropDown,
+  RadioSector,
+} from "./Mui";
 import { BasicButton } from "./styles/Button";
 import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
 import { useState, useEffect } from "react";
-
+import { BoxWithTextAndInput } from "./styles/ContainerStyle";
+import { MotionIcon } from "components/styles/Icon";
 type Form = {
   postType: string;
   setCardOpen: any;
@@ -15,9 +22,41 @@ const TranForm = styled.form`
   flex-direction: column;
 `;
 
+const AmountTitle = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 1rem 0;
+  height: 3rem;
+`;
+const SubTitle = styled.div`
+  width: 30vw;
+`;
+const AmountHighlight = styled.div`
+  font-weight: 600;
+  font-size: 36px;
+`;
+const RadioBox = styled.div`
+  padding: 2rem;
+  position: absolute;
+  left: 0;
+  width: 90vw;
+  height: 20rem;
+  box-shadow: 2px 2px 2px grey;
+  border-radius: 15px;
+  top: 25rem;
+  background-color: white;
+  z-index: 10;
+  border: 1px solid grey;
+`;
+
 export default function TransactionForm({ postType, setCardOpen }: Form) {
   const [categoryName, setCategoryName] = useState([]);
-
+  const [categoryIcon, setcategoryIcon] = useState("");
+  const [categoryDetail, setCategoryDetail] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,13 +69,24 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
     setCardOpen(false);
   };
 
+  const HandleCategory = () => {
+    if (!categoryDetail) {
+      setCategoryDetail(true);
+    } else {
+      setCategoryDetail(false);
+    }
+  };
+
   const categoryState = () => {
-    const categoryChange = watch("category");
-    if (categoryChange) {
-      const target = SmallCategoriesData.find(
-        (target) => target.name === categoryChange
-      );
+    const target = SmallCategoriesData.find(
+      (target) => target.name === watch("category")
+    );
+
+    if (target.content && target.image) {
       setCategoryName(target.content);
+      setcategoryIcon(target.image);
+    } else {
+      console.log("No such type");
     }
   };
 
@@ -46,15 +96,48 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
 
   return (
     <TranForm onSubmit={handleSubmit(HandleSubmit)}>
-      <h1>{postType}</h1>
-      <h2>${watch("amount")}</h2>
-      <AmountInput control={control} name={"amount"} />
-      <DropDown control={control} name={"category"} data={CategoriesData} />
-      <DropDown control={control} name={"categoryDetail"} data={categoryName} />
-      <DropDown control={control} name={"accountType"} data={AccountTypeData} />
-      <NoteInput control={control} name={"textDetails"} />
+      <AmountTitle>
+        $<AmountHighlight>{watch("amount")}</AmountHighlight>
+      </AmountTitle>
       <DatePicker control={control} name={"date"} />
-      <BasicButton children={"SUBMIT"} />
+      <AmountInput control={control} name={"amount"} />
+      <BoxWithTextAndInput>
+        <SubTitle>CATEGORY:</SubTitle>
+        <DropDown control={control} name={"category"} data={CategoriesData} />
+      </BoxWithTextAndInput>
+
+      {categoryIcon && (
+        <BoxWithTextAndInput>
+          <MotionIcon image={categoryIcon} action={HandleCategory} />
+          <div>{watch("categoryDetail")}</div>
+        </BoxWithTextAndInput>
+      )}
+
+      {categoryDetail && (
+        <div onClick={HandleCategory}>
+          <RadioBox>
+            <RadioSector
+              control={control}
+              name={"categoryDetail"}
+              data={categoryName}
+            />
+          </RadioBox>
+        </div>
+      )}
+
+      <BoxWithTextAndInput>
+        <NoteInput control={control} name={"textDetails"} label={"NOTE"} />
+      </BoxWithTextAndInput>
+      <BoxWithTextAndInput>
+        <SubTitle>From:</SubTitle>
+        <DropDown
+          control={control}
+          name={"accountType"}
+          data={AccountTypeData}
+        />
+      </BoxWithTextAndInput>
+
+      <BasicButton children={"Add"} />
     </TranForm>
   );
 }

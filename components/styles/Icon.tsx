@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import motion from "framer-motion";
+
+import { motion, useAnimation } from "framer-motion";
+
 import { VscGrabber, VscChromeClose, VscTriangleLeft } from "react-icons/vsc";
 // import { BsPatchPlusFill } from "react-icons/bs";
 import { MdOutlineStickyNote2 } from "react-icons/md";
@@ -30,6 +32,29 @@ export const NoteIcon = styled(MdOutlineStickyNote2)`
   color: grey;
   margin: 0 0.5rem;
 `;
+
+const PlusLogo = styled(motion.img)`
+  width: 3.5rem;
+`;
+
+export const MotionIcon = ({ action, image }) => {
+  const animation = useAnimation();
+  async function sequence() {
+    await animation.start({ rotate: -90 });
+    await animation.start({ scale: 1.5 });
+    await animation.start({ rotate: 0 });
+    animation.start({ scale: 1 });
+  }
+
+  return (
+    <PlusLogo
+      src={image}
+      whileHover={sequence}
+      animate={animation}
+      onClick={action}
+    />
+  );
+};
 
 // export const AddItemsIcon = styled(motion.img)`
 //   width: 4rem;
