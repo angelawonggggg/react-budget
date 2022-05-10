@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import LogIn from "../components/LogIn";
 import styled from "styled-components";
-import Image from "next/image";
 import { SpecialLink } from "components/styles/StyledLink";
 
 import { withIronSessionSsr } from "iron-session/next";
@@ -22,15 +21,12 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 const Wrapper = styled.section`
-margin-left: auto;
-margin-right: auto;
-display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
 `;
 
-
-
-
-export default function Home({ user } : { user: User }) {
+export default function Home({ user }: { user: User }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -49,7 +45,6 @@ export default function Home({ user } : { user: User }) {
             </Link>
           </div>
         </div>
-        <Image src="/" width="4" height="3" className="card"></Image>
       </Wrapper>
     </div>
   );

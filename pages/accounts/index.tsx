@@ -12,7 +12,6 @@ interface Accounts {
 }
 
 export default function Account() {
-  const count = 1;
   const account = "Cash";
   const balance = 100;
   const total = 100;
