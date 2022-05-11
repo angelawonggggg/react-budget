@@ -17,7 +17,7 @@ export type PopupForm = {
 export type AccountForm = {
   account: string;
   balance: number;
-  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+  toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export type ButtonType = {
