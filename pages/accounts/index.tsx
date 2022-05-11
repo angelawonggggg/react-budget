@@ -6,7 +6,6 @@ import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
 import { EditAccountForm } from "components/styles/Form";
 
 interface Accounts {
-  id: number;
   name: string;
   balance: number;
 }
@@ -14,10 +13,10 @@ interface Accounts {
 export default function Account() {
   const account = "Cash";
   const balance = 100;
-  const total = 100;
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [accounts, setAccounts] = useState<Accounts[]>([]);
+  const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
   useEffect(() => {
     fetch("/api/accounts")
@@ -51,6 +50,7 @@ export default function Account() {
           key={idx}
           toggleEditForm={toggleEditForm}
           name={account.name}
+          accountId={account.id}
           balance={account.balance}
         />
       ))}

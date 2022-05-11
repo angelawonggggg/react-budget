@@ -4,8 +4,10 @@ import styled from "styled-components";
 import AddTransaction from "components/AddTransaction";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 export default function Home() {
-  const [transactionData, setTransactionData] = useState(false);
+  const [transactionData, setTransactionData] = useState<any[]>([]);
+
   const fetchDataFromAPI = () => {
     axios.get("/api/transaction/").then((data) => {
       console.log(data.data.transaction);
@@ -23,16 +25,17 @@ export default function Home() {
       </Head>
       <div>date</div>
       <div>0 TRANSACTIONS</div>
-      {transactionData && (
-        <div>
-          <div>{transactionData[0].accountType}</div>
-          <div>$ {transactionData[0].amount}</div>
-          <div>{transactionData[0].category}</div>
-          <div>{transactionData[0].categoryDetail}</div>
-          <div>{transactionData[0].date}</div>
-          <div>{transactionData[0].textDetails}</div>
+
+      {transactionData.map((transaction, idx) => (
+        <div key={idx}>
+          <div>{transaction.accountType}</div>
+          <div>{transaction.amount}</div>
+          <div>{transaction.category}</div>
+          <div>{transaction.categoryDetail}</div>
+          <div>{transaction.date}</div>
+          <div>{transaction.textDetails}</div>
         </div>
-      )}
+      ))}
 
       <AddTransaction />
     </div>

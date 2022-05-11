@@ -2,7 +2,6 @@ import { TiDelete } from "react-icons/ti";
 import styled from "styled-components";
 import { PopupForm, AccountForm } from "../../utils/type";
 
-
 const Title = styled.h1`
   font-size: 15px;
   text-align: center;
@@ -66,7 +65,14 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-export const GetPopupForm = ({ title, items, onInputChange, onClose}: PopupForm) => (
+export const GetPopupForm = ({
+  title,
+  items,
+  balance,
+  setAccountType,
+  setBalance,
+  onClose,
+}: PopupForm) => (
   <Overlay>
     <PopupCard>
       <CloseIcon onClick={onClose}>
@@ -75,7 +81,8 @@ export const GetPopupForm = ({ title, items, onInputChange, onClose}: PopupForm)
 
       <Title>{title}</Title>
       <Label> Account type </Label>
-      <Select>
+
+      <Select onChange={setAccountType}>
         {items?.map((item, id) => (
           <Item key={id} value={item}>
             {item}
@@ -83,16 +90,20 @@ export const GetPopupForm = ({ title, items, onInputChange, onClose}: PopupForm)
         ))}
       </Select>
       <Label> Balance </Label>
-      <Input type="number" onChange={onInputChange}></Input>
+      <Input type="number" value={balance} onChange={setBalance}></Input>
       <button>Submit</button>
     </PopupCard>
   </Overlay>
 );
 
-export const EditAccountForm = ({account, balance, toggleEditForm }: AccountForm ) => (
+export const EditAccountForm = ({
+  account,
+  balance,
+  toggleEditForm,
+}: AccountForm) => (
   <Overlay>
     <PopupCard>
-    <CloseIcon onClick={toggleEditForm}>
+      <CloseIcon onClick={toggleEditForm}>
         <TiDelete />
       </CloseIcon>
       <Title>{account}</Title>
@@ -107,7 +118,7 @@ export const EditAccountForm = ({account, balance, toggleEditForm }: AccountForm
       <Label>Notes </Label>
       <Input type="Text"></Input>
 
-      <button >Submit</button>
-      </PopupCard>
+      <button>Submit</button>
+    </PopupCard>
   </Overlay>
 );
