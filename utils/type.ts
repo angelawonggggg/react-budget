@@ -1,8 +1,8 @@
+import { Account } from "models/accounts";
+
 export type AccountDetail = {
-  name: string;
-  balance: number;
-  accountId: number;
   toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+  account: Account;
 };
 
 export type PopupForm = {

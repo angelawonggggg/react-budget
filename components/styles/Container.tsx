@@ -104,19 +104,17 @@ const Balance = styled.div`
 `;
 
 export const AccountDetailCard = ({
-  name,
-  balance,
-  accountId,
   toggleEditForm,
+  account,
 }: AccountDetail) => (
   <AccountCard>
     <AccountCardIcon>
       <TiEdit onClick={toggleEditForm} />
     </AccountCardIcon>
-    <Link href={"/accounts/" + accountId}>
+    <Link href={"/accounts/" + account?.id}>
       <div>
-        <AccountDetailName>{name}</AccountDetailName>
-        <Balance>{"Balance: $" + balance}</Balance>
+        <AccountDetailName>{account.title}</AccountDetailName>
+        <Balance>{"Balance: $" + account.balance}</Balance>
       </div>
     </Link>
   </AccountCard>
