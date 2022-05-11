@@ -7,6 +7,7 @@ import {
   DropDown,
   RadioSector,
 } from "./Mui";
+import axios from "axios";
 import { BasicButton } from "./styles/Button";
 import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
 import { useState, useEffect } from "react";
@@ -65,8 +66,22 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
     formState: { errors },
   } = useForm();
   const HandleSubmit = (data: any) => {
-    console.log(postType, data);
-    setCardOpen(false);
+    axios
+      .post("/api/transaction/", {
+        accountType: data.accountType,
+        amount: data.amount,
+        category: data.category,
+        categoryDetail: data.categoryDetail,
+        date: data.date,
+        textDetails: data.textDetails,
+      })
+      .then((data) => {
+        console.log("get data", data);
+        setCardOpen(false);
+      })
+      .catch((err) => {
+        console.log("Error creating a new transaction", err);
+      });
   };
 
   const HandleCategory = () => {
