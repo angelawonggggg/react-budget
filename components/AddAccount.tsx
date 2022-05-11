@@ -30,7 +30,10 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
       .then((data) => {
         console.log("data", data);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        closePopup();
+      });
   };
 
   return (

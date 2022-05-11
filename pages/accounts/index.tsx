@@ -21,7 +21,7 @@ export default function Account() {
   useEffect(() => {
     fetch("/api/accounts")
       .then((res) => res.json())
-      .then((data) => setAccounts(data.accounts));
+      .then((data) => setAccounts(data.data));
   });
 
   const togglePopupForm = () => {
