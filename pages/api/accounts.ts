@@ -7,8 +7,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (title && balance) {
       try {
-        const account = await Account.create(req.body);
-        res.status(201).json({ success: true, data: account, msg: "POST" });
+        const account = await Account.create(req.body, "-_id -__v");
+        res.status(201).json({ success: true, data: account });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
       }
@@ -19,8 +19,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "GET") {
     try {
-      const accounts = await Account.find({});
-      res.status(200).json({ success: true, data: accounts, msg: "GET" });
+      const accounts = await Account.find({}, "-_id -__v");
+      res.status(200).json({ success: true, data: accounts });
     } catch (error) {
       res.status(400).json({ success: false, error: error });
     }
