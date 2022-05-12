@@ -97,7 +97,7 @@ export const GetPopupForm = ({
 );
 
 export const EditAccountForm = ({
-  account,
+  accountType,
   balance,
   toggleEditForm,
 }: AccountForm) => (
@@ -106,13 +106,10 @@ export const EditAccountForm = ({
       <CloseIcon onClick={toggleEditForm}>
         <TiDelete />
       </CloseIcon>
-      <Title>{account}</Title>
+      <Title>{accountType}</Title>
       <Label>Current Balance</Label>
       <div>{"$" + balance}</div>
-      <Label>Add Income </Label>
-      <Input type="number"></Input>
-
-      <Label>Add Debit </Label>
+      <Label>Balance change </Label>
       <Input type="number"></Input>
 
       <Label>Notes </Label>

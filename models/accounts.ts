@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 export type Account = {
   title: string;
   balance: number;
+  balanceChange: number;
+  notes: string;
 };
 
 const accountSchema = new mongoose.Schema({

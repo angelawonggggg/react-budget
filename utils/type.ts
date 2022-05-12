@@ -1,7 +1,11 @@
 import { Account } from "models/accounts";
 
-export type AccountDetail = {
+export type AccountDetailBox = {
   toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+  account: Account;
+};
+
+export type AccountDetail = {
   account: Account;
 };
 
@@ -15,7 +19,7 @@ export type PopupForm = {
 };
 
 export type AccountForm = {
-  account: string;
+  accountType: string;
   balance: number;
   toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
 };

@@ -16,7 +16,7 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
     "Other",
   ];
 
-  const [account, setAccount] = useState("nnnnnn");
+  const [account, setAccount] = useState("Cash");
   const [accountBalance, setAccountBalance] = useState(0);
 
   const handleSubmit = (): void => {

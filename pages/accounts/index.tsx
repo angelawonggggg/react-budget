@@ -3,29 +3,24 @@ import { useState, useEffect } from "react";
 import AddAccount from "components/AddAccount";
 import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
-import { EditAccountForm } from "components/styles/Form";
 import { Account } from "models/accounts";
 
 export default function AccountPage() {
-  const account = "Cash";
-  const balance = 100;
   const [isShowPopup, setIsShowPopup] = useState(false);
-  const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
   useEffect(() => {
     fetch("/api/accounts")
       .then((res) => res.json())
-      .then(({ data }) => setAccounts(data));
-  });
+      .then(({ data }) => {
+        setAccounts(data);
+        console.log(data);
+      });
+  }, [isShowPopup]);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
-  };
-
-  const toggleEditForm = () => {
-    setIsShowEditPopup(!isShowEditPopup);
   };
 
   return (
@@ -42,20 +37,8 @@ export default function AccountPage() {
       {isShowPopup && <AddAccount closePopup={togglePopupForm} />}
 
       {accounts?.map?.((account, idx) => (
-        <AccountDetails
-          key={idx}
-          toggleEditForm={toggleEditForm}
-          account={account}
-        />
+        <AccountDetails key={idx} account={account} />
       ))}
-
-      {isShowEditPopup && (
-        <EditAccountForm
-          account={account}
-          balance={balance}
-          toggleEditForm={toggleEditForm}
-        />
-      )}
     </div>
   );
 }

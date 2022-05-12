@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { TiEdit } from "react-icons/ti";
 import Link from "next/link";
-import { AccountDetail } from "../../utils/type";
+import { AccountDetailBox } from "../../utils/type";
 
 export const ChartContainer = styled.div`
   position: relative;
@@ -106,12 +106,12 @@ const Balance = styled.div`
 export const AccountDetailCard = ({
   toggleEditForm,
   account,
-}: AccountDetail) => (
+}: AccountDetailBox) => (
   <AccountCard>
     <AccountCardIcon>
       <TiEdit onClick={toggleEditForm} />
     </AccountCardIcon>
-    <Link href={"/accounts/" + account?.id}>
+    <Link href={"/accounts/" + account._id}>
       <div>
         <AccountDetailName>{account.title}</AccountDetailName>
         <Balance>{"Balance: $" + account.balance}</Balance>
