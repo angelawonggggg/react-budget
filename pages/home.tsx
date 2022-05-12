@@ -33,7 +33,6 @@ export default function Home() {
           <div>{transactionData[0].textDetails}</div>
         </div>
       )}
-
       <AddTransaction />
     </div>
   );
