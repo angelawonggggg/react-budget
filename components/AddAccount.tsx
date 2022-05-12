@@ -2,6 +2,7 @@ import * as StyledForm from "./styles/Form";
 import * as StyledContainer from "./styles/Container";
 import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
+import axios from "axios";
 
 export default function AddAccount({ closePopup }: { closePopup: () => void }) {
   const title = "Add an account";
@@ -15,12 +16,24 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
     "Other",
   ];
 
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState("nnnnnn");
+  const [accountBalance, setAccountBalance] = useState(0);
 
-  const handleSubmit = (event: React.MouseEvent<HTMLFormElement>): void => {
+  const handleSubmit = (): void => {
     event.preventDefault();
-    setAccount(account);
-    console.log("submit, set to", account);
+
+    axios
+      .post("/api/accounts/", {
+        title: account,
+        balance: accountBalance,
+      })
+      .then((data) => {
+        console.log("data", data);
+      })
+      .catch(console.error)
+      .finally(() => {
+        closePopup();
+      });
   };
 
   return (
@@ -30,13 +43,15 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
           <StyledForm.CloseIcon onClick={closePopup}>
             <TiDelete />
           </StyledForm.CloseIcon>
+
           <StyledForm.GetPopupForm
             title={title}
             items={items}
-            onInputChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setAccount(event.target.value);
-            }}
-
+            balance={accountBalance}
+            setAccountType={(event) => setAccount(event.target.value)}
+            setBalance={(event) =>
+              setAccountBalance(parseFloat(event.target.value))
+            }
             onClose={closePopup}
           />
         </StyledContainer.Wrapper>

@@ -4,25 +4,20 @@ import AddAccount from "components/AddAccount";
 import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
 import { EditAccountForm } from "components/styles/Form";
+import { Account } from "models/accounts";
 
-interface Accounts {
-  id: number;
-  name: string;
-  balance: number;
-}
-
-export default function Account() {
+export default function AccountPage() {
   const account = "Cash";
   const balance = 100;
-  const total = 100;
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowEditPopup, setIsShowEditPopup] = useState(false);
-  const [accounts, setAccounts] = useState<Accounts[]>([]);
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
   useEffect(() => {
     fetch("/api/accounts")
       .then((res) => res.json())
-      .then((data) => setAccounts(data.accounts));
+      .then(({ data }) => setAccounts(data));
   });
 
   const togglePopupForm = () => {
@@ -50,8 +45,7 @@ export default function Account() {
         <AccountDetails
           key={idx}
           toggleEditForm={toggleEditForm}
-          name={account.name}
-          balance={account.balance}
+          account={account}
         />
       ))}
 

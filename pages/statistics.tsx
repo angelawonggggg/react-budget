@@ -3,7 +3,11 @@ import LineChart from "../components/LineChart";
 import DoughnutChart from "../components/DoughnutChart";
 import Bar from "../components/BarChart";
 import { useState } from "react";
-import { ChartContainer, IconWrapper } from "../components/styles/Container";
+import {
+  ChartContainer,
+  IconWrapper,
+  DatepickerContainer,
+} from "../components/styles/Container";
 import { Icon } from "../components/styles/Icon";
 import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 import Calendar from "../components/Calendar";
@@ -27,10 +31,10 @@ export default function Statistics() {
       <Head>
         <title>Budget | Statistics</title>
       </Head>
-      <h1>Statistics</h1>
-      <div className="calendar-container">
+
+      <DatepickerContainer>
         <Calendar />
-      </div>
+      </DatepickerContainer>
 
       <ChartContainer>
         <LineChart />
