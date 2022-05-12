@@ -42,17 +42,24 @@ async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "GET") {
+    let client;
+    try {
+      client = await connectDatabase();
+    } catch (error) {
+      res.status(500).json({ message: "Connection to the database failed!" });
+      return;
+    }
     try {
       const documents = await getAllDocuments(client, "transaction", {
         _id: -1,
       });
-      res.status(200).json({ comments: documents });
+      res.status(200).json({ transaction: documents });
     } catch (error) {
-      res.status(500).json({ message: "Getting comments failed." });
+      res.status(500).json({ message: "Getting transaction failed." });
     }
   }
 
-  client.close();
+  // client.close();
 }
 
 export default transactionHandler;

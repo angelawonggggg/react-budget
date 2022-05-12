@@ -7,16 +7,27 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [transactionData, setTransactionData] = useState<any[]>([]);
+  const [amount, setAmount] = useState(0);
+  const [updateData, setUpdateData] = useState("");
 
   const fetchDataFromAPI = () => {
     axios.get("/api/transaction/").then((data) => {
-      console.log(data.data.transaction);
+      console.log(data);
       setTransactionData(data.data.transaction);
+      const amount = data.data.transaction.map((trans: any) =>
+        parseInt(trans.amount)
+      );
+      const sum = amount.reduce((x: number, y: number) => x + y);
+
+      setAmount(sum);
     });
   };
+
   useEffect(() => {
-    fetchDataFromAPI();
-  }, []);
+    if (transactionData) {
+      fetchDataFromAPI();
+    }
+  }, [updateData]);
 
   return (
     <div>
@@ -24,8 +35,8 @@ export default function Home() {
         <title>Budget | Home</title>
       </Head>
       <div>date</div>
-      <div>0 TRANSACTIONS</div>
-
+      <div>{transactionData.length} TRANSACTIONS</div>
+      <div>$ {amount}</div>
       {transactionData.map((transaction, idx) => (
         <div key={idx}>
           <div>{transaction.accountType}</div>
@@ -37,7 +48,7 @@ export default function Home() {
         </div>
       ))}
 
-      <AddTransaction />
+      <AddTransaction setUpdateData={setUpdateData} />
     </div>
   );
 }

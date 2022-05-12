@@ -16,6 +16,7 @@ import { MotionIcon } from "components/styles/Icon";
 type Form = {
   postType: string;
   setCardOpen: any;
+  setUpdateData: any;
 };
 
 const TranForm = styled.form`
@@ -54,7 +55,11 @@ const RadioBox = styled.div`
   border: 1px solid grey;
 `;
 
-export default function TransactionForm({ postType, setCardOpen }: Form) {
+export default function TransactionForm({
+  setUpdateData,
+  postType,
+  setCardOpen,
+}: Form) {
   const [categoryName, setCategoryName] = useState([]);
   const [categoryIcon, setcategoryIcon] = useState("");
   const [categoryDetail, setCategoryDetail] = useState(false);
@@ -78,6 +83,7 @@ export default function TransactionForm({ postType, setCardOpen }: Form) {
       .then((data) => {
         console.log("get data", data);
         setCardOpen(false);
+        setUpdateData(data);
       })
       .catch((err) => {
         console.log("Error creating a new transaction", err);

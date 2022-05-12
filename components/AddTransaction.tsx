@@ -35,7 +35,7 @@ const ActiveTitle = styled(TypeTitle)`
   background-color: grey;
   color: white;
 `;
-export default function AddTransaction() {
+export default function AddTransaction({ setUpdateData }) {
   const [type, setType] = useState("Expense");
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -81,13 +81,25 @@ export default function AddTransaction() {
               )}
             </SubTitleArea>
             {type === "Expense" && (
-              <TransactionForm setCardOpen={setCardOpen} postType="Expense" />
+              <TransactionForm
+                setUpdateData={setUpdateData}
+                setCardOpen={setCardOpen}
+                postType="Expense"
+              />
             )}
             {type === "Income" && (
-              <TransactionForm setCardOpen={setCardOpen} postType="Income" />
+              <TransactionForm
+                setUpdateData={setUpdateData}
+                setCardOpen={setCardOpen}
+                postType="Income"
+              />
             )}
             {type === "Transfer" && (
-              <TransactionForm setCardOpen={setCardOpen} postType="Transfer" />
+              <TransactionForm
+                setUpdateData={setUpdateData}
+                setCardOpen={setCardOpen}
+                postType="Transfer"
+              />
             )}
           </BigCard>
         </AnimatePresence>
