@@ -15,7 +15,6 @@ export default function AccountPage() {
       .then((res) => res.json())
       .then(({ data }) => {
         setAccounts(data);
-        console.log(data);
       });
   }, [isShowPopup]);
 

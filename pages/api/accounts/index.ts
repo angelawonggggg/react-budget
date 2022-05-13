@@ -1,6 +1,6 @@
 import { connect } from "middleware/mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import Account from "../../../models/accounts";
+import Accounts from "../../../models/accounts";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -9,7 +9,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (title && balance) {
       try {
-        const account = await Account.create(req.body, "-_id -__v");
+        const account = await Accounts.create(req.body, "-_id -__v");
         res.status(201).json({ success: true, data: account });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
@@ -21,27 +21,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "GET") {
     try {
-      const accounts = await Account.find({});
+      const accounts = await Accounts.find({});
       res.status(200).json({ success: true, data: accounts });
     } catch (error) {
       res.status(400).json({ success: false, error: error });
     }
   }
 
-  // if (req.method === "PUT") {
-  //   try {
-  //     const { balanceChange, notes } = req.body;
-  //     const id = req.query.id;
-
-  //     const account = await Account.findByIdAndUpdate(
-  //       id,
-  //       { balance: 300 },
-  //       { new: true }
-  //     );
-  //   } catch (error) {
-  //     res.status(400).json({ success: false, error: error });
-  //   }
-  // }
+  if (req.method === "DELETE") {
+    const id = req.query.id;
+    await Accounts.deleteOne({ id });
+  }
 }
 
 export default handler;

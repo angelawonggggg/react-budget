@@ -9,6 +9,12 @@ export type AccountDetail = {
   account: Account;
 };
 
+export type EditAccount = {
+  account: Account;
+  notes: string;
+  balanceChange: number;
+};
+
 export type PopupForm = {
   title: string;
   items: Array<string>;

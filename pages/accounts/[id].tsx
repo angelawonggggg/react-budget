@@ -1,26 +1,39 @@
+import { Account } from "models/accounts";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import "../../utils/type";
 
-export default function Account() {
+export default function AccountPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [accountInfo, setAccountInfo] = useState("");
-  console.log(accountInfo, id);
+  const [accountInfo, setAccountInfo] = useState<Account | null>(null);
 
   useEffect(() => {
-    fetch("/api/accounts/" + id)
-      .then((res) => res.json())
-      .then(({ data }) => {
-        setAccountInfo(data);
-      });
+    if (id) {
+      fetch("/api/accounts/" + id)
+        .then((res) => res.json())
+        .then(({ data }) => {
+          setAccountInfo(data);
+        });
+    }
   }, []);
+
+  const handleDelete = async () => {
+    if (confirm("Are you sure you want to delete this account?")) {
+      fetch("/api/accounts", {
+        method: "DELETE",
+      }).then((res) => res.json());
+    } else {
+      console.log("cancelled");
+    }
+  };
 
   return (
     <div>
-      <h3>{accountInfo.title}</h3>
-      <div>Balance: ${accountInfo.balance}</div>
+      <h1>{accountInfo?.title}</h1>
+      <div>Balance: ${accountInfo?.balance}</div>
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }

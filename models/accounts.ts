@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export type Account = {
+  id: string;
   title: string;
   balance: number;
   balanceChange: number;
