@@ -5,10 +5,10 @@ import Accounts from "../../../models/accounts";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
   if (req.method === "POST") {
-    const { title, balance } = req.body;
+    const { accountType, balance } = req.body;
 
     const account = new Accounts({
-      title,
+      accountType,
       balance: parseFloat(balance),
     });
     const error = account.validateSync();

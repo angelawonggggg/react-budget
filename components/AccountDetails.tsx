@@ -9,12 +9,14 @@ export default function AccountDetails({ account }: AccountDetail) {
     setIsShowEditPopup(!isShowEditPopup);
   };
 
+  console.log(account);
+
   return (
     <>
       <AccountDetailCard account={account} toggleEditForm={toggleEditForm} />
       {isShowEditPopup && (
         <EditAccountForm
-          accountType={account.title}
+          accountType={account.accountType}
           balance={account.balance}
           toggleEditForm={toggleEditForm}
         />

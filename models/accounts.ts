@@ -2,17 +2,17 @@ import mongoose from "mongoose";
 
 export type Account = {
   id: string;
-  title: string;
+  accountType: string;
   balance: number;
   balanceChange: number;
   notes: string;
 };
 
 const accountSchema = new mongoose.Schema({
-  title: {
+  accountType: {
     type: String,
-    required: [true, "Title is required"],
-    maxlength: [20, "Title must be less than 20 characters"],
+    required: [true, "Account type is required"],
+    maxlength: [20, "Account type must be less than 20 characters"],
   },
   balance: {
     type: Number,

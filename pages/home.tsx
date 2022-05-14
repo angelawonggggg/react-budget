@@ -1,11 +1,8 @@
 import Head from "next/head";
-import { motion } from "framer-motion";
-import styled from "styled-components";
 import AddTransaction from "components/AddTransaction";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { AccountTransaction } from "utils/type";
-import transactions from "models/transactions";
 
 export default function Home() {
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(

@@ -17,7 +17,7 @@ export type EditAccount = {
 
 export type PopupForm = {
   title: string;
-  items: Array<string>;
+  accountTypes: Array<string>;
   balance: number;
   setAccountType: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   setBalance: (event: React.ChangeEvent<HTMLInputElement>) => void;

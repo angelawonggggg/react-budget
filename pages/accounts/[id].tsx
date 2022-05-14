@@ -24,7 +24,7 @@ export default function AccountPage() {
         .then((res) => res.json())
         .then(({ data }) => {
           setAccountInfo(data);
-          fetchTransactions(data.title);
+          fetchTransactions(data.accountType);
         });
     }
   }, [id]);
@@ -49,7 +49,7 @@ export default function AccountPage() {
 
   return (
     <div>
-      <h1>{accountInfo?.title}</h1>
+      <h1>{accountInfo?.accountType}</h1>
       <div>Balance: ${accountInfo?.balance}</div>
       <button>Edit</button>
       <button onClick={handleDelete}>Delete</button>

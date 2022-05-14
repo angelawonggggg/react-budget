@@ -4,9 +4,15 @@ import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
 import axios from "axios";
 
-export default function AddAccount({ closePopup, postSave }: { closePopup: () => void, postSave: () => void }) {
+export default function AddAccount({
+  closePopup,
+  postSave,
+}: {
+  closePopup: () => void;
+  postSave: () => void;
+}) {
   const title = "Add an account";
-  const items = [
+  const accountTypes = [
     "Cash",
     "Credit",
     "Debit",
@@ -16,7 +22,7 @@ export default function AddAccount({ closePopup, postSave }: { closePopup: () =>
     "Other",
   ];
 
-  const [account, setAccount] = useState("Cash");
+  const [accountType, setAccountType] = useState("Cash");
   const [accountBalance, setAccountBalance] = useState(0);
 
   const handleSubmit = (): void => {
@@ -24,7 +30,7 @@ export default function AddAccount({ closePopup, postSave }: { closePopup: () =>
 
     axios
       .post("/api/accounts/", {
-        title: account,
+        accountType: accountType,
         balance: accountBalance,
       })
       .then((data) => {
@@ -47,9 +53,9 @@ export default function AddAccount({ closePopup, postSave }: { closePopup: () =>
 
           <StyledForm.GetPopupForm
             title={title}
-            items={items}
+            accountTypes={accountTypes}
             balance={accountBalance}
-            setAccountType={(event) => setAccount(event.target.value)}
+            setAccountType={(event) => setAccountType(event.target.value)}
             setBalance={(event) =>
               setAccountBalance(parseFloat(event.target.value))
             }

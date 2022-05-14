@@ -67,7 +67,7 @@ const Overlay = styled.div`
 
 export const GetPopupForm = ({
   title,
-  items,
+  accountTypes,
   balance,
   setAccountType,
   setBalance,
@@ -83,7 +83,7 @@ export const GetPopupForm = ({
       <Label> Account type </Label>
 
       <Select onChange={setAccountType}>
-        {items?.map((item, id) => (
+        {accountTypes?.map((item, id) => (
           <Item key={id} value={item}>
             {item}
           </Item>

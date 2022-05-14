@@ -113,7 +113,7 @@ export const AccountDetailCard = ({
     </AccountCardIcon>
     <Link href={"/accounts/" + account._id}>
       <div>
-        <AccountDetailName>{account.title}</AccountDetailName>
+        <AccountDetailName>{account.accountType}</AccountDetailName>
         <Balance>{"Balance: $" + account.balance}</Balance>
       </div>
     </Link>
