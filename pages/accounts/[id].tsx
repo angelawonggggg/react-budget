@@ -8,7 +8,6 @@ import { AccountTransaction } from "../../utils/type";
 export default function AccountPage() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(`id: ${id}`);
   const [accountInfo, setAccountInfo] = useState<Account | null>(null);
   const [transactions, setTransactions] = useState<AccountTransaction[]>([]);
 
@@ -16,13 +15,11 @@ export default function AccountPage() {
     const res = await fetch(`/api/transaction/?accountType=${accountType}`);
     const data = await res.json();
     const { transactions } = data;
-    console.log(data);
     return setTransactions(transactions);
   };
 
   useEffect(() => {
     if (id) {
-      console.log(`Fetching account info for ${id}`);
       fetch("/api/accounts/" + id)
         .then((res) => res.json())
         .then(({ data }) => {
@@ -36,7 +33,15 @@ export default function AccountPage() {
     if (confirm("Are you sure you want to delete this account?")) {
       fetch("/api/accounts", {
         method: "DELETE",
-      }).then((res) => res.json());
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      })
+        .then((res) => res.json())
+        .then(({ data }) => {
+          console.log(data);
+        });
     } else {
       console.log("cancelled");
     }
@@ -54,6 +59,8 @@ export default function AccountPage() {
           <AccountTransactionCard transaction={transaction} />
         </div>
       ))}
+
+      {transactions.length === 0 && <div>No transactions yet</div>}
     </div>
   );
 }

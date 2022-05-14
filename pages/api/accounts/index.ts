@@ -30,8 +30,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "DELETE") {
-    const id = req.query.id;
-    await Accounts.deleteOne({ id });
+    const id = req.body.id;
+    if (id) {
+      const accounts = await Accounts.findByIdAndDelete(id);
+      res.status(200).json({ success: true, data: accounts });
+    } else {
+      res.status(400).json({ success: false, error: "Missing id" });
+    }
   }
 }
 
