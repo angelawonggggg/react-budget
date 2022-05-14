@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import {
@@ -7,7 +8,6 @@ import {
 } from "../../utils/db-util";
 
 async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
-  let client;
   if (req.method === "POST") {
     const { accountType, amount, category, categoryDetail, date, textDetails } =
       req.body;
@@ -42,7 +42,7 @@ async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "GET") {
-    let client;
+    let client: MongoClient;
     try {
       client = await connectDatabase();
     } catch (error) {
@@ -50,10 +50,17 @@ async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
     try {
-      const documents = await getAllDocuments(client, "transaction", {
-        _id: -1,
-      });
-      res.status(200).json({ transaction: documents });
+      const query: { accountType?: string } = {};
+      if (req.query.accountType) {
+        query.accountType = req.query.accountType as string;
+      }
+      const documents = await client
+        .db()
+        .collection("transaction")
+        .find(query)
+        .toArray();
+
+      res.status(200).json({ transactions: documents });
     } catch (error) {
       res.status(500).json({ message: "Getting transaction failed." });
     }

@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Accounts from "../../../models/accounts";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await connect();
   if (req.method === "POST") {
-    await connect();
     const { title, balance } = req.body;
 
     if (title && balance) {

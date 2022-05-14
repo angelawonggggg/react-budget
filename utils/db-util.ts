@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const dbUri = "mongodb://db:27017";
+
 export async function connectDatabase() {
   const client = await MongoClient.connect(dbUri);
   return client;

@@ -33,3 +33,9 @@ export type AccountForm = {
 export type ButtonType = {
   children: string;
 };
+
+export type AccountTransaction = {
+  category: string;
+  amount: number;
+  date: string;
+};

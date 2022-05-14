@@ -4,19 +4,20 @@ import styled from "styled-components";
 import AddTransaction from "components/AddTransaction";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { AccountTransaction } from "utils/type";
 
 export default function Home() {
-  const [transactionData, setTransactionData] = useState<any[]>([]);
+  const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
+    []
+  );
   const [amount, setAmount] = useState(0);
   const [updateData, setUpdateData] = useState("");
 
   const fetchDataFromAPI = () => {
-    axios.get("/api/transaction/").then((data) => {
-      console.log(data);
-      setTransactionData(data.data.transaction);
-      const amount = data.data.transaction.map((trans: any) =>
-        parseInt(trans.amount)
-      );
+    axios.get("/api/transaction/").then((res) => {
+      const { transactions }: { transactions: AccountTransaction[] } = res.data;
+      setTransactionData(transactions);
+      const amount = transactions.map((trans: any) => parseInt(trans.amount));
       const sum = amount.reduce((x: number, y: number) => x + y);
 
       setAmount(sum);

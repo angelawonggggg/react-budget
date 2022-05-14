@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AddAccount from "components/AddAccount";
 import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
@@ -16,7 +16,7 @@ export default function AccountPage() {
       .then(({ data }) => {
         setAccounts(data);
       });
-  }, [isShowPopup]);
+  }, []);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);

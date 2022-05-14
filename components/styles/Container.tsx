@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { TiEdit } from "react-icons/ti";
 import Link from "next/link";
-import { AccountDetailBox } from "../../utils/type";
+import { AccountDetailBox, AccountTransaction } from "../../utils/type";
 
 export const ChartContainer = styled.div`
   position: relative;
@@ -126,3 +126,18 @@ export const NetWorthCard = ({ total }: any) => (
     <MainText>{"$" + total}</MainText>
   </NetWorthWrapper>
 );
+
+export const AccountTransactionCard = ({
+  transaction,
+}: {
+  transaction: AccountTransaction;
+}) => {
+  const { category, amount, date } = transaction;
+  return (
+    <AccountCard>
+      <div>Category: {category}</div>
+      <div>Amount: ${amount}</div>
+      <div>Date: {date}</div>
+    </AccountCard>
+  );
+};
