@@ -1,18 +1,21 @@
-import { MongoClient } from "mongodb";
+import { connect } from "middleware/mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
+import AccountTransaction from "../../models/transactions";
 
-import {
-  connectDatabase,
-  insertDocument,
-  getAllDocuments,
-} from "../../utils/db-util";
-
-async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await connect();
   if (req.method === "POST") {
-    const { accountType, amount, category, categoryDetail, date, textDetails } =
+    const { accountType, category, categoryDetail, date, textDetails } =
       req.body;
+    let amount = parseFloat(req.body.amount);
+    if (isNaN(amount)) {
+      res
+        .status(400)
+        .json({ success: false, error: "amount must be a number" });
+      return;
+    }
 
-    const newtransaction = {
+    const cleanedPayload = {
       accountType,
       amount,
       category,
@@ -20,53 +23,35 @@ async function transactionHandler(req: NextApiRequest, res: NextApiResponse) {
       date,
       textDetails,
     };
+    const newTransaction = new AccountTransaction(cleanedPayload);
+    const error = newTransaction.validateSync();
+    if (error) {
+      res.status(400).json({ success: false, error: error });
+    } else {
+      newTransaction.save();
 
-    let client;
-    try {
-      client = await connectDatabase();
-    } catch (error) {
-      res.status(500).json({ message: "Connection to the database failed!" });
-      return;
-    }
-
-    try {
-      await insertDocument(client, "transaction", newtransaction);
       res.status(201).json({
-        message: "adding new transaction!",
-        transaction: newtransaction,
+        status: "success",
+        transaction: newTransaction,
       });
-    } catch (error) {
-      res.status(500).json({ message: "Inserting data failed" });
-      return;
     }
   }
 
   if (req.method === "GET") {
-    let client: MongoClient;
-    try {
-      client = await connectDatabase();
-    } catch (error) {
-      res.status(500).json({ message: "Connection to the database failed!" });
-      return;
-    }
     try {
       const query: { accountType?: string } = {};
       if (req.query.accountType) {
         query.accountType = req.query.accountType as string;
       }
-      const documents = await client
-        .db()
-        .collection("transaction")
-        .find(query)
-        .toArray();
-
-      res.status(200).json({ transactions: documents });
+      const transactions = await AccountTransaction.find(query);
+      res.status(200).json({
+        status: "success",
+        transactions,
+      });
     } catch (error) {
-      res.status(500).json({ message: "Getting transaction failed." });
+      res.status(500).json({ status: "unsuccess" });
     }
   }
-
-  // client.close();
 }
 
-export default transactionHandler;
+export default handler;

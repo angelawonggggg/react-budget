@@ -7,15 +7,16 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { title, balance } = req.body;
 
-    if (title && balance) {
-      try {
-        const account = await Accounts.create(req.body, "-_id -__v");
-        res.status(201).json({ success: true, data: account });
-      } catch (error) {
-        res.status(400).json({ success: false, error: error });
-      }
+    const account = new Accounts({
+      title,
+      balance: parseFloat(balance),
+    });
+    const error = account.validateSync();
+    if (error) {
+      res.status(400).json({ error: error.message });
     } else {
-      res.status(400).json({ success: false, error: "Missing fields" });
+      await account.save();
+      res.status(201).json({ success: true, data: account });
     }
   }
 

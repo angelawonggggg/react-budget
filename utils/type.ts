@@ -35,7 +35,10 @@ export type ButtonType = {
 };
 
 export type AccountTransaction = {
+  accountType: string;
+  amount: string;
   category: string;
-  amount: number;
+  categoryDetail: string;
   date: string;
+  textDetails: string;
 };

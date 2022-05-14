@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-var Schema = mongoose.Schema;
 
 export type User = {
   isLoggedIn: boolean;
@@ -7,7 +6,7 @@ export type User = {
   password: string;
 };
 
-var user = new Schema({
+var user = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -18,4 +17,4 @@ var user = new Schema({
   },
 });
 
-var User = mongoose.model("User", user);
+export default mongoose.models.User || mongoose.model("User", user);

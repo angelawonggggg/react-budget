@@ -47,7 +47,7 @@ const RadioBox = styled.div`
   left: 0;
   width: 90vw;
   height: 20rem;
-  box-shadow: 2px 2px 2px grey;
+  box-shadow: 0 0 10px 2px grey;
   border-radius: 15px;
   top: 25rem;
   background-color: white;

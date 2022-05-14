@@ -5,22 +5,17 @@ import AddTransaction from "components/AddTransaction";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { AccountTransaction } from "utils/type";
+import transactions from "models/transactions";
 
 export default function Home() {
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
     []
   );
-  const [amount, setAmount] = useState(0);
   const [updateData, setUpdateData] = useState("");
 
   const fetchDataFromAPI = () => {
     axios.get("/api/transaction/").then((res) => {
-      const { transactions }: { transactions: AccountTransaction[] } = res.data;
-      setTransactionData(transactions);
-      const amount = transactions.map((trans: any) => parseInt(trans.amount));
-      const sum = amount.reduce((x: number, y: number) => x + y);
-
-      setAmount(sum);
+      setTransactionData(res.data.transactions);
     });
   };
 
@@ -37,15 +32,25 @@ export default function Home() {
       </Head>
       <div>date</div>
       <div>{transactionData.length} TRANSACTIONS</div>
-      <div>$ {amount}</div>
+      <div>
+        $
+        {transactionData.reduce(
+          (sum, tran) =>
+            sum + isNaN(parseInt(tran.amount)) ? 0 : parseInt(tran.amount),
+          0
+        )}
+      </div>
       {transactionData.map((transaction, idx) => (
         <div key={idx}>
-          <div>{transaction.accountType}</div>
-          <div>{transaction.amount}</div>
-          <div>{transaction.category}</div>
-          <div>{transaction.categoryDetail}</div>
-          <div>{transaction.date}</div>
-          <div>{transaction.textDetails}</div>
+          <ul>
+            <li>{transaction.accountType}</li>
+            <li>{transaction.amount}</li>
+            <li>{transaction.category}</li>
+            <li>{transaction.categoryDetail}</li>
+            <li>{transaction.date}</li>
+            <li>{transaction.textDetails}</li>
+          </ul>
+          <hr />
         </div>
       ))}
 

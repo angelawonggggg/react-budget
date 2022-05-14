@@ -4,7 +4,7 @@ import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
 import axios from "axios";
 
-export default function AddAccount({ closePopup }: { closePopup: () => void }) {
+export default function AddAccount({ closePopup, postSave }: { closePopup: () => void, postSave: () => void }) {
   const title = "Add an account";
   const items = [
     "Cash",
@@ -33,6 +33,7 @@ export default function AddAccount({ closePopup }: { closePopup: () => void }) {
       .catch(console.error)
       .finally(() => {
         closePopup();
+        postSave();
       });
   };
 

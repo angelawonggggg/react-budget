@@ -7,12 +7,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default withIronSessionApiRoute(loginRoute, sessionOptions);
 import { MongoClient } from "mongodb";
 import crypto from "crypto";
-
-// Connection URI
-const dbUri = "mongodb://db:27017";
+import { DATABASE_URL } from "middleware/mongodb";
 
 // Create a new MongoClient
-const client = new MongoClient(dbUri);
+const client = new MongoClient(DATABASE_URL);
 
 async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
   const { username, password } = await req.body;

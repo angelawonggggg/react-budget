@@ -1,9 +1,8 @@
 import { MongoClient } from "mongodb";
-
-const dbUri = "mongodb://db:27017";
+import { DATABASE_URL } from "middleware/mongodb";
 
 export async function connectDatabase() {
-  const client = await MongoClient.connect(dbUri);
+  const client = await MongoClient.connect(DATABASE_URL);
   return client;
 }
 

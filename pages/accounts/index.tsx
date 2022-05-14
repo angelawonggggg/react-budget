@@ -10,13 +10,14 @@ export default function AccountPage() {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
-  useEffect(() => {
+  const loadAccounts = () => {
     fetch("/api/accounts")
       .then((res) => res.json())
       .then(({ data }) => {
         setAccounts(data);
       });
-  }, []);
+  };
+  useEffect(loadAccounts, []);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
@@ -33,7 +34,9 @@ export default function AccountPage() {
         <button onClick={togglePopupForm}>Add an account</button>
       </PageTopWrapper>
 
-      {isShowPopup && <AddAccount closePopup={togglePopupForm} />}
+      {isShowPopup && (
+        <AddAccount closePopup={togglePopupForm} postSave={loadAccounts} />
+      )}
 
       {accounts?.map?.((account, idx) => (
         <AccountDetails key={idx} account={account} />
