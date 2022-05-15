@@ -1,7 +1,8 @@
 import { AccountTransactionCard } from "components/styles/Container";
 import { Account } from "models/accounts";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
+import { MdFilterList } from "react-icons/md";
 import "../../utils/type";
 import { AccountTransaction } from "../../utils/type";
 
@@ -47,12 +48,32 @@ export default function AccountPage() {
     }
   };
 
+  const filterList = (event: React.MouseEventHandler) => {
+    const result = transactions.filter(
+      (transaction) => transaction.transactionType === `${event}`
+    );
+    setTransactions(result);
+  };
+
   return (
     <div>
       <h1>{accountInfo?.accountType}</h1>
       <div>Balance: ${accountInfo?.balance}</div>
       <button>Edit</button>
       <button onClick={handleDelete}>Delete</button>
+
+      <button onClick={(e) => filterList(e.target.value)} value="expense">
+        Expense
+      </button>
+      <button onClick={(e) => filterList(e.target.value)} value="income">
+        Income
+      </button>
+
+      <select>
+        <option>Date</option>
+        <option>Amount</option>
+        <option>Category</option>
+      </select>
 
       {transactions?.map((transaction, idx) => (
         <div key={idx}>

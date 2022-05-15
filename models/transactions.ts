@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const AccountTransaction = new mongoose.Schema({
   accountType: {
     type: String,
@@ -10,16 +9,15 @@ const AccountTransaction = new mongoose.Schema({
   amount: {
     type: Number,
     required: [true, "amount is required"],
-    maxlength: [20, "Title must be less than 20 characters"],
   },
   category: {
     type: String,
     required: [true, "category is required"],
-    maxlength: [20, "Title must be less than 20 characters"],
+    maxlength: [20, "Category must be less than 20 characters"],
   },
   categoryDetail: {
     type: String,
-    required: [true, "categoryDetail is required"],
+    //required: [true, "categoryDetail is required"],
     maxlength: [20, "Title must be less than 20 characters"],
   },
   date: {
@@ -29,7 +27,7 @@ const AccountTransaction = new mongoose.Schema({
   },
   textDetails: {
     type: String,
-    required: [false, "textDetails is required"],
+    //required: [false, "textDetails is required"],
     maxlength: [20, "Title must be less than 20 characters"],
   },
 });

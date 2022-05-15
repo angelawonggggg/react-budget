@@ -1,5 +1,11 @@
 import { Account } from "models/accounts";
 
+export type TransactionFormType = {
+  postType: string;
+  setCardOpen: any;
+  setUpdateData: any;
+};
+
 export type AccountDetailBox = {
   toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
   account: Account;
@@ -36,6 +42,7 @@ export type ButtonType = {
 
 export type AccountTransaction = {
   accountType: string;
+  transactionType: string;
   amount: string;
   category: string;
   categoryDetail: string;

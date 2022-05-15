@@ -5,9 +5,9 @@ import AccountTransaction from "../../models/transactions";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
   if (req.method === "POST") {
-    const { accountType, category, categoryDetail, date, textDetails } =
+    const { accountType, amount, category, categoryDetail, date, textDetails } =
       req.body;
-    let amount = parseFloat(req.body.amount);
+
     if (isNaN(amount)) {
       res
         .status(400)

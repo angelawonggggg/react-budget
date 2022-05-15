@@ -13,11 +13,7 @@ import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
 import { useState, useEffect } from "react";
 import { BoxWithTextAndInput } from "./styles/ContainerStyle";
 import { MotionIcon } from "components/styles/Icon";
-type Form = {
-  postType: string;
-  setCardOpen: any;
-  setUpdateData: any;
-};
+import { TransactionFormType } from "../utils/type";
 
 const TranForm = styled.form`
   display: flex;
@@ -59,7 +55,7 @@ export default function TransactionForm({
   setUpdateData,
   postType,
   setCardOpen,
-}: Form) {
+}: TransactionFormType) {
   const [categoryName, setCategoryName] = useState([]);
   const [categoryIcon, setcategoryIcon] = useState("");
   const [categoryDetail, setCategoryDetail] = useState(false);
@@ -70,6 +66,7 @@ export default function TransactionForm({
     control,
     formState: { errors },
   } = useForm();
+
   const HandleSubmit = (data: any) => {
     axios
       .post("/api/transaction/", {

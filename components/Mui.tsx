@@ -95,7 +95,7 @@ export const DropDown = ({ control, name, data }: FormControlData) => {
       render={({ field }) => (
         <DropDownBox {...field}>
           {data &&
-            data.map((title: string) => (
+            data.map((title: string, uuidv4: number) => (
               <MenuItem key={uuidv4} value={title}>
                 {title}
               </MenuItem>

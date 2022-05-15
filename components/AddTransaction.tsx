@@ -42,6 +42,8 @@ export default function AddTransaction({ setUpdateData }) {
   const handleType = (e: any) => {
     setType(e.target.innerHTML);
   };
+
+  console.log(type);
   const handleCardOpen = () => {
     if (!cardOpen) {
       setCardOpen(true);

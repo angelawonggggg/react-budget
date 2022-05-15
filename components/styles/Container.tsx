@@ -103,6 +103,16 @@ const Balance = styled.div`
   cursor: pointer;
 `;
 
+const Tag = styled.div`
+  display: block;
+  margin-left: auto;
+  background: ${(props) => props?.color || "#e2e1e1"};
+  font-size: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  color: whitesmoke;
+`;
+
 export const AccountDetailCard = ({
   toggleEditForm,
   account,
@@ -132,9 +142,12 @@ export const AccountTransactionCard = ({
 }: {
   transaction: AccountTransaction;
 }) => {
-  const { category, amount, date } = transaction;
+  const { category, amount, date, transactionType } = transaction;
   return (
     <AccountCard>
+      <Tag color={transactionType === "income" ? "#59b259" : "#d14545"}>
+        {transactionType}
+      </Tag>
       <div>Category: {category}</div>
       <div>Amount: ${amount}</div>
       <div>Date: {date}</div>
