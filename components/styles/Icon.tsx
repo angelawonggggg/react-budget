@@ -56,9 +56,10 @@ export const MotionIcon = ({ action, image }) => {
   );
 };
 
-// export const AddItemsIcon = styled(motion.img)`
-//   width: 4rem;
-//   position: absolute;
-//   bottom: 2rem;
-//   right: 2rem;
-// `;
+export const ScrollIcon = styled.div`
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 30px;
+  cursor: pointer;
+`;

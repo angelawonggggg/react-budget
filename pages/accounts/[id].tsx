@@ -1,6 +1,7 @@
 import { AccountTransactionCard } from "components/styles/Container";
+import { ScrollIcon } from "components/styles/Icon";
 import { Account } from "models/accounts";
-import { PromiseProvider } from "mongoose";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import "../../utils/type";
@@ -12,6 +13,7 @@ export default function AccountPage() {
   const [accountInfo, setAccountInfo] = useState<Account | null>(null);
   const [transactions, setTransactions] = useState<AccountTransaction[]>([]);
   const [filteredList, setFilteredList] = useState<AccountTransaction[]>([]);
+  const [showScrollTopBtn, setShowScrollTopBtn] = useState(false);
 
   const fetchTransactions = async (accountType: string) => {
     const res = await fetch(`/api/transaction/?accountType=${accountType}`);
@@ -50,13 +52,31 @@ export default function AccountPage() {
   };
 
   const filterList = (type: string) => {
-    // const result = transactions.filter(
-    //   (transaction) => transaction.transactionType === type
-    // );
+    if (transactions.length === 0) return;
+
+    if (type === "all") {
+      return setFilteredList(transactions);
+    }
     setFilteredList(
       transactions.filter((transaction) => transaction.transactionType === type)
     );
-    console.log(filteredList);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > window.screenY) {
+        setShowScrollTopBtn(true);
+      } else {
+        setShowScrollTopBtn(false);
+      }
+    });
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -66,13 +86,10 @@ export default function AccountPage() {
 
       <button onClick={handleDelete}>Delete</button>
 
-      <button onClick={(e) => filterList("expense")}>Expense</button>
-      <button onClick={(e) => filterList("income")}>Income</button>
-
-      <select>
-        <option>Date</option>
-        <option>Amount</option>
-        <option>Category</option>
+      <select onChange={(e) => filterList(e.target.value)}>
+        <option value="all">All</option>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
       </select>
 
       {filteredList.length == 0 &&
@@ -89,6 +106,12 @@ export default function AccountPage() {
       ))}
 
       {transactions.length === 0 && <div>No transactions yet</div>}
+
+      {showScrollTopBtn ? (
+        <ScrollIcon>
+          <FaArrowAltCircleUp onClick={scrollToTop} />
+        </ScrollIcon>
+      ) : null}
     </div>
   );
 }
