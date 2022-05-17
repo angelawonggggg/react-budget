@@ -7,6 +7,7 @@ import { Account } from "models/accounts";
 
 export default function AccountPage() {
   const [isShowPopup, setIsShowPopup] = useState(false);
+  const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
@@ -17,10 +18,14 @@ export default function AccountPage() {
         setAccounts(data);
       });
   };
-  useEffect(loadAccounts, [total]);
+  useEffect(loadAccounts, [isShowEditPopup]);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
+  };
+
+  const toggleEditForm = () => {
+    setIsShowEditPopup(!isShowEditPopup);
   };
 
   return (
@@ -39,7 +44,12 @@ export default function AccountPage() {
       )}
 
       {accounts?.map?.((account, idx) => (
-        <AccountDetails key={idx} account={account} />
+        <AccountDetails
+          key={idx}
+          account={account}
+          toggleEditForm={toggleEditForm}
+          isShowEditPopup={isShowEditPopup}
+        />
       ))}
     </div>
   );

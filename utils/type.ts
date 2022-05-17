@@ -13,6 +13,8 @@ export type AccountDetailBox = {
 
 export type AccountDetail = {
   account: Account;
+  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+  isShowEditPopup: boolean;
 };
 
 export type EditAccount = {

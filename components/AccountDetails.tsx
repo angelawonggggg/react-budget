@@ -4,12 +4,16 @@ import { useState } from "react";
 import { EditAccountForm } from "./styles/Form";
 import axios from "axios";
 
-export default function AccountDetails({ account }: AccountDetail) {
-  const [isShowEditPopup, setIsShowEditPopup] = useState(false);
+export default function AccountDetails({
+  account,
+  toggleEditForm,
+  isShowEditPopup,
+}: AccountDetail) {
+  // const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [balanceChange, setBalanceChange] = useState(0);
-  const toggleEditForm = () => {
-    setIsShowEditPopup(!isShowEditPopup);
-  };
+  // const toggleEditForm = () => {
+  //   setIsShowEditPopup(!isShowEditPopup);
+  // };
 
   const newBalance = account.balance + balanceChange;
 
@@ -24,6 +28,9 @@ export default function AccountDetails({ account }: AccountDetail) {
       })
       .then((data) => {
         console.log(data);
+      })
+      .finally(() => {
+        toggleEditForm();
       });
   };
 
