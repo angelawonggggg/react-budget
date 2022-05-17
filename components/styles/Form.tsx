@@ -99,6 +99,8 @@ export const GetPopupForm = ({
 export const EditAccountForm = ({
   accountType,
   balance,
+  setBalanceChange,
+  onSubmit,
   toggleEditForm,
 }: AccountForm) => (
   <Overlay>
@@ -106,16 +108,18 @@ export const EditAccountForm = ({
       <CloseIcon onClick={toggleEditForm}>
         <TiDelete />
       </CloseIcon>
-      <Title>{accountType}</Title>
-      <Label>Current Balance</Label>
-      <div>{"$" + balance}</div>
-      <Label>Balance change </Label>
-      <Input type="number"></Input>
+      <form onSubmit={onSubmit}>
+        <Title>{accountType}</Title>
+        <Label>Current Balance</Label>
+        <div>{"$" + balance}</div>
+        <Label>Balance change </Label>
+        <Input type="number" onChange={setBalanceChange}></Input>
 
-      <Label>Notes </Label>
-      <Input type="Text"></Input>
+        {/* <Label>Notes </Label>
+        <Input type="Text"></Input> */}
 
-      <button>Submit</button>
+        <button value="submit">Update</button>
+      </form>
     </PopupCard>
   </Overlay>
 );

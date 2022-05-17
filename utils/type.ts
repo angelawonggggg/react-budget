@@ -34,6 +34,8 @@ export type AccountForm = {
   accountType: string;
   balance: number;
   toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
+  setBalanceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (event: React.FormEventHandler<HTMLFormElement>) => void;
 };
 
 export type ButtonType = {

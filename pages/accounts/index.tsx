@@ -17,7 +17,7 @@ export default function AccountPage() {
         setAccounts(data);
       });
   };
-  useEffect(loadAccounts, []);
+  useEffect(loadAccounts, [total]);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
