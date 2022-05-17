@@ -53,3 +53,8 @@ export type AccountTransaction = {
   date: string;
   textDetails: string;
 };
+
+export type LineChart = {
+  labels: Array<string>;
+  stats: Array<number>;
+};

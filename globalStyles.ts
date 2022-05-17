@@ -21,10 +21,10 @@ const GlobalStyle = createGlobalStyle`
      background: #138BFC;
      color: white;
      margin: 1em 0;
-     padding: 0.25em 1em;
-     border: 2px solid #138BFC;
+     padding: 0.5em 1em;
      border-radius: 3px;
      cursor: pointer;
+     border: none;
   };
 
   a {
@@ -51,6 +51,16 @@ const GlobalStyle = createGlobalStyle`
 
  .card {
     width: 50%;
+ }
+
+ select {
+   padding: 5px 0;
+   margin: 10px 0;
+   width: 100px;
+ }
+
+ select:focus {
+    border: blue;
  }
 
 

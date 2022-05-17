@@ -21,13 +21,14 @@ export const IconWrapper = styled.div`
   margin: 15px 10px;
 `;
 
-const NetWorthWrapper = styled.div`
+export const NetWorthWrapper = styled.div`
   background-color: whitesmoke;
   width: 80%;
   padding: 20px;
-  margin: 10px;
+  margin: 10px auto;
   border-radius: 10px;
   max-width: 450px;
+  text-align: center;
 `;
 
 const SmallText = styled.p`
@@ -36,7 +37,7 @@ const SmallText = styled.p`
   font-size: 12px;
 `;
 
-const MainText = styled.p`
+export const MainText = styled.p`
   text-align: center;
   font-size: 25px;
   margin: 5px 0;

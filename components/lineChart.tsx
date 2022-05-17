@@ -22,23 +22,11 @@ ChartJS.register([
 ]);
 
 import { Line } from "react-chartjs-2";
+import { LineChart } from "../utils/type";
 
-export default function LineChart() {
+export default function LineChartComponent({ labels, stats }: LineChart) {
   const data = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
+    labels: labels,
     datasets: [
       {
         label: "My monthly expenses",
@@ -59,7 +47,7 @@ export default function LineChart() {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: stats,
       },
     ],
   };
@@ -83,7 +71,5 @@ export default function LineChart() {
     //   },
   };
 
-  return (
-      <Line data={data} width={100} height={100} options={options} />
-  );
+  return <Line data={data} width={100} height={100} options={options} />;
 }

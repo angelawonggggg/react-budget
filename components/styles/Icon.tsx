@@ -9,6 +9,7 @@ export const Icon = styled.span`
   font-size: 20px;
   margin: 0 5px;
   color: ${(props) => props?.color || "gray"};
+  cursor: pointer;
 `;
 
 export const IconFocus = styled.span`

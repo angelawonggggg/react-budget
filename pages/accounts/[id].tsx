@@ -1,4 +1,8 @@
-import { AccountTransactionCard } from "components/styles/Container";
+import {
+  AccountTransactionCard,
+  MainText,
+  NetWorthWrapper,
+} from "components/styles/Container";
 import { ScrollIcon } from "components/styles/Icon";
 import { Account } from "models/accounts";
 import { FaArrowAltCircleUp } from "react-icons/fa";
@@ -6,6 +10,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import "../../utils/type";
 import { AccountTransaction } from "../../utils/type";
+import { Button } from "components/styles/Button";
 
 export default function AccountPage() {
   const router = useRouter();
@@ -81,10 +86,14 @@ export default function AccountPage() {
 
   return (
     <div>
-      <h1>{accountInfo?.accountType}</h1>
-      <div>Balance: ${accountInfo?.balance}</div>
+      <NetWorthWrapper>
+        <h1>{accountInfo?.accountType}</h1>
+        <div>Balance: ${accountInfo?.balance}</div>
 
-      <button onClick={handleDelete}>Delete</button>
+        <Button color="red" onClick={handleDelete}>
+          Delete Account
+        </Button>
+      </NetWorthWrapper>
 
       <select onChange={(e) => filterList(e.target.value)}>
         <option value="all">All</option>
@@ -105,7 +114,7 @@ export default function AccountPage() {
         </div>
       ))}
 
-      {transactions.length === 0 && <div>No transactions yet</div>}
+      {transactions.length === 0 && <MainText>No transactions yet</MainText>}
 
       {showScrollTopBtn ? (
         <ScrollIcon>

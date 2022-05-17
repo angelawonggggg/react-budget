@@ -10,7 +10,8 @@ import {
 } from "../components/styles/Container";
 import { Icon } from "../components/styles/Icon";
 import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
-import Calendar from "../components/Calendar";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
@@ -26,6 +27,28 @@ export default function Statistics() {
     setIsShowDonut(false);
   };
 
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const labels = months.slice(startDate.getMonth(), endDate.getMonth() + 1);
+
+  const stats = [65, 59, 80, 81, 56, 55, 40];
+
   return (
     <div>
       <Head>
@@ -33,11 +56,30 @@ export default function Statistics() {
       </Head>
 
       <DatepickerContainer>
-        <Calendar />
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
+          className="DatePickerInput"
+        />
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
+          className="DatePickerInput"
+        />
       </DatepickerContainer>
 
       <ChartContainer>
-        <LineChart />
+        <LineChart labels={labels} stats={stats} />
       </ChartContainer>
 
       <IconWrapper>
