@@ -1,23 +1,21 @@
 // https://www.chartjs.org/docs/3.0.2/getting-started/integration.html
 import { Chart, ArcElement, BarElement } from "chart.js";
+import { BarChart } from "../utils/type";
 
 Chart.register(ArcElement, BarElement);
 
 import { Bar } from "react-chartjs-2";
 
-export default function BarChart() {
+export default function BarChartComponent({
+  categories,
+  categorySum,
+}: BarChart) {
   const data = {
-    labels: [
-      "Food",
-      "Entertainment",
-      "Transportation",
-      "Study",
-      "Rent",
-      "Other",
-    ],
+    labels: categories,
     datasets: [
       {
-        data: [300, 50, 100, 50, 800, 150],
+        label: "$",
+        data: categorySum,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -25,6 +23,7 @@ export default function BarChart() {
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
           "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 46, 64, 0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -33,6 +32,7 @@ export default function BarChart() {
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
           "rgba(255, 159, 64, 1)",
+          "rgba(255, 46, 64, 1)",
         ],
         borderWidth: 1,
       },

@@ -63,3 +63,8 @@ export type DoughnutChart = {
   categories: Array<string>;
   categorySum: Array<number>;
 };
+
+export type BarChart = {
+  categories: Array<string>;
+  categorySum: Array<number>;
+};

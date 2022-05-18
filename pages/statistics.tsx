@@ -16,9 +16,9 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
   const [isShowBar, setIsShowBar] = useState(false);
-  const [data, setData] = useState([]);
-  const [monthlyStats, setMonthlyStats] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [data, setData] = useState<any[]>([]);
+  const [monthlyStats, setMonthlyStats] = useState<number[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const today = new Date();
   const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
   const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
@@ -58,11 +58,10 @@ export default function Statistics() {
       .then((data) => setData(data.transactions));
   };
 
-  // console.log(labels, data);
-  const monthlySum = [];
-  const categoryList = [];
-  const categorySumList = [];
-  const [categorySum, setCategorySum] = useState([]);
+  const monthlySum: number[] = [];
+  const categoryList: string[] = [];
+  const categorySumList: number[] = [];
+  const [categorySum, setCategorySum] = useState<number[]>([]);
 
   useEffect(() => {
     fetchTransactions();
@@ -73,7 +72,7 @@ export default function Statistics() {
     setCategories(categoryList);
     getCategorySum();
     setCategorySum(categorySumList);
-  }, [startDate, endDate]);
+  }, [startDate]);
 
   const getMonthlyStats = () => {
     for (let i = 0; i < 12; i++) {
@@ -89,8 +88,11 @@ export default function Statistics() {
 
   const getCategories = () => {
     for (let i = 0; i < data.length; i++) {
-      if (!categories.includes(data[i].category)) {
-        console.log(data[i].category);
+      if (
+        !categories.includes(data[i].category) &&
+        data[i].transactionType == "expense"
+      ) {
+        console.log(data[0]);
         categoryList.push(data[i].category);
       }
     }
@@ -154,7 +156,7 @@ export default function Statistics() {
         {isShowDonut && (
           <DoughnutChart categories={categories} categorySum={categorySum} />
         )}
-        {isShowBar && <Bar />}
+        {isShowBar && <Bar categories={categories} categorySum={categorySum} />}
       </ChartContainer>
     </div>
   );
