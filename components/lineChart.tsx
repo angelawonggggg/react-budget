@@ -29,7 +29,7 @@ export default function LineChartComponent({ labels, stats }: LineChart) {
     labels: labels,
     datasets: [
       {
-        label: "My monthly expenses",
+        label: "Monthly expenses",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "rgba(75,192,192,0.4)",
@@ -65,10 +65,10 @@ export default function LineChartComponent({ labels, stats }: LineChart) {
         },
       },
     },
-    //   parsing: {
-    //     xAxisKey: "id",
-    //     yAxisKey: "nested.value",
-    //   },
+    parsing: {
+      xAxisKey: "months",
+      yAxisKey: "expenses $",
+    },
   };
 
   return <Line data={data} width={100} height={100} options={options} />;

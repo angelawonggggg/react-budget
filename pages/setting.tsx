@@ -1,8 +1,6 @@
 import Head from "next/head";
 
-
 export default function Setting() {
-
   return (
     <div>
       <Head>

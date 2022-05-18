@@ -68,3 +68,8 @@ export type BarChart = {
   categories: Array<string>;
   categorySum: Array<number>;
 };
+
+export type Theme = {
+  toggleTheme: (event: React.MouseEvent<SVGAElement>) => void;
+  isDark: boolean;
+};

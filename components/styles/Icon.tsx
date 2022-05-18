@@ -1,10 +1,10 @@
 import styled from "styled-components";
-
 import { motion, useAnimation } from "framer-motion";
-
 import { VscGrabber, VscChromeClose, VscTriangleLeft } from "react-icons/vsc";
-// import { BsPatchPlusFill } from "react-icons/bs";
 import { MdOutlineStickyNote2 } from "react-icons/md";
+import { BsToggleOn, BsToggleOff } from "react-icons/bs";
+import { Theme } from "../../utils/type";
+
 export const Icon = styled.span`
   font-size: 20px;
   margin: 0 5px;
@@ -64,3 +64,23 @@ export const ScrollIcon = styled.div`
   font-size: 30px;
   cursor: pointer;
 `;
+
+const ToggleIcon = styled.span`
+  font-size: 30px;
+  color: ${(props) => props.color || ""};
+  vertical-align: middle;
+`;
+
+export const ToggleTheme = ({ toggleTheme, isDark }: Theme) => (
+  <>
+    {isDark ? (
+      <ToggleIcon>
+        <BsToggleOff onClick={toggleTheme} />
+      </ToggleIcon>
+    ) : (
+      <ToggleIcon>
+        <BsToggleOn onClick={toggleTheme} />
+      </ToggleIcon>
+    )}
+  </>
+);
