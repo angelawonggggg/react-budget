@@ -69,6 +69,8 @@ const ToggleIcon = styled.span`
   font-size: 30px;
   color: ${(props) => props.color || ""};
   vertical-align: middle;
+  position: absolute;
+  right: 10px;
 `;
 
 export const ToggleTheme = ({ toggleTheme, isDark }: Theme) => (
