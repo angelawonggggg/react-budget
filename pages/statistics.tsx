@@ -2,7 +2,7 @@ import Head from "next/head";
 import LineChart from "../components/LineChart";
 import DoughnutChart from "../components/DoughnutChart";
 import Bar from "../components/BarChart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChartContainer,
   IconWrapper,
@@ -12,10 +12,14 @@ import { Icon } from "../components/styles/Icon";
 import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
   const [isShowBar, setIsShowBar] = useState(false);
+
+  const [data, setData] = useState([]);
+  const [monthlyStats, setMonthlyStats] = useState([]);
 
   const showDonutChart = () => {
     setIsShowDonut(true);
@@ -27,8 +31,11 @@ export default function Statistics() {
     setIsShowDonut(false);
   };
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const today = new Date();
+  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  const [startDate, setStartDate] = useState(new Date(lastMonth));
+  const [endDate, setEndDate] = useState(new Date(nextMonth));
 
   const months = [
     "January",
@@ -47,7 +54,35 @@ export default function Statistics() {
 
   const labels = months.slice(startDate.getMonth(), endDate.getMonth() + 1);
 
-  const stats = [65, 59, 80, 81, 56, 55, 40];
+  const fetchTransactions = async () => {
+    const data = await fetch("/api/transaction")
+      .then((res) => res.json())
+      .then((data) => setData(data.transactions));
+  };
+
+  // console.log(labels, data);
+
+  useEffect(() => {
+    fetchTransactions();
+    getMonthlyStats();
+    setMonthlyStats(stats);
+  }, [labels.length]);
+
+  const stats = [];
+
+  console.log(monthlyStats);
+
+  const getMonthlyStats = () => {
+    for (let i = 0; i < 12; i++) {
+      let total = 0;
+      for (let j = 0; j < data.length; j++) {
+        if (data[j].date.split("/")[1] == i + 1) {
+          total += data[j].amount;
+        }
+      }
+      stats.push(total);
+    }
+  };
 
   return (
     <div>
@@ -79,7 +114,7 @@ export default function Statistics() {
       </DatepickerContainer>
 
       <ChartContainer>
-        <LineChart labels={labels} stats={stats} />
+        <LineChart labels={labels} stats={monthlyStats} />
       </ChartContainer>
 
       <IconWrapper>
