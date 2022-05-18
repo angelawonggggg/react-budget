@@ -58,3 +58,8 @@ export type LineChart = {
   labels: Array<string>;
   stats: Array<number>;
 };
+
+export type DoughnutChart = {
+  categories: Array<string>;
+  categorySum: Array<number>;
+};

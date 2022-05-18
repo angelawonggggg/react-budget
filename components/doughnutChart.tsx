@@ -1,14 +1,32 @@
 // https://www.chartjs.org/docs/3.0.2/getting-started/integration.html
 import { Doughnut } from "react-chartjs-2";
+import { DoughnutChart } from "../utils/type";
 
-export default function DoughnutChart() {
+export default function DoughnutChartComponent({
+  categories,
+  categorySum,
+}: DoughnutChart) {
   const data = {
-    labels: ["Food", "Entertainment", "Transportation"],
+    labels: categories,
     datasets: [
       {
-        data: [300, 50, 100],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        data: categorySum,
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#F39C12",
+          "#00BBFF",
+          "#DAF7A6",
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#F39C12",
+          "#00BBFF",
+          "#DAF7A6",
+        ],
       },
     ],
   };

@@ -12,25 +12,13 @@ import { Icon } from "../components/styles/Icon";
 import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 
 export default function Statistics() {
   const [isShowDonut, setIsShowDonut] = useState(true);
   const [isShowBar, setIsShowBar] = useState(false);
-
   const [data, setData] = useState([]);
   const [monthlyStats, setMonthlyStats] = useState([]);
-
-  const showDonutChart = () => {
-    setIsShowDonut(true);
-    setIsShowBar(false);
-  };
-
-  const showBarChart = () => {
-    setIsShowBar(true);
-    setIsShowDonut(false);
-  };
-
+  const [categories, setCategories] = useState([]);
   const today = new Date();
   const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
   const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
@@ -54,6 +42,16 @@ export default function Statistics() {
 
   const labels = months.slice(startDate.getMonth(), endDate.getMonth() + 1);
 
+  const showDonutChart = () => {
+    setIsShowDonut(true);
+    setIsShowBar(false);
+  };
+
+  const showBarChart = () => {
+    setIsShowBar(true);
+    setIsShowDonut(false);
+  };
+
   const fetchTransactions = async () => {
     const data = await fetch("/api/transaction")
       .then((res) => res.json())
@@ -61,16 +59,21 @@ export default function Statistics() {
   };
 
   // console.log(labels, data);
+  const monthlySum = [];
+  const categoryList = [];
+  const categorySumList = [];
+  const [categorySum, setCategorySum] = useState([]);
 
   useEffect(() => {
     fetchTransactions();
     getMonthlyStats();
-    setMonthlyStats(stats);
-  }, [labels.length]);
+    getCategories();
 
-  const stats = [];
-
-  console.log(monthlyStats);
+    setMonthlyStats(monthlySum);
+    setCategories(categoryList);
+    getCategorySum();
+    setCategorySum(categorySumList);
+  }, [startDate, endDate]);
 
   const getMonthlyStats = () => {
     for (let i = 0; i < 12; i++) {
@@ -80,7 +83,28 @@ export default function Statistics() {
           total += data[j].amount;
         }
       }
-      stats.push(total);
+      monthlySum.push(total);
+    }
+  };
+
+  const getCategories = () => {
+    for (let i = 0; i < data.length; i++) {
+      if (!categories.includes(data[i].category)) {
+        console.log(data[i].category);
+        categoryList.push(data[i].category);
+      }
+    }
+  };
+
+  const getCategorySum = () => {
+    for (let i = 0; i < categoryList.length; i++) {
+      let total = 0;
+      for (let j = 0; j < data.length; j++) {
+        if (data[j].category == categoryList[i]) {
+          total += data[j].amount;
+        }
+      }
+      categorySumList.push(total);
     }
   };
 
@@ -127,7 +151,9 @@ export default function Statistics() {
       </IconWrapper>
 
       <ChartContainer>
-        {isShowDonut && <DoughnutChart />}
+        {isShowDonut && (
+          <DoughnutChart categories={categories} categorySum={categorySum} />
+        )}
         {isShowBar && <Bar />}
       </ChartContainer>
     </div>
