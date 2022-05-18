@@ -73,3 +73,11 @@ export type Theme = {
   toggleTheme: (event: React.MouseEvent<SVGAElement>) => void;
   isDark: boolean;
 };
+
+export type RegisterFormType = {
+  username: string;
+  password: string;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  setUsername: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setPassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};

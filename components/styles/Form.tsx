@@ -1,6 +1,6 @@
 import { TiDelete } from "react-icons/ti";
 import styled from "styled-components";
-import { PopupForm, AccountForm } from "../../utils/type";
+import { PopupForm, AccountForm, RegisterFormType } from "../../utils/type";
 
 const Title = styled.h1`
   font-size: 15px;
@@ -115,11 +115,25 @@ export const EditAccountForm = ({
         <Label>Balance change </Label>
         <Input type="number" onChange={setBalanceChange}></Input>
 
-        {/* <Label>Notes </Label>
-        <Input type="Text"></Input> */}
-
         <button value="submit">Update</button>
       </form>
     </PopupCard>
   </Overlay>
+);
+
+export const RegisterForm = ({
+  handleSubmit,
+  setUsername,
+  setPassword,
+  username,
+  password,
+}: RegisterFormType) => (
+  <form onSubmit={handleSubmit}>
+    <label htmlFor="">Username</label>
+    <input type="text" defaultValue={username} onChange={setUsername} />
+
+    <label htmlFor="">Password</label>
+    <input type="password" defaultValue={password} onChange={setPassword} />
+    <button value="submit">Submit</button>
+  </form>
 );

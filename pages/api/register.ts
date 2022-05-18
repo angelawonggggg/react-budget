@@ -9,7 +9,6 @@ import { MongoClient } from "mongodb";
 import crypto from "crypto";
 import { DATABASE_URL } from "middleware/mongodb";
 
-
 // Create a new MongoClient
 const client = new MongoClient(DATABASE_URL);
 

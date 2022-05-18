@@ -1,34 +1,51 @@
 import Head from "next/head";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { RegisterForm } from "../components/styles/Form";
 
+export default function signUp() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  // const handleChange = (e): void => {
+  //   setUsername(e.target.value)
+  //   setPassword(e.target.value)
+  // }
 
-export default function signUp(props: Props) {
+  const handleSubmit = (e): void => {
+    e.preventDefault();
 
-  const Wrapper = styled.section`
-    margin-left: 35px;
-`;
+    axios
+      .post("/api/register/", {
+        username: username,
+        password: password,
+      })
+      .then((data) => {
+        console.log("data", data);
+      })
+      .catch(console.error);
+
+    console.log(username, password);
+  };
+
   return (
     <div>
       <Head>
         <title>Budget | Sign Up</title>
       </Head>
-      <Wrapper>
+
       <h1>Sign up</h1>
-        <form>
-          <label htmlFor="">Username</label>
-          <input type="text" />
-          <label htmlFor="">Password</label>
-          <input type="password" />
-          <button>Submit</button>
-        </form>
-      </Wrapper>
 
+      <RegisterForm
+        handleSubmit={handleSubmit}
+        setUsername={(e) => setUsername(e.target.value)}
+        setPassword={(e) => setPassword(e.target.value)}
+        username={username}
+        password={password}
+      />
 
-
-  
+      <pre>Test account username: angela password: angela</pre>
     </div>
   );
 }
-
-
