@@ -24,9 +24,10 @@ export default function signUp() {
       .then((data) => {
         console.log("data", data);
       })
-      .catch(console.error);
-
-    console.log(username, password);
+      .catch(console.error)
+      .finally(() => {
+        alert("Successfully registered");
+      });
   };
 
   return (
@@ -44,8 +45,6 @@ export default function signUp() {
         username={username}
         password={password}
       />
-
-      <pre>Test account username: angela password: angela</pre>
     </div>
   );
 }
