@@ -4,6 +4,7 @@ import AccountTransaction from "../../models/transactions";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
+  // const { user } = req.session;
   if (req.method === "POST") {
     const {
       transactionType,

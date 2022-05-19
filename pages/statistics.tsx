@@ -55,7 +55,10 @@ export default function Statistics() {
   const fetchTransactions = async () => {
     const data = await fetch("/api/transaction")
       .then((res) => res.json())
-      .then((data) => setData(data.transactions));
+      .then((data) => {
+        setData(data.transactions);
+        getMonthlyStats();
+      });
   };
 
   const monthlySum: number[] = [];
@@ -65,14 +68,13 @@ export default function Statistics() {
 
   useEffect(() => {
     fetchTransactions();
-    getMonthlyStats();
     getCategories();
 
     setMonthlyStats(monthlySum);
     setCategories(categoryList);
     getCategorySum();
     setCategorySum(categorySumList);
-  }, [startDate]);
+  }, []);
 
   const getMonthlyStats = () => {
     for (let i = 0; i < 12; i++) {
