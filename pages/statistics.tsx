@@ -53,40 +53,36 @@ export default function Statistics() {
   };
 
   const fetchTransactions = async () => {
-    const data = await fetch("/api/transaction")
+    await fetch("/api/transaction")
       .then((res) => res.json())
-      .then((data) => {
-        setData(data.transactions);
-        getMonthlyStats();
+      .then(({ transactions }) => {
+        setData(transactions);
+        const monthlySum: number[] = [];
+        for (let i = 0; i < 12; i++) {
+          let total = 0;
+          for (let j = 0; j < transactions.length; j++) {
+            if (transactions[j].date.split("/")[1] == i + 1) {
+              total += transactions[j].amount;
+            }
+          }
+          monthlySum.push(total);
+        }
+        setMonthlyStats(monthlySum);
+        getCategories();
+
+        setCategories(categoryList);
+        getCategorySum();
+        setCategorySum(categorySumList);
       });
   };
 
-  const monthlySum: number[] = [];
   const categoryList: string[] = [];
   const categorySumList: number[] = [];
   const [categorySum, setCategorySum] = useState<number[]>([]);
 
   useEffect(() => {
     fetchTransactions();
-    getCategories();
-
-    setMonthlyStats(monthlySum);
-    setCategories(categoryList);
-    getCategorySum();
-    setCategorySum(categorySumList);
   }, []);
-
-  const getMonthlyStats = () => {
-    for (let i = 0; i < 12; i++) {
-      let total = 0;
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].date.split("/")[1] == i + 1) {
-          total += data[j].amount;
-        }
-      }
-      monthlySum.push(total);
-    }
-  };
 
   const getCategories = () => {
     for (let i = 0; i < data.length; i++) {
