@@ -44,10 +44,12 @@ export const DatePicker = ({ control, name }: FormControl) => {
       <Controller
         name={name}
         control={control}
+        rules={{ required: true }}
         defaultValue={utc}
         render={({ field: { ref, ...rest } }) => (
           <KeyboardDatePicker
             margin="normal"
+            inputRef={ref}
             format="dd/MM/yyyy"
             KeyboardButtonProps={{
               "aria-label": "change date",
@@ -76,12 +78,15 @@ export const AmountInput = ({ control, name }: FormControl) => {
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
-        <FormControl fullWidth sx={{ m: 1 }} {...field}>
+      rules={{ required: true }}
+      render={({ field: { ref, ...field } }) => (
+        <FormControl fullWidth>
           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
           <AmountBox
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="Amount"
+            {...field}
+            inputRef={ref}
           />
         </FormControl>
       )}
@@ -92,8 +97,8 @@ export const AmountInput = ({ control, name }: FormControl) => {
 export const DropDown = ({ control, name, data }: FormControlData) => {
   return (
     <Controller
-      render={({ field }) => (
-        <DropDownBox {...field}>
+      render={({ field: { ref, ...field } }) => (
+        <DropDownBox {...field} inputRef={ref}>
           {data &&
             data.map((title: string, uuidv4: number) => (
               <MenuItem key={uuidv4} value={title}>
@@ -105,6 +110,7 @@ export const DropDown = ({ control, name, data }: FormControlData) => {
       name={name}
       control={control}
       defaultValue={data[0]}
+      rules={{ required: true }}
     />
   );
 };

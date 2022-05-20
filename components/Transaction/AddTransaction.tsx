@@ -3,7 +3,7 @@ import { LargeCloseIcon, MotionIcon } from "components/styles/Icon";
 import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
-import TransactionForm from "components/TransactionForm";
+import TransactionForm from "components/Transaction/TransactionForm";
 
 const HeadArea = styled.div`
   display: flex;
@@ -27,6 +27,7 @@ const Title = styled.div`
 const TypeTitle = styled.div`
   margin: 0 1rem;
   padding: 0.5rem 1rem;
+  font-size: 0.8rem;
 `;
 
 const ActiveTitle = styled(TypeTitle)`

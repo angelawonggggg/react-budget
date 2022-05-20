@@ -6,14 +6,14 @@ import {
   AmountInput,
   DropDown,
   RadioSector,
-} from "./Mui";
+} from "../Mui";
 import axios from "axios";
-import { BasicButton } from "./styles/Button";
-import { CategoriesData, SmallCategoriesData, AccountTypeData } from "./Data";
+import { BasicButton } from "../styles/Button";
+import { CategoriesData, SmallCategoriesData, AccountTypeData } from "../Data";
 import { useState, useEffect } from "react";
-import { BoxWithTextAndInput } from "./styles/ContainerStyle";
+import { BoxWithTextAndInput } from "../styles/ContainerStyle";
 import { MotionIcon } from "components/styles/Icon";
-import { TransactionFormType } from "../utils/type";
+import { TransactionFormType } from "../../utils/type";
 
 const TranForm = styled.form`
   display: flex;
@@ -62,6 +62,7 @@ export default function TransactionForm({
   const {
     register,
     handleSubmit,
+    setError,
     watch,
     control,
     formState: { errors },
@@ -70,6 +71,7 @@ export default function TransactionForm({
   const HandleSubmit = (data: any) => {
     axios
       .post("/api/transaction/", {
+        transactionType: postType,
         accountType: data.accountType,
         amount: data.amount,
         category: data.category,
@@ -119,6 +121,7 @@ export default function TransactionForm({
       </AmountTitle>
       <DatePicker control={control} name={"date"} />
       <AmountInput control={control} name={"amount"} />
+
       <BoxWithTextAndInput>
         <SubTitle>CATEGORY:</SubTitle>
         <DropDown control={control} name={"category"} data={CategoriesData} />

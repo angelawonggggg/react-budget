@@ -5,8 +5,15 @@ import AccountTransaction from "../../models/transactions";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
   if (req.method === "POST") {
-    const { accountType, amount, category, categoryDetail, date, textDetails } =
-      req.body;
+    const {
+      transactionType,
+      accountType,
+      amount,
+      category,
+      categoryDetail,
+      date,
+      textDetails,
+    } = req.body;
 
     if (isNaN(amount)) {
       res
@@ -16,6 +23,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const cleanedPayload = {
+      transactionType,
       accountType,
       amount,
       category,

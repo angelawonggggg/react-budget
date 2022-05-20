@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const AccountTransaction = new mongoose.Schema({
+  transactionType: {
+    type: String,
+    required: [true, "transactionType is required"],
+    maxlength: [20, "transactionType must be less than 20 characters"],
+  },
   accountType: {
     type: String,
     required: [true, "accountType is required"],
