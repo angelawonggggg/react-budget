@@ -6,9 +6,9 @@ import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import TextField from "@mui/material/TextField";
 import { Controller } from "react-hook-form";
-import { NoteIcon } from "./styles/Icon";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Box from "@mui/material/Box";
+
 import styled from "styled-components";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -68,7 +68,7 @@ export const NoteInput = ({ control, name }: FormControl) => {
       name={name}
       control={control}
       render={({ field }) => (
-        <TextField {...field} multiline rows={3} variant="outlined" />
+        <TextField {...field} fullWidth multiline rows={3} variant="outlined" />
       )}
     />
   );

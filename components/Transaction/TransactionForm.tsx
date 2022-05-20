@@ -49,6 +49,7 @@ const RadioBox = styled.div`
   background-color: white;
   z-index: 10;
   border: 1px solid grey;
+  overflow: scroll;
 `;
 
 export default function TransactionForm({

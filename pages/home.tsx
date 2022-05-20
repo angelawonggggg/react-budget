@@ -6,10 +6,13 @@ import { AccountTransaction } from "utils/type";
 import TransactionHero from "../components/Transaction/TransactionHero";
 import TransactionItem from "../components/Transaction/TransactionItem";
 
+
+
 export default function Home() {
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
     []
   );
+  const [monthvalue, setMonthValue] = useState<Date | null>(new Date());
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [incomeTotal, setincomeTotal] = useState(0);
   const [updateData, setUpdateData] = useState("");
@@ -19,6 +22,8 @@ export default function Home() {
       .get("/api/transaction/")
       .then((res) => {
         const data = res.data.transactions;
+        const monthSelect = data.filter((month) => month.date === monthvalue);
+        console.log(monthSelect);
         setTransactionData(data);
         const expenseType = data.filter(
           (name: any) => name.transactionType === "Expense"
@@ -58,20 +63,24 @@ export default function Home() {
       <TransactionHero income={incomeTotal} expenses={expenseTotal} />
 
       <div>date</div>
+    
       <div>{transactionData.length} TRANSACTIONS</div>
 
-      {transactionData.map((transaction, idx) => (
-        <div key={idx}>
-          <TransactionItem
-            transactionType={transaction.transactionType}
-            title={transaction.category}
-            date={transaction.date}
-            amount={transaction.amount}
-            secondTitle={transaction.categoryDetail}
-            details={transaction.textDetails}
-          />
-        </div>
-      ))}
+      {transactionData
+        .slice(0)
+        .reverse()
+        .map((transaction, idx) => (
+          <div key={idx}>
+            <TransactionItem
+              transactionType={transaction.transactionType}
+              title={transaction.category}
+              date={transaction.date}
+              amount={transaction.amount}
+              secondTitle={transaction.categoryDetail}
+              details={transaction.textDetails}
+            />
+          </div>
+        ))}
 
       <AddTransaction setUpdateData={setUpdateData} />
     </div>

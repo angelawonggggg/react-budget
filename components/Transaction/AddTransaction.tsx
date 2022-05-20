@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
 import TransactionForm from "components/Transaction/TransactionForm";
+import { prependOnceListener } from "process";
 
 const HeadArea = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const SubTitleArea = styled(HeadArea)`
 `;
 
 const PlusIcon = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
 `;
@@ -25,9 +26,13 @@ const Title = styled.div`
 `;
 
 const TypeTitle = styled.div`
+  background: ${(props) => (props.active ? "grey" : "none")};
+  color: ${(props) => (props.active ? "white" : "black")};
   margin: 0 1rem;
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
+  border-radius: 25px;
+  border: 1px solid grey;
 `;
 
 const ActiveTitle = styled(TypeTitle)`
@@ -67,20 +72,22 @@ export default function AddTransaction({ setUpdateData }) {
             </HeadArea>
             <SubTitleArea>
               {type === "Expense" ? (
-                <ActiveTitle onClick={handleType}>Expense</ActiveTitle>
+                <TypeTitle active onClick={handleType}>
+                  Expense
+                </TypeTitle>
               ) : (
                 <TypeTitle onClick={handleType}>Expense</TypeTitle>
               )}
               {type === "Income" ? (
-                <ActiveTitle onClick={handleType}>Income</ActiveTitle>
+                <TypeTitle active onClick={handleType}>Income</TypeTitle>
               ) : (
                 <TypeTitle onClick={handleType}>Income</TypeTitle>
               )}
-              {type === "Transfer" ? (
+              {/* {type === "Transfer" ? (
                 <ActiveTitle onClick={handleType}>Transfer</ActiveTitle>
               ) : (
                 <TypeTitle onClick={handleType}>Transfer</TypeTitle>
-              )}
+              )} */}
             </SubTitleArea>
             {type === "Expense" && (
               <TransactionForm
@@ -96,13 +103,13 @@ export default function AddTransaction({ setUpdateData }) {
                 postType="Income"
               />
             )}
-            {type === "Transfer" && (
+            {/* {type === "Transfer" && (
               <TransactionForm
                 setUpdateData={setUpdateData}
                 setCardOpen={setCardOpen}
                 postType="Transfer"
               />
-            )}
+            )} */}
           </BigCard>
         </AnimatePresence>
       )}
