@@ -14,7 +14,12 @@ const client = new MongoClient(DATABASE_URL);
 
 async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
   const { username, password } = await req.body;
-  if (!username || !password) {
+  if (
+    !username ||
+    !password ||
+    password.trim().length < 1 ||
+    username.trim().length < 1
+  ) {
     res.status(400).json({ error: "username and password required" });
     return;
   }
@@ -42,6 +47,7 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
       login: username,
       avatarUrl: "avatar_url:",
     } as User;
+
     req.session.user = user;
     await req.session.save();
     res.json(user);

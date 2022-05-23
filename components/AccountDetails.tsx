@@ -1,6 +1,6 @@
 import { AccountDetailCard } from "./styles/Container";
 import { AccountDetail } from "../utils/type";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { EditAccountForm } from "./styles/Form";
 import axios from "axios";
 
@@ -9,11 +9,26 @@ export default function AccountDetails({
   toggleEditForm,
   isShowEditPopup,
 }: AccountDetail) {
-  // const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [balanceChange, setBalanceChange] = useState(0);
-  // const toggleEditForm = () => {
-  //   setIsShowEditPopup(!isShowEditPopup);
+  // const [accountExpenseSum, setAccountExpenseSum] = useState([]);
+
+  // const accountExpenseSumList = useRef([]);
+
+  // const fetchTransactions = async (accountType: String) => {
+  //   console.log(accountType);
+  //   const res = await axios.get(`/api/transaction/?transactionType=expense`);
+  //   const data = await res.data.transactions;
+  //   const accountExpenseSum = data
+  //     .filter((transaction) => transaction.accountType === account.accountType)
+  //     .reduce((acc, curr) => acc + curr.amount, 0);
+  //   console.log(accountExpenseSum, account.accountType);
+  //   // return accountExpenseSumList.current.push(accountExpenseSum);
   // };
+  // console.log(accountExpenseSumList);
+
+  // useEffect(() => {
+  //   fetchTransactions();
+  // });
 
   const newBalance = account.balance + balanceChange;
 

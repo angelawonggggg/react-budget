@@ -1,13 +1,11 @@
 import Head from "next/head";
-// import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import LogIn from "../components/LogIn";
-import styled from "styled-components";
 import { SpecialLink } from "components/styles/StyledLink";
 
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
+import Login from "components/LogIn";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
@@ -17,16 +15,12 @@ export const getServerSideProps = withIronSessionSsr(
       },
     };
   },
+
   sessionOptions
 );
 
-const Wrapper = styled.section`
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-`;
-
 export default function Home({ user }: { user: User }) {
+  console.log(user.isLoggedIn);
   return (
     <div>
       <Head>
@@ -35,17 +29,17 @@ export default function Home({ user }: { user: User }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Wrapper>
+      <div>
+        {!user && <Login />}
+        <div>{user.isLoggedIn && <div>{user.login} Logged in</div>}</div>
+        <Login />
         <div>
-          <LogIn />
-          <div>
-            New here?
-            <Link href="/signUp">
-              <SpecialLink>Sign up</SpecialLink>
-            </Link>
-          </div>
+          New here?
+          <Link href="/signUp">
+            <SpecialLink>Sign up</SpecialLink>
+          </Link>
         </div>
-      </Wrapper>
+      </div>
     </div>
   );
 }

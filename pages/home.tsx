@@ -6,8 +6,6 @@ import { AccountTransaction } from "utils/type";
 import TransactionHero from "../components/Transaction/TransactionHero";
 import TransactionItem from "../components/Transaction/TransactionItem";
 
-
-
 export default function Home() {
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
     []
@@ -63,7 +61,7 @@ export default function Home() {
       <TransactionHero income={incomeTotal} expenses={expenseTotal} />
 
       <div>date</div>
-    
+
       <div>{transactionData.length} TRANSACTIONS</div>
 
       {transactionData

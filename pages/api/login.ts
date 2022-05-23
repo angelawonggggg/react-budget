@@ -13,6 +13,10 @@ import { DATABASE_URL } from "middleware/mongodb";
 const client = new MongoClient(DATABASE_URL);
 
 async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    return;
+  }
+
   const { username, password } = await req.body;
   if (!username || !password) {
     res.status(400).json({ error: "username and password required" });
