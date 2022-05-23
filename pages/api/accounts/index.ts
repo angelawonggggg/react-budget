@@ -4,6 +4,12 @@ import Accounts from "../../../models/accounts";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
+  if (!req.session.user) {
+    res.status(401).json({
+      error: "Unauthorized",
+    });
+    return;
+  }
   if (req.method === "POST") {
     const { accountType, balance } = req.body;
 
