@@ -1,10 +1,12 @@
 import { connect } from "middleware/mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import Accounts from "../../../models/accounts";
+import { withIronSessionApiRoute } from "iron-session/next";
+import { sessionOptions } from "lib/session";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
-  if (!req.session.user) {
+  if (!req.session?.user) {
     res.status(401).json({
       error: "Unauthorized",
     });
@@ -58,4 +60,5 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default handler;
+// export default handler;
+export default withIronSessionApiRoute(handler, sessionOptions);
