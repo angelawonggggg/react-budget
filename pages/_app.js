@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const themeToggler = () => {
     setTheme(!isDark);
   };
+
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />

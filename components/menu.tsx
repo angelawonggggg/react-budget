@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { motion, useCycle } from "framer-motion";
 import { MenuIcon, LargeCloseIcon } from "components/styles/Icon";
 import { HeaderMenuLink } from "./styles/StyledLink";
+import { useRouter } from "next/router";
+import Logout from "./Logout";
 
 const Navbar = styled(motion.nav)`
   margin: 20px 0;
@@ -52,6 +54,20 @@ const links = [
 
 export default function Menu() {
   const [open, cycleOpen] = useCycle(false, true);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await fetch("/api/logout", {
+      method: "POST",
+    }).then((res) => {
+      if (res.status === 200) {
+        router.push("/");
+        console.log("Logout successful");
+      } else {
+        console.log("Logout failed");
+      }
+    });
+  };
 
   return (
     <main>
@@ -73,6 +89,7 @@ export default function Menu() {
               <HeaderMenuLink key={idx} href={href} children={children} />
             ))}
           </RouterList>
+          <Logout />
         </Navbar>
       )}
 
