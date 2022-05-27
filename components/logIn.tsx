@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
-import { useRouter } from "next/router";
-
 export default function LogIn() {
-  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const formSubmit = () => {
@@ -19,7 +16,7 @@ export default function LogIn() {
       }),
     }).then((res) => {
       if (res.status === 200) {
-        router.push("/home");
+        // router.push("/home");
         console.log("Login successful");
       } else {
         console.log("Login failed");

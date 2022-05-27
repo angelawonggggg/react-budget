@@ -12,7 +12,31 @@ import "../../utils/type";
 import { AccountTransaction } from "../../utils/type";
 import { Button } from "components/styles/Button";
 
-export default function AccountPage() {
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "lib/session";
+import { User } from "models/auth";
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const { user } = req.session;
+    if (user?.isLoggedIn === false) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+        props: {
+          user: user,
+        },
+      };
+    }
+    return { props: { user } };
+  },
+  sessionOptions
+);
+
+export default function AccountPage({ user }: { user: User }) {
+  console.log(user);
   const router = useRouter();
   const { id } = router.query;
   const [accountInfo, setAccountInfo] = useState<Account | null>(null);

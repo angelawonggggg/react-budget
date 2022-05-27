@@ -5,7 +5,30 @@ import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
 import { Account } from "models/accounts";
 
-export default function AccountPage() {
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "lib/session";
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const { user } = req.session;
+    if (user?.isLoggedIn === false) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+        props: {
+          user: user,
+        },
+      };
+    }
+    return { props: { user } };
+  },
+  sessionOptions
+);
+
+export default function AccountPage({ user }: { user: any }) {
+  console.log(user);
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);

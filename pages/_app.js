@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import GlobalStyle from "../globalStyles";
 import Layout from "../components/layout";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ToggleTheme } from "../components/styles/Icon";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../components/styles/Global";

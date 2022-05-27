@@ -12,8 +12,31 @@ import { Icon } from "../components/styles/Icon";
 import { BiBarChartAlt2, BiDoughnutChart } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "lib/session";
+import { User } from "models/auth";
 
-export default function Statistics() {
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const { user } = req.session;
+    if (user?.isLoggedIn === false) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+        props: {
+          user: user,
+        },
+      };
+    }
+    return { props: { user } };
+  },
+  sessionOptions
+);
+
+export default function Statistics({ user }: { user: User }) {
+  console.log(user);
   const [isShowDonut, setIsShowDonut] = useState(true);
   const [isShowBar, setIsShowBar] = useState(false);
   const [data, setData] = useState<any[]>([]);

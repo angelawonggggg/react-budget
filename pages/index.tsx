@@ -19,8 +19,8 @@ export const getServerSideProps = withIronSessionSsr(
   sessionOptions
 );
 
-export default function Home({ user }: { user: User }) {
-  console.log(user.isLoggedIn);
+export default function LandingPage({ user }: { user: User }) {
+  console.log(user);
   return (
     <div>
       <Head>
@@ -30,15 +30,18 @@ export default function Home({ user }: { user: User }) {
       </Head>
 
       <div>
-        {!user && <Login />}
         <div>{user.isLoggedIn && <div>{user.login} Logged in</div>}</div>
-        <Login />
-        <div>
-          New here?
-          <Link href="/signUp">
-            <SpecialLink>Sign up</SpecialLink>
-          </Link>
-        </div>
+        {!user.isLoggedIn && (
+          <div>
+            <Login />
+            <div>
+              New here?
+              <Link href="/signUp">
+                <SpecialLink>Sign up</SpecialLink>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

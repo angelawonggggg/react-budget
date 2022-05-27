@@ -47,6 +47,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     req.session.user = user;
     await req.session.save();
     res.json(user);
+    res.redirect("/home");
   } catch (error) {
     await client.close();
     res.status(500).json({ message: (error as Error).message });

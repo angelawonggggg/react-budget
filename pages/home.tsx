@@ -5,8 +5,31 @@ import { useEffect, useState } from "react";
 import { AccountTransaction } from "utils/type";
 import TransactionHero from "../components/Transaction/TransactionHero";
 import TransactionItem from "../components/Transaction/TransactionItem";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "lib/session";
+import { User } from "models/auth";
 
-export default function Home() {
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const { user } = req.session;
+    if (user?.isLoggedIn === false) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+        props: {
+          user: user,
+        },
+      };
+    }
+    return { props: { user } };
+  },
+  sessionOptions
+);
+
+export default function Home({ user }: { user: User }) {
+  console.log(user);
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
     []
   );
