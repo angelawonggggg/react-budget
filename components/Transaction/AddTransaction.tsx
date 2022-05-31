@@ -79,15 +79,12 @@ export default function AddTransaction({ setUpdateData }) {
                 <TypeTitle onClick={handleType}>Expense</TypeTitle>
               )}
               {type === "Income" ? (
-                <TypeTitle active onClick={handleType}>Income</TypeTitle>
+                <TypeTitle active onClick={handleType}>
+                  Income
+                </TypeTitle>
               ) : (
                 <TypeTitle onClick={handleType}>Income</TypeTitle>
               )}
-              {/* {type === "Transfer" ? (
-                <ActiveTitle onClick={handleType}>Transfer</ActiveTitle>
-              ) : (
-                <TypeTitle onClick={handleType}>Transfer</TypeTitle>
-              )} */}
             </SubTitleArea>
             {type === "Expense" && (
               <TransactionForm
@@ -103,13 +100,6 @@ export default function AddTransaction({ setUpdateData }) {
                 postType="Income"
               />
             )}
-            {/* {type === "Transfer" && (
-              <TransactionForm
-                setUpdateData={setUpdateData}
-                setCardOpen={setCardOpen}
-                postType="Transfer"
-              />
-            )} */}
           </BigCard>
         </AnimatePresence>
       )}

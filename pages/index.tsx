@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import { SpecialLink } from "components/styles/StyledLink";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
@@ -9,18 +11,28 @@ import Login from "components/LogIn";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
-    return {
-      props: {
-        user: req.session.user ?? {},
-      },
-    };
+    const { user } = req.session;
+    if (user?.isLoggedIn === true) {
+      return {
+        redirect: {
+          destination: "/home",
+          permanent: false,
+        },
+        props: {
+          user: user,
+        },
+      };
+    }
+    return { props: { user } };
   },
 
   sessionOptions
 );
 
 export default function LandingPage({ user }: { user: User }) {
-  console.log(user);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
   return (
     <div>
       <Head>

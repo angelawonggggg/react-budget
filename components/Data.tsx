@@ -117,8 +117,11 @@ export const SmallCategoriesData = [
   },
 ];
 export const AccountTypeData = [
-  "Checking Account",
-  "Credit Account",
   "Cash",
-  "Savings account",
+  "Credit",
+  "Debit",
+  "Investment",
+  "Transport Card",
+  "Membership",
+  "Other",
 ];

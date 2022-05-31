@@ -128,13 +128,13 @@ export default function TransactionForm({
         <DropDown control={control} name={"category"} data={CategoriesData} />
       </BoxWithTextAndInput>
 
-      {categoryIcon && (
+      {/* {categoryIcon && (
         <BoxWithTextAndInput>
           <MotionIcon image={categoryIcon} action={HandleCategory} />
           <div>{watch("categoryDetail")}</div>
         </BoxWithTextAndInput>
-      )}
-
+      )} */}
+      {/* 
       {categoryDetail && (
         <div onClick={HandleCategory}>
           <RadioBox>
@@ -145,11 +145,11 @@ export default function TransactionForm({
             />
           </RadioBox>
         </div>
-      )}
+      )} */}
 
-      <BoxWithTextAndInput>
+      {/* <BoxWithTextAndInput>
         <NoteInput control={control} name={"textDetails"} label={"NOTE"} />
-      </BoxWithTextAndInput>
+      </BoxWithTextAndInput> */}
       <BoxWithTextAndInput>
         <SubTitle>From:</SubTitle>
         <DropDown

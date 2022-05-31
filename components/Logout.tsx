@@ -2,6 +2,7 @@ import React from "react";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
@@ -23,18 +24,23 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function Logout({ user }: { user: User }) {
+  const router = useRouter();
   console.log(user);
   const handleLogout = async () => {
     await fetch("/api/logout", {
       method: "POST",
       body: JSON.stringify({}),
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("Logout successful");
-      } else {
-        console.log("Logout failed");
-      }
-    });
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("Logout successful");
+        } else {
+          console.log("Logout failed");
+        }
+      })
+      .finally(() => {
+        router.push("/");
+      });
   };
 
   return (

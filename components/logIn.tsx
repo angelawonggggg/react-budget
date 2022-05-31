@@ -16,7 +16,7 @@ export default function LogIn() {
       }),
     }).then((res) => {
       if (res.status === 200) {
-        // router.push("/home");
+        window.location.reload();
         console.log("Login successful");
       } else {
         console.log("Login failed");

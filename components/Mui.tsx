@@ -11,9 +11,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 import styled from "styled-components";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import OutlinedInput from "@mui/material/OutlinedInput";
+
 import { Select, MenuItem } from "@material-ui/core";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -30,7 +28,7 @@ const DropDownBox = styled(Select)`
   width: 100%;
 `;
 
-const AmountBox = styled(OutlinedInput)`
+const AmountBox = styled.input`
   margin: 1rem 0;
   height: 3rem;
 `;
@@ -81,12 +79,14 @@ export const AmountInput = ({ control, name }: FormControl) => {
       rules={{ required: true }}
       render={({ field: { ref, ...field } }) => (
         <FormControl fullWidth>
-          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          {/* <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel> */}
           <AmountBox
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            label="Amount"
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            // label="Amount"
             {...field}
             inputRef={ref}
+            type="number"
+            placeholder="Amount"
           />
         </FormControl>
       )}
