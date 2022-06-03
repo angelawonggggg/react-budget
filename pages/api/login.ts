@@ -41,7 +41,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
 
     const user = {
       isLoggedIn: true,
-      login: username,
+      username: username,
       avatarUrl: "avatar_url:",
     } as User;
     req.session.user = user;

@@ -61,8 +61,7 @@ const Overlay = styled.div`
   z-index: 999;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export const GetPopupForm = ({

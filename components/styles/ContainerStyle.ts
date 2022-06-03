@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 `;
 
 export const BigCard = styled(motion.section)`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 5vw;
   padding: 1rem 2rem;

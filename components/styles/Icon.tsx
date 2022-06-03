@@ -6,7 +6,7 @@ import { BsToggleOn, BsToggleOff } from "react-icons/bs";
 import { Theme } from "../../utils/type";
 
 export const Icon = styled.span`
-  font-size: 20px;
+  font-size: ${(props) => (props.size ? "20px" : "15px")};
   margin: 0 5px;
   color: ${(props) => props?.color || "gray"};
   cursor: pointer;
@@ -71,6 +71,7 @@ const ToggleIcon = styled.span`
   vertical-align: middle;
   position: absolute;
   right: 10px;
+  z-index: 11;
 `;
 
 export const ToggleTheme = ({ toggleTheme, isDark }: Theme) => (

@@ -77,17 +77,9 @@ export const AmountInput = ({ control, name }: FormControl) => {
       name={name}
       control={control}
       rules={{ required: true }}
-      render={({ field: { ref, ...field } }) => (
+      render={({ field: { ...field } }) => (
         <FormControl fullWidth>
-          {/* <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel> */}
-          <AmountBox
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            // label="Amount"
-            {...field}
-            inputRef={ref}
-            type="number"
-            placeholder="Amount"
-          />
+          <AmountBox {...field} type="number" placeholder="Amount" />
         </FormControl>
       )}
     />

@@ -9,15 +9,21 @@
 //   Transportation?: string[];
 // }
 
-export const CategoriesData: string[] = [
+export const ExpenseCategoriesData: string[] = [
   "Miscellaneous",
   "Entertainment",
   "Food",
   "Housing",
-  "Income",
   "Lifestyle",
-  "Savings",
   "Transportation",
+];
+
+export const IncomeCategoriesData: string[] = [
+  "Salary",
+  "Investment",
+  "Freelance",
+  "Subsidies",
+  "Other",
 ];
 
 export const SmallCategoriesData = [

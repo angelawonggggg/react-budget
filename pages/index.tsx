@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import { SpecialLink } from "components/styles/StyledLink";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
@@ -30,9 +28,6 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function LandingPage({ user }: { user: User }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const router = useRouter();
-
   return (
     <div>
       <Head>

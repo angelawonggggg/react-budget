@@ -67,19 +67,35 @@ export const PageTopWrapper = styled.div`
   margin: 15px;
 `;
 
+export const ItemWrapper = styled.div`
+  min-width: 300px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  border-image-source: linear-gradient(to left, #c7a1d6, #515ea7d9);
+`;
+
 const AccountCard = styled.div`
   display: flex;
   align-items: baseline;
   flex-direction: column;
   margin: 15px auto;
-  padding: 10px;
-  background: powderblue;
-  border-radius: 5px;
+  padding: 15px 30px;
+  background: #f9f8fd;
+  color: #0e0c22;
+  border-radius: 40px;
   max-width: 600px;
   position: relative;
-  box-shadow: darkgrey 1px 1px 4px;
   max-width: 500px;
   position: relative;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #bfd2f3;
+  }
 `;
 
 const AccountCardIcon = styled.div`
@@ -102,6 +118,7 @@ const Balance = styled.div`
   font-size: 15px;
   margin-top: 10px;
   cursor: pointer;
+  color: gray;
 `;
 
 const Tag = styled.div`
@@ -144,6 +161,13 @@ export const AccountTransactionCard = ({
   transaction: AccountTransaction;
 }) => {
   const { category, amount, date, transactionType } = transaction;
+  const newDate = new Date(date);
+  newDate.setHours(0, 0, 0, 0);
+  const transactionDate = [
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    newDate.getDate(),
+  ].join("-");
   return (
     <AccountCard>
       <Tag color={transactionType === "income" ? "#59b259" : "#d14545"}>
@@ -151,7 +175,7 @@ export const AccountTransactionCard = ({
       </Tag>
       <div>Category: {category}</div>
       <div>Amount: ${amount}</div>
-      <div>Date: {date}</div>
+      <div>Date: {transactionDate}</div>
     </AccountCard>
   );
 };

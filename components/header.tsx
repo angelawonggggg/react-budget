@@ -9,6 +9,11 @@ const Navbar = styled.nav`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 0 0 10px 2px grey;
 `;
 
 const Logo = styled.a`
@@ -20,10 +25,10 @@ const Logo = styled.a`
   border-bottom: 5px dotted;
 `;
 
-export default function Header() {
+export default function Header({ username }: String) {
   return (
     <Navbar>
-      {<Menu />}
+      {<Menu username={username} />}
       <Link href="/">
         <Logo>Budget</Logo>
       </Link>

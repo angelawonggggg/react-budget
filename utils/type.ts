@@ -4,6 +4,7 @@ export type TransactionFormType = {
   postType: string;
   setCardOpen: any;
   setUpdateData: any;
+  transactionType: string;
 };
 
 export type AccountDetailBox = {

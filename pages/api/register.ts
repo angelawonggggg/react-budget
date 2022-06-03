@@ -5,7 +5,7 @@ import { sessionOptions } from "lib/session";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default withIronSessionApiRoute(registerRoute, sessionOptions);
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import crypto from "crypto";
 import { DATABASE_URL } from "middleware/mongodb";
 
@@ -36,16 +36,17 @@ async function registerRoute(req: NextApiRequest, res: NextApiResponse) {
     const hash = crypto
       .pbkdf2Sync(password, salt, 100000, 64, "sha512")
       .toString("hex");
-    await client.db().collection("users").insertOne({
+
+    const newUser = await client.db().collection("users").insertOne({
       username,
       salt,
       hash,
     });
 
     const user = {
+      _id: newUser.insertedId,
       isLoggedIn: true,
-      login: username,
-      avatarUrl: "avatar_url:",
+      username,
     } as User;
 
     req.session.user = user;

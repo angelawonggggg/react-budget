@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
   button {
      display: block;
-     background: #138BFC;
+     background: #E94C89;
      color: white;
      margin: 1em 0;
      padding: 0.5em 1em;

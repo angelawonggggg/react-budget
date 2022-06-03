@@ -11,7 +11,9 @@ export const ToggleIcon = styled.span`
 export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
-    color: ${({ theme }) => theme.text} || "white";
+   
     transition: all 0.50s linear;
   }
   `;
+
+// color: ${({ theme }) => theme.text} || "white";

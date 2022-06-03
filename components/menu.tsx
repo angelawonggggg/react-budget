@@ -21,6 +21,12 @@ const Navbar = styled(motion.nav)`
   color: white;
 `;
 
+const Profile = styled.div`
+  margin: 2rem auto;
+  background-color: orange;
+  padding: 1rem;
+`;
+
 const RouterList = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -46,28 +52,13 @@ const sideVariants = {
 };
 
 const links = [
-  { children: "Home", href: "/home", id: 1 },
+  { children: "Transactions", href: "/home", id: 1 },
   { children: "Accounts", href: "/accounts", id: 2 },
   { children: "Statistics", href: "/statistics", id: 3 },
-  { children: "Setting", href: "/setting", id: 4 },
 ];
 
-export default function Menu() {
+export default function Menu({ username }: String) {
   const [open, cycleOpen] = useCycle(false, true);
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    await fetch("/api/logout", {
-      method: "POST",
-    }).then((res) => {
-      if (res.status === 200) {
-        router.push("/");
-        console.log("Logout successful");
-      } else {
-        console.log("Logout failed");
-      }
-    });
-  };
 
   return (
     <main>
@@ -79,6 +70,8 @@ export default function Menu() {
             width: 320,
           }}
         >
+          {" "}
+          <Profile>{username}</Profile>
           <RouterList
             className="container"
             initial="closed"

@@ -39,10 +39,13 @@ function MyApp({ Component, pageProps, user }) {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
       <ToggleTheme toggleTheme={themeToggler} isDark={isDark} />
-      <Layout>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </Layout>
+
+      {
+        <Layout user={user}>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </Layout>
+      }
     </ThemeProvider>
   );
 }

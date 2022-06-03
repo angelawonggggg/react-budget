@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { GiReceiveMoney } from "react-icons/gi";
+import { Icon } from "../styles/Icon";
 
 type Item = {
   date: string;
@@ -8,21 +10,28 @@ type Item = {
   secondTitle: string;
   transactionType: string;
 };
-const Titledata = styled.div`
+const TitleData = styled.div`
   color: silver;
+  font-size: 15px;
 `;
 const Box = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
   padding: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-bottom: 1px solid #ddd;
 `;
 
 const Items = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const ItemCategory = styled.div`
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 2;
+  font-family: "Roboto", sans-serif;
 `;
 
 const Amount = styled.div`
@@ -38,22 +47,33 @@ export default function TransactionItem({
   secondTitle,
   transactionType,
 }: Item) {
+  const newDate = new Date(date);
+  newDate.setHours(0, 0, 0, 0);
+  const transactionDate = [
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    newDate.getDate(),
+  ].join("-");
   return (
     <Box>
-      <Titledata>{date}</Titledata>
+      <TitleData>{transactionDate}</TitleData>
       <Items>
-        <div>{title}</div>
+        <ItemCategory>{title}</ItemCategory>
 
-        {transactionType === "Income" ? (
+        {transactionType === "income" ? (
           <Amount>+${amount}</Amount>
         ) : (
           <div>${amount}</div>
         )}
       </Items>
-      <Items>
-        <div>{secondTitle}</div>
-        <div>{details}</div>
-      </Items>
+
+      {transactionType === "income" ? (
+        <Icon>
+          <GiReceiveMoney />
+        </Icon>
+      ) : (
+        ""
+      )}
     </Box>
   );
 }

@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
 import TransactionForm from "components/Transaction/TransactionForm";
-import { prependOnceListener } from "process";
+// import { prependOnceListener } from "process";
 
 const HeadArea = styled.div`
   display: flex;
@@ -41,6 +41,17 @@ const ActiveTitle = styled(TypeTitle)`
   background-color: grey;
   color: white;
 `;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
 export default function AddTransaction({ setUpdateData }) {
   const [type, setType] = useState("Expense");
   const [cardOpen, setCardOpen] = useState(false);
@@ -58,50 +69,54 @@ export default function AddTransaction({ setUpdateData }) {
   return (
     <main>
       {cardOpen && (
-        <AnimatePresence>
-          <BigCard
-            initial={{ y: 1000 }}
-            animate={{ y: 0 }}
-            transition={{
-              type: "tween",
-            }}
-          >
-            <HeadArea>
-              <LargeCloseIcon onClick={handleCardOpen} />
-              <Title>New Transaction</Title>
-            </HeadArea>
-            <SubTitleArea>
-              {type === "Expense" ? (
-                <TypeTitle active onClick={handleType}>
-                  Expense
-                </TypeTitle>
-              ) : (
-                <TypeTitle onClick={handleType}>Expense</TypeTitle>
+        <Overlay>
+          <AnimatePresence>
+            <BigCard
+              initial={{ y: 1000 }}
+              animate={{ y: 0 }}
+              transition={{
+                type: "tween",
+              }}
+            >
+              <HeadArea>
+                <LargeCloseIcon onClick={handleCardOpen} />
+                <Title>New Transaction</Title>
+              </HeadArea>
+              <SubTitleArea>
+                {type === "Expense" ? (
+                  <TypeTitle active onClick={handleType}>
+                    Expense
+                  </TypeTitle>
+                ) : (
+                  <TypeTitle onClick={handleType}>Expense</TypeTitle>
+                )}
+                {type === "Income" ? (
+                  <TypeTitle active onClick={handleType}>
+                    Income
+                  </TypeTitle>
+                ) : (
+                  <TypeTitle onClick={handleType}>Income</TypeTitle>
+                )}
+              </SubTitleArea>
+              {type === "Expense" && (
+                <TransactionForm
+                  setUpdateData={setUpdateData}
+                  setCardOpen={setCardOpen}
+                  postType="Expense"
+                  transactionType="expense"
+                />
               )}
-              {type === "Income" ? (
-                <TypeTitle active onClick={handleType}>
-                  Income
-                </TypeTitle>
-              ) : (
-                <TypeTitle onClick={handleType}>Income</TypeTitle>
+              {type === "Income" && (
+                <TransactionForm
+                  setUpdateData={setUpdateData}
+                  setCardOpen={setCardOpen}
+                  postType="Income"
+                  transactionType="income"
+                />
               )}
-            </SubTitleArea>
-            {type === "Expense" && (
-              <TransactionForm
-                setUpdateData={setUpdateData}
-                setCardOpen={setCardOpen}
-                postType="Expense"
-              />
-            )}
-            {type === "Income" && (
-              <TransactionForm
-                setUpdateData={setUpdateData}
-                setCardOpen={setCardOpen}
-                postType="Income"
-              />
-            )}
-          </BigCard>
-        </AnimatePresence>
+            </BigCard>
+          </AnimatePresence>
+        </Overlay>
       )}
       {!cardOpen && (
         <PlusIcon>
