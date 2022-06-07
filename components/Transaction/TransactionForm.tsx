@@ -76,14 +76,6 @@ export default function TransactionForm({
       });
   };
 
-  // const HandleCategory = () => {
-  //   if (!categoryDetail) {
-  //     setCategoryDetail(true);
-  //   } else {
-  //     setCategoryDetail(false);
-  //   }
-  // };
-
   const categoryState = () => {
     const target = SmallCategoriesData.find(
       (target) => target.name === watch("category")

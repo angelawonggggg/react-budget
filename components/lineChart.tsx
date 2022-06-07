@@ -21,10 +21,30 @@ ChartJS.register([
   Legend,
 ]);
 
-import { Line } from "react-chartjs-2";
 import { LineChart } from "../utils/type";
+import { Line } from "react-chartjs-2";
 
-export default function LineChartComponent({ labels, stats }: LineChart) {
+export default function LineChartComponent({ dataset, labels }: LineChart) {
+  const getMonthlySum = () => {
+    const monthlySum: number[] = [];
+    for (let i = 0; i < 12; i++) {
+      let total = 0;
+      for (let j = 0; j < dataset.length; j++) {
+        let formatMonth = new Date(dataset[j].date).getMonth();
+        if (formatMonth == i && dataset[j].transactionType == "expense") {
+          total += dataset[j].amount;
+          monthlySum[i] = total;
+        }
+      }
+      if (monthlySum[i] == null) {
+        monthlySum[i] = 0;
+      }
+    }
+    // console.log(monthlySum);
+
+    return monthlySum;
+  };
+
   const data = {
     labels: labels,
     datasets: [
@@ -47,7 +67,7 @@ export default function LineChartComponent({ labels, stats }: LineChart) {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: stats,
+        data: getMonthlySum(),
       },
     ],
   };

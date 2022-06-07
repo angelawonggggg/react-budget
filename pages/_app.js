@@ -1,12 +1,10 @@
 import "../styles/globals.css";
-import GlobalStyle from "../globalStyles";
 import Layout from "../components/layout";
 import React, { useState } from "react";
 import { ToggleTheme } from "../components/styles/Icon";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../components/styles/Global";
 import { lightTheme, darkTheme } from "../components/styles/Theme";
-
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 
@@ -42,7 +40,7 @@ function MyApp({ Component, pageProps, user }) {
 
       {
         <Layout user={user}>
-          <GlobalStyle />
+          <GlobalStyles />
           <Component {...pageProps} />
         </Layout>
       }

@@ -48,10 +48,9 @@ const PopupCard = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: -150px;
   background-color: white;
   padding: 40px;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
 `;
 
 const Overlay = styled.div`

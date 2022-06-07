@@ -8,8 +8,10 @@ export const ChartContainer = styled.div`
   height: 40vh;
   width: 70vw;
   min-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1rem auto;
+  background: ${(props) => props.theme.bg.secondary};
+  border-radius: 30px;
+  padding: 25px;
 `;
 
 export const DatepickerContainer = styled.div`
@@ -22,7 +24,7 @@ export const IconWrapper = styled.div`
 `;
 
 export const NetWorthWrapper = styled.div`
-  background-color: whitesmoke;
+  background-color: ${(props) => props.theme.bg.secondary};
   width: 80%;
   padding: 20px;
   margin: 10px auto;
@@ -41,6 +43,7 @@ export const MainText = styled.p`
   text-align: center;
   font-size: 25px;
   margin: 5px 0;
+  color: ${(props) => props.theme.text.primary};
 `;
 
 export const Wrapper = styled.div`
@@ -84,8 +87,8 @@ const AccountCard = styled.div`
   flex-direction: column;
   margin: 15px auto;
   padding: 15px 30px;
-  background: #f9f8fd;
-  color: #0e0c22;
+  background: ${(props) => props.theme.bg.secondary};
+  color: ${(props) => props.theme.text.secondary};
   border-radius: 40px;
   max-width: 600px;
   position: relative;
@@ -94,7 +97,8 @@ const AccountCard = styled.div`
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background: #bfd2f3;
+    background: ${(props) => props.theme.bg.inset};
+    cursor: pointer;
   }
 `;
 
@@ -102,6 +106,7 @@ const AccountCardIcon = styled.div`
   position: absolute;
   right: 10px;
   font-size: 1em;
+  color: ${(props) => props.theme.text.tertiary};
 
   &:hover {
     cursor: pointer;
@@ -112,13 +117,14 @@ const AccountDetailName = styled.h1`
   font-size: 15px;
   display: block;
   cursor: pointer;
+  color: ${(props) => props.theme.text.primary};
 `;
 
 const Balance = styled.div`
   font-size: 15px;
   margin-top: 10px;
   cursor: pointer;
-  color: gray;
+  color: ${(props) => props.theme.text.secondary};
 `;
 
 const Tag = styled.div`

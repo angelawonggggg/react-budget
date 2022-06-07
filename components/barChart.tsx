@@ -1,21 +1,50 @@
 // https://www.chartjs.org/docs/3.0.2/getting-started/integration.html
 import { Chart, ArcElement, BarElement } from "chart.js";
 import { BarChart } from "../utils/type";
+import { useState } from "react";
 
 Chart.register(ArcElement, BarElement);
 
 import { Bar } from "react-chartjs-2";
 
-export default function BarChartComponent({
-  categories,
-  categorySum,
-}: BarChart) {
+export default function BarChartComponent({ content }: BarChart) {
+  const categoryList: string[] = [];
+  const categorySumList: number[] = [];
+
+  console.log(content);
+
+  const getCategories = () => {
+    for (let i = 0; i < content.length; i++) {
+      if (
+        !categoryList.includes(content[i].category) &&
+        content[i].transactionType == "expense"
+      ) {
+        categoryList.push(content[i].category);
+      }
+    }
+    console.log(categoryList);
+    return categoryList;
+  };
+
+  const getCategorySum = () => {
+    for (let i = 0; i < categoryList.length; i++) {
+      let total = 0;
+      for (let j = 0; j < content.length; j++) {
+        if (content[j].category == categoryList[i]) {
+          total += content[j].amount;
+        }
+      }
+      categorySumList.push(total);
+    }
+    return categorySumList;
+  };
+
   const data = {
-    labels: categories,
+    labels: getCategories(),
     datasets: [
       {
         label: "$",
-        data: categorySum,
+        data: getCategorySum(),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

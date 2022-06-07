@@ -36,12 +36,11 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function Statistics({ user }: { user: User }) {
-  console.log(user);
   const [isShowDonut, setIsShowDonut] = useState(true);
   const [isShowBar, setIsShowBar] = useState(false);
   const [data, setData] = useState<any[]>([]);
   const [monthlyStats, setMonthlyStats] = useState<number[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  // const [categories, setCategories] = useState<string[]>([]);
   const today = new Date();
   const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
   const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
@@ -80,56 +79,28 @@ export default function Statistics({ user }: { user: User }) {
       .then((res) => res.json())
       .then(({ transactions }) => {
         setData(transactions);
-        const monthlySum: number[] = [];
-        for (let i = 0; i < 12; i++) {
-          let total = 0;
-          for (let j = 0; j < transactions.length; j++) {
-            if (transactions[j].date.split("/")[1] == i + 1) {
-              total += transactions[j].amount;
-            }
-          }
-          monthlySum.push(total);
-        }
-        setMonthlyStats(monthlySum);
-        getCategories();
-
-        setCategories(categoryList);
-        getCategorySum();
-        setCategorySum(categorySumList);
       });
   };
-
-  const categoryList: string[] = [];
-  const categorySumList: number[] = [];
-  const [categorySum, setCategorySum] = useState<number[]>([]);
+  //   const monthlySum: number[] = [];
+  //   for (let i = 0; i < 12; i++) {
+  //     let total = 0;
+  //     for (let j = 0; j < data.length; j++) {
+  //       if (data[j].date.split("/")[1] == i + 1) {
+  //         total += data[j].amount;
+  //         console.log(total);
+  //       }
+  //     }
+  //     monthlySum.push(total);
+  //   }
+  //   setMonthlyStats(monthlySum);
+  // })
 
   useEffect(() => {
     fetchTransactions();
+
+    // setCategories(categoryList);
+    console.log(data);
   }, []);
-
-  const getCategories = () => {
-    for (let i = 0; i < data.length; i++) {
-      if (
-        !categories.includes(data[i].category) &&
-        data[i].transactionType == "expense"
-      ) {
-        console.log(data[0]);
-        categoryList.push(data[i].category);
-      }
-    }
-  };
-
-  const getCategorySum = () => {
-    for (let i = 0; i < categoryList.length; i++) {
-      let total = 0;
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].category == categoryList[i]) {
-          total += data[j].amount;
-        }
-      }
-      categorySumList.push(total);
-    }
-  };
 
   return (
     <div>
@@ -140,7 +111,9 @@ export default function Statistics({ user }: { user: User }) {
       <DatepickerContainer>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => {
+            setStartDate(date);
+          }}
           selectsStart
           startDate={startDate}
           endDate={endDate}
@@ -161,7 +134,7 @@ export default function Statistics({ user }: { user: User }) {
       </DatepickerContainer>
 
       <ChartContainer>
-        <LineChart labels={labels} stats={monthlyStats} />
+        <LineChart labels={labels} dataset={data} stats={monthlyStats} />
       </ChartContainer>
 
       <IconWrapper>
@@ -174,10 +147,8 @@ export default function Statistics({ user }: { user: User }) {
       </IconWrapper>
 
       <ChartContainer>
-        {isShowDonut && (
-          <DoughnutChart categories={categories} categorySum={categorySum} />
-        )}
-        {isShowBar && <Bar categories={categories} categorySum={categorySum} />}
+        {isShowDonut && <DoughnutChart content={data} />}
+        {isShowBar && <Bar content={data} />}
       </ChartContainer>
     </div>
   );

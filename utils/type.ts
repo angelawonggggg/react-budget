@@ -56,18 +56,19 @@ export type AccountTransaction = {
 };
 
 export type LineChart = {
+  dataset: Array<any>;
   labels: Array<string>;
   stats: Array<number>;
 };
 
 export type DoughnutChart = {
-  categories: Array<string>;
-  categorySum: Array<number>;
+  // categories: Array<string>;
+  // categorySum: Array<number>;
+  content: Array<any>;
 };
 
 export type BarChart = {
-  categories: Array<string>;
-  categorySum: Array<number>;
+  content: Array<any>;
 };
 
 export type Theme = {

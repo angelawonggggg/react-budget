@@ -4,28 +4,27 @@ import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
 import { useRouter } from "next/router";
 
-export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps({ req }) {
-    const { user } = req.session;
-    if (user?.isLoggedIn === false) {
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-        props: {
-          user: user,
-        },
-      };
-    }
-    return { props: { user } };
-  },
-  sessionOptions
-);
+// export const getServerSideProps = withIronSessionSsr(
+//   async function getServerSideProps({ req }) {
+//     const { user } = req.session;
+//     if (user?.isLoggedIn === false) {
+//       return {
+//         redirect: {
+//           destination: "/",
+//           permanent: false,
+//         },
+//         props: {
+//           user: user,
+//         },
+//       };
+//     }
+//     return { props: { user } };
+//   },
+//   sessionOptions
+// );
 
-export default function Logout({ user }: { user: User }) {
+export default function Logout() {
   const router = useRouter();
-  console.log(user);
   const handleLogout = async () => {
     await fetch("/api/logout", {
       method: "POST",

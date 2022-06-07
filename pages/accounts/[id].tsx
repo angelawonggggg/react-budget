@@ -111,7 +111,7 @@ export default function AccountPage({ user }: { user: User }) {
   return (
     <div>
       <NetWorthWrapper>
-        <h1>{accountInfo?.accountType}</h1>
+        <MainText>{accountInfo?.accountType}</MainText>
         <div>Balance: ${accountInfo?.balance}</div>
 
         <Button color="red" onClick={handleDelete}>

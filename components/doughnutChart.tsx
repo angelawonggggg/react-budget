@@ -2,15 +2,43 @@
 import { Doughnut } from "react-chartjs-2";
 import { DoughnutChart } from "../utils/type";
 
-export default function DoughnutChartComponent({
-  categories,
-  categorySum,
-}: DoughnutChart) {
+export default function DoughnutChartComponent({ content }: DoughnutChart) {
+  const categoryList: string[] = [];
+  const categorySumList: number[] = [];
+
+  // console.log(content);
+
+  const getCategories = () => {
+    for (let i = 0; i < content.length; i++) {
+      if (
+        !categoryList.includes(content[i].category) &&
+        content[i].transactionType == "expense"
+      ) {
+        categoryList.push(content[i].category);
+      }
+    }
+    console.log(categoryList);
+    return categoryList;
+  };
+
+  const getCategorySum = () => {
+    for (let i = 0; i < categoryList.length; i++) {
+      let total = 0;
+      for (let j = 0; j < content.length; j++) {
+        if (content[j].category == categoryList[i]) {
+          total += content[j].amount;
+        }
+      }
+      categorySumList.push(total);
+    }
+    return categorySumList;
+  };
+
   const data = {
-    labels: categories,
+    labels: getCategories(),
     datasets: [
       {
-        data: categorySum,
+        data: getCategorySum(),
         backgroundColor: [
           "#FF6384",
           "#36A2EB",

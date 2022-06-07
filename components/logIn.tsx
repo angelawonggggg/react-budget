@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MainText } from "components/styles/Container";
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ export default function LogIn() {
 
   return (
     <div>
-      <h1>Log in to your account</h1>
+      <MainText>Log in to your account</MainText>
       <div>
         <label>Username</label>
         <input type="text" onChange={(e) => setUsername(e.target.value)} />

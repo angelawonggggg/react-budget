@@ -8,7 +8,7 @@ import { Theme } from "../../utils/type";
 export const Icon = styled.span`
   font-size: ${(props) => (props.size ? "20px" : "15px")};
   margin: 0 5px;
-  color: ${(props) => props?.color || "gray"};
+  color: ${(props) => props?.color || props?.theme.text.secondary};
   cursor: pointer;
 `;
 
@@ -69,7 +69,7 @@ const ToggleIcon = styled.span`
   font-size: 30px;
   color: ${(props) => props.color || ""};
   vertical-align: middle;
-  position: absolute;
+  position: fixed;
   right: 10px;
   z-index: 11;
 `;

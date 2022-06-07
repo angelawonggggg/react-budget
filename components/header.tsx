@@ -12,14 +12,14 @@ const Navbar = styled.nav`
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: white;
-  box-shadow: 0 0 10px 2px grey;
+  background-color: ${(props) => props.theme.bg.primary};
+  box-shadow: 0 0 10px 2px #57564f;
 `;
 
 const Logo = styled.a`
   font-family: impact;
   font-size: 1.5em;
-  color: #138bfc;
+  color: #44719c;
   cursor: pointer;
   margin: 0 20px;
   border-bottom: 5px dotted;

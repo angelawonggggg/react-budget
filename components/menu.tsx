@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { motion, useCycle } from "framer-motion";
 import { MenuIcon, LargeCloseIcon } from "components/styles/Icon";
 import { HeaderMenuLink } from "./styles/StyledLink";
-import { useRouter } from "next/router";
 import Logout from "./Logout";
 
 const Navbar = styled(motion.nav)`
@@ -10,7 +9,7 @@ const Navbar = styled(motion.nav)`
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: #4b4849;
   border-bottom: 1px solid #ddd;
   position: absolute;
   height: 100vh;
