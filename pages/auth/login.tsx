@@ -27,7 +27,7 @@ export default function Login({ user }: { user: User }) {
       </Head>
 
       <main>
-        <h1>Login {user.isLoggedIn ? user.username : "Guest"}</h1>
+        <h1>Login {user?.isLoggedIn ? user.username : "Guest"}</h1>
 
         <h2>to be implemented</h2>
       </main>

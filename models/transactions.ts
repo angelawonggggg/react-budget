@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
 
+export type Transaction = {
+  id: string;
+  transactionType: string;
+  accountType: string;
+  amount: number;
+  category: string;
+  date: string;
+  userId: mongoose.Schema.Types.ObjectId;
+};
+
 const AccountTransaction = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   transactionType: {
     type: String,
     required: [true, "transactionType is required"],
@@ -21,20 +30,15 @@ const AccountTransaction = new mongoose.Schema({
     required: [true, "category is required"],
     maxlength: [20, "Category must be less than 20 characters"],
   },
-  // categoryDetail: {
-  //   type: String,
-  //   maxlength: [20, "Title must be less than 20 characters"],
-  // },
   date: {
     type: Date,
-
     required: [true, "date is required"],
     maxlength: [20, "Title must be less than 20 characters"],
   },
-  // textDetails: {
-  //   type: String,
-  //   maxlength: [20, "Title must be less than 20 characters"],
-  // },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "userId is required"],
+  },
 });
 
 export default mongoose.models.AccountTransaction ||

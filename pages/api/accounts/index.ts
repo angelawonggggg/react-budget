@@ -6,7 +6,8 @@ import { sessionOptions } from "lib/session";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
-  if (!req.session?.user) {
+  const { user } = req.session;
+  if (!user) {
     res.status(401).json({
       error: "Unauthorized",
     });
@@ -18,6 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const account = new Accounts({
       accountType,
       balance: parseFloat(balance),
+      userId: user._id,
     });
     const error = account.validateSync();
     if (error) {
@@ -30,12 +32,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "GET") {
     try {
-      const accounts = await Accounts.find({});
-      res.status(200).json({ success: true, data: accounts });
+      const accounts = await Accounts.find({
+        userId: user._id,
+      });
+      res.status(200).json({
+        success: true,
+        data: accounts,
+        userId: user._id,
+      });
     } catch (error) {
       res.status(400).json({ success: false, error: error });
     }
   }
+
   if (req.method === "PUT") {
     const { id, balance } = req.body;
 
@@ -60,5 +69,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-// export default handler;
 export default withIronSessionApiRoute(handler, sessionOptions);

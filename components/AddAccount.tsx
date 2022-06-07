@@ -3,6 +3,7 @@ import * as StyledContainer from "./styles/Container";
 import { TiDelete } from "react-icons/ti";
 import { useState } from "react";
 import axios from "axios";
+import user from "pages/api/user";
 
 export default function AddAccount({
   closePopup,

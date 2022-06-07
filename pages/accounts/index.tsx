@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import AddAccount from "components/AddAccount";
 import AccountDetails from "components/AccountDetails";
 import { NetWorthCard, PageTopWrapper } from "components/styles/Container";
@@ -11,14 +11,14 @@ import { sessionOptions } from "lib/session";
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const { user } = req.session;
-    if (user?.isLoggedIn === false) {
+    if (!user?.isLoggedIn) {
       return {
         redirect: {
           destination: "/",
           permanent: false,
         },
         props: {
-          user: user,
+          user: null,
         },
       };
     }
@@ -39,6 +39,7 @@ export default function AccountPage({ user }: { user: any }) {
       .then((res) => res.json())
       .then(({ data }) => {
         setAccounts(data);
+        console.log(data);
       });
   };
   useEffect(loadAccounts, [isShowEditPopup]);

@@ -10,14 +10,10 @@ import Login from "components/LogIn";
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const { user } = req.session;
-    if (user?.isLoggedIn === true) {
+    if (!user?.isLoggedIn) {
       return {
-        redirect: {
-          destination: "/home",
-          permanent: false,
-        },
         props: {
-          user: user,
+          user: null,
         },
       };
     }
@@ -37,8 +33,8 @@ export default function LandingPage({ user }: { user: User }) {
       </Head>
 
       <div>
-        <div>{user.isLoggedIn && <div>{user.login} Logged in</div>}</div>
-        {!user.isLoggedIn && (
+        <div>{user?.isLoggedIn && <div>{user?.login} Logged in</div>}</div>
+        {!user?.isLoggedIn && (
           <div>
             <Login />
             <div>

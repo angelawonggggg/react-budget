@@ -47,6 +47,7 @@ export default function AccountPage({ user }: { user: User }) {
   const fetchTransactions = async (accountType: string) => {
     const res = await fetch(`/api/transaction/?accountType=${accountType}`);
     const data = await res.json();
+
     const { transactions } = data;
     return setTransactions(transactions);
   };
@@ -73,7 +74,7 @@ export default function AccountPage({ user }: { user: User }) {
       })
         .then((res) => res.json())
         .then(({ data }) => {
-          console.log(data);
+          router.push("/accounts");
         });
     } else {
       console.log("cancelled");

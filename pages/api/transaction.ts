@@ -1,20 +1,22 @@
 import { connect } from "middleware/mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import AccountTransaction from "../../models/transactions";
+import { withIronSessionApiRoute } from "iron-session/next";
+import { sessionOptions } from "lib/session";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connect();
+  const { user } = req.session;
+
+  if (!user) {
+    res.status(401).json({
+      error: "Unauthorized",
+    });
+    return;
+  }
 
   if (req.method === "POST") {
-    const {
-      transactionType,
-      accountType,
-      amount,
-      category,
-      categoryDetail,
-      date,
-      textDetails,
-    } = req.body;
+    const { transactionType, accountType, amount, category, date } = req.body;
 
     if (isNaN(amount)) {
       res
@@ -23,21 +25,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
 
-    const cleanedPayload = {
+    const newTransaction = new AccountTransaction({
       transactionType,
       accountType,
       amount,
       category,
-      categoryDetail,
       date,
-      textDetails,
-    };
-    const newTransaction = new AccountTransaction(cleanedPayload);
+      userId: user?._id,
+    });
     const error = newTransaction.validateSync();
     if (error) {
       res.status(400).json({ success: false, error: error });
     } else {
-      newTransaction.save();
+      await newTransaction.save();
 
       res.status(201).json({
         status: "success",
@@ -48,12 +48,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "GET") {
     try {
-      // const query: { accountType?: string } = {};
-
-      // if (req.query.accountType) {
-      //   query.accountType = req.query.accountType as string;
-      // }
-      const transactions = await AccountTransaction.find({});
+      const transactions = await AccountTransaction.find({
+        userId: user?._id,
+      });
       res.status(200).json({
         status: "success",
         transactions,
@@ -64,4 +61,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default handler;
+export default withIronSessionApiRoute(handler, sessionOptions);

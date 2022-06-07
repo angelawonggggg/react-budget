@@ -6,6 +6,7 @@ export type Account = {
   balance: number;
   balanceChange: number;
   notes: string;
+  userId: mongoose.Schema.Types.ObjectId;
 };
 
 const accountSchema = new mongoose.Schema({
@@ -17,6 +18,9 @@ const accountSchema = new mongoose.Schema({
   balance: {
     type: Number,
     required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 

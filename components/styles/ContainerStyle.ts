@@ -19,16 +19,16 @@ export const Wrapper = styled.div`
 export const BigCard = styled(motion.section)`
   position: fixed;
   top: 50%;
-  left: 5vw;
+  left: 50%;
   padding: 1rem 2rem;
   background-color: white;
   box-shadow: 2px 2px 2px grey;
   border-radius: 15px;
   height: 70vh;
-  width: 90vw;
+  width: 80vw;
   z-index: 2;
   overflow: scroll;
-  transform: translateY(-50%) !important;
+  transform: translate(-50%, -50%) !important;
 `;
 export const BoxWithTextAndInput = styled.div`
   display: flex;
