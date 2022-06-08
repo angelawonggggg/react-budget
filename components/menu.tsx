@@ -21,14 +21,18 @@ const Navbar = styled(motion.nav)`
 `;
 
 const Profile = styled.div`
-  margin: 2rem auto;
-  background-color: orange;
+  margin: 0 auto;
   padding: 1rem;
+`;
+
+const LogoutButton = styled.div`
+  margin: 0 auto;
 `;
 
 const RouterList = styled(motion.div)`
   display: flex;
   flex-direction: column;
+  margin: 2rem 0;
 `;
 const HeaderMenuIcon = styled(MenuIcon)`
   position: absolute;
@@ -36,9 +40,22 @@ const HeaderMenuIcon = styled(MenuIcon)`
 `;
 
 const CloseMenuIcon = styled(LargeCloseIcon)`
-  transform: scale(2);
   position: absolute;
   left: 1rem;
+`;
+
+const ProfileIcon = styled.div`
+  background-color: orange;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 `;
 
 const sideVariants = {
@@ -58,6 +75,9 @@ const links = [
 
 export default function Menu({ username }: String) {
   const [open, cycleOpen] = useCycle(false, true);
+  const formatUsername = username.charAt(0).toUpperCase() + username.slice(1);
+  const usernameFirstLetter = formatUsername.charAt(0);
+  console.log(usernameFirstLetter);
 
   return (
     <main>
@@ -70,7 +90,13 @@ export default function Menu({ username }: String) {
           }}
         >
           {" "}
-          <Profile>{username}</Profile>
+          <ProfileIcon>
+            <div>{usernameFirstLetter}</div>
+          </ProfileIcon>
+          <Profile>{formatUsername}</Profile>
+          <LogoutButton>
+            <Logout />
+          </LogoutButton>
           <RouterList
             className="container"
             initial="closed"
@@ -81,7 +107,6 @@ export default function Menu({ username }: String) {
               <HeaderMenuLink key={idx} href={href} children={children} />
             ))}
           </RouterList>
-          <Logout />
         </Navbar>
       )}
 

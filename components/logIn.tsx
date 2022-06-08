@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MainText } from "components/styles/Container";
+import { useRouter } from "next/router";
 
 export default function LogIn() {
   const [username, setUsername] = useState("");

@@ -16,9 +16,7 @@ export const IconFocus = styled.span`
   color: black;
 `;
 
-export const MenuIcon = styled(VscGrabber)`
-  transform: scale(2);
-`;
+export const MenuIcon = styled(VscGrabber)``;
 
 export const LargeCloseIcon = styled(VscChromeClose)`
   transform: scale(1.5);
@@ -69,7 +67,7 @@ const ToggleIcon = styled.span`
   font-size: 30px;
   color: ${(props) => props.color || ""};
   vertical-align: middle;
-  position: fixed;
+  position: absolute;
   right: 10px;
   z-index: 11;
 `;

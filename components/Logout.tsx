@@ -1,27 +1,6 @@
 import React from "react";
-import { withIronSessionSsr } from "iron-session/next";
-import { sessionOptions } from "lib/session";
-import { User } from "models/auth";
 import { useRouter } from "next/router";
-
-// export const getServerSideProps = withIronSessionSsr(
-//   async function getServerSideProps({ req }) {
-//     const { user } = req.session;
-//     if (user?.isLoggedIn === false) {
-//       return {
-//         redirect: {
-//           destination: "/",
-//           permanent: false,
-//         },
-//         props: {
-//           user: user,
-//         },
-//       };
-//     }
-//     return { props: { user } };
-//   },
-//   sessionOptions
-// );
+import { Button } from "../components/styles/Button";
 
 export default function Logout() {
   const router = useRouter();
@@ -44,7 +23,9 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
+      <Button color="gray" onClick={handleLogout}>
+        Logout
+      </Button>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
 
  button {
     display: block;
-    background: #E94C89;
+    background-color: #E94C89;
     color: white;
     margin: 1em 0;
     padding: 0.5em 1em;
@@ -65,6 +65,22 @@ select {
 select:focus {
    border: blue;
 }
+
+
+.react-datepicker-wrapper, react-datepicker__input-container, {
+  width: 95%;
+}
+
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+  background: beige;
+}
+
+.react-datepicker__navigation {
+  top: 0; 
+  margin: 0;
+}
+
+
 
   }
   `;

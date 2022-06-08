@@ -73,7 +73,7 @@ export default function AccountPage({ user }: { user: User }) {
         body: JSON.stringify({ id }),
       })
         .then((res) => res.json())
-        .then(({ data }) => {
+        .then(() => {
           router.push("/accounts");
         });
     } else {

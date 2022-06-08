@@ -72,13 +72,11 @@ export const PageTopWrapper = styled.div`
 
 export const ItemWrapper = styled.div`
   min-width: 300px;
-  padding: 10px;
   margin: 10px;
   border-radius: 10px;
   border: 10px solid;
   border-image-slice: 1;
   border-width: 3px;
-  border-image-source: linear-gradient(to left, #c7a1d6, #515ea7d9);
 `;
 
 const AccountCard = styled.div`

@@ -40,11 +40,12 @@ export default function Statistics({ user }: { user: User }) {
   const [isShowBar, setIsShowBar] = useState(false);
   const [data, setData] = useState<any[]>([]);
   const [monthlyStats, setMonthlyStats] = useState<number[]>([]);
-  // const [categories, setCategories] = useState<string[]>([]);
+
   const today = new Date();
-  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+
+  const lastSixMonth = new Date(today.getFullYear(), today.getMonth() - 5, 1);
   const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-  const [startDate, setStartDate] = useState(new Date(lastMonth));
+  const [startDate, setStartDate] = useState(new Date(lastSixMonth));
   const [endDate, setEndDate] = useState(new Date(nextMonth));
 
   const months = [
@@ -81,25 +82,10 @@ export default function Statistics({ user }: { user: User }) {
         setData(transactions);
       });
   };
-  //   const monthlySum: number[] = [];
-  //   for (let i = 0; i < 12; i++) {
-  //     let total = 0;
-  //     for (let j = 0; j < data.length; j++) {
-  //       if (data[j].date.split("/")[1] == i + 1) {
-  //         total += data[j].amount;
-  //         console.log(total);
-  //       }
-  //     }
-  //     monthlySum.push(total);
-  //   }
-  //   setMonthlyStats(monthlySum);
-  // })
 
   useEffect(() => {
     fetchTransactions();
-
-    // setCategories(categoryList);
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return (
