@@ -38,3 +38,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 <img width="400" height="480" alt="Screenshot 2022-06-09 at 5 54 46 PM" src="https://user-images.githubusercontent.com/93753578/172953135-450780f9-b69c-4259-a6da-d3a1a3ea5b5a.png">
 <img width="400" alt="Screenshot 2022-06-09 at 5 54 58 PM" src="https://user-images.githubusercontent.com/93753578/172953157-95f3bd97-5315-4a08-8589-402fbc38dbf8.png">
 
+### 5. CRUD 
+
+<div><img width="400" height="305" alt="Screenshot 2022-06-09 at 5 37 19 PM" src="https://user-images.githubusercontent.com/93753578/172956950-422a8390-9934-4c48-a09e-fcee0e1f220a.png"><img width="400" height="305" alt="Screenshot 2022-06-09 at 6 45 54 PM" src="https://user-images.githubusercontent.com/93753578/172957657-5e9ae538-89fb-42ff-a9c6-9cebbbb56a5f.png">
+</div>
+
+<div><img width="400" height="240" alt="Screenshot 2022-06-09 at 5 30 01 PM" src="https://user-images.githubusercontent.com/93753578/172957046-60f9ab1d-9938-4d46-bf38-f250cf58e044.png">
+<img width="400" height="240" alt="Screenshot 2022-06-09 at 6 49 14 PM" src="https://user-images.githubusercontent.com/93753578/172958001-c137fe0a-9561-40d3-b52d-9407c64c2dd2.png"></div>
+
+
+
