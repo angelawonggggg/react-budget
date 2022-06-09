@@ -33,8 +33,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 <div><img width="400" height="360" alt="Screenshot 2022-06-09 at 5 47 06 PM" src="https://user-images.githubusercontent.com/93753578/172952655-3207fe61-d34a-40f8-ac10-4f9b416df201.png"><img width="400" height="360" alt="Screenshot 2022-06-09 at 5 47 18 PM" src="https://user-images.githubusercontent.com/93753578/172952672-52d76d12-a101-4ce8-80f4-22c6f98aff80.png"></div>
 
 ### 4. Filter transactions 
-<img width="400" alt="Screenshot 2022-06-09 at 5 54 36 PM" src="https://user-images.githubusercontent.com/93753578/172953107-c2d3cf6b-ddcb-4364-9980-ffe41fb0356f.png">
 
-<div><img width="400" height="480" alt="Screenshot 2022-06-09 at 5 54 46 PM" src="https://user-images.githubusercontent.com/93753578/172953135-450780f9-b69c-4259-a6da-d3a1a3ea5b5a.png"><img width="400" height="480" alt="Screenshot 2022-06-09 at 5 54 58 PM" src="https://user-images.githubusercontent.com/93753578/172953157-95f3bd97-5315-4a08-8589-402fbc38dbf8.png"></div>
-
+<img width="400" height="480" alt="Screenshot 2022-06-09 at 5 54 36 PM" src="https://user-images.githubusercontent.com/93753578/172953107-c2d3cf6b-ddcb-4364-9980-ffe41fb0356f.png">
+<img width="400" height="480" alt="Screenshot 2022-06-09 at 5 54 46 PM" src="https://user-images.githubusercontent.com/93753578/172953135-450780f9-b69c-4259-a6da-d3a1a3ea5b5a.png">
+<img width="400" alt="Screenshot 2022-06-09 at 5 54 58 PM" src="https://user-images.githubusercontent.com/93753578/172953157-95f3bd97-5315-4a08-8589-402fbc38dbf8.png">
 
