@@ -1,23 +1,13 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import {
-  DatePicker,
-  NoteInput,
-  AmountInput,
-  DropDown,
-  RadioSector,
-} from "../Mui";
+import { DatePicker, AmountInput, DropDown } from "../Mui";
 import axios from "axios";
 import { BasicButton } from "../styles/Button";
-import {
-  ExpenseCategoriesData,
-  IncomeCategoriesData,
-  SmallCategoriesData,
-  AccountTypeData,
-} from "../Data";
+import { ExpenseCategoriesData, IncomeCategoriesData } from "../Data";
 import { useState, useEffect } from "react";
 import { BoxWithTextAndInput } from "../styles/ContainerStyle";
 import { TransactionFormType } from "../../utils/type";
+import { Account } from "models/accounts";
 
 const TranForm = styled.form`
   display: flex;
@@ -47,8 +37,7 @@ export default function TransactionForm({
   setCardOpen,
   transactionType,
 }: TransactionFormType) {
-  const [categoryName, setCategoryName] = useState([]);
-  const [categoryIcon, setCategoryIcon] = useState("");
+  const [accounts, setAccounts] = useState<Account[]>([]);
 
   const {
     handleSubmit,
@@ -56,6 +45,17 @@ export default function TransactionForm({
     control,
     formState: { errors },
   } = useForm();
+
+  const loadAccounts = () => {
+    fetch("/api/accounts")
+      .then((res) => res.json())
+      .then(({ data }) => {
+        const accountTypes = data.map((account) => account.accountType);
+        setAccounts(accountTypes);
+      });
+  };
+
+  useEffect(loadAccounts, []);
 
   const HandleSubmit = (data: any) => {
     axios
@@ -75,23 +75,6 @@ export default function TransactionForm({
         console.log("Error creating a new transaction", err);
       });
   };
-
-  const categoryState = () => {
-    const target = SmallCategoriesData.find(
-      (target) => target.name === watch("category")
-    );
-
-    if (target?.content && target?.image) {
-      setCategoryName(target?.content);
-      setCategoryIcon(target?.image);
-    } else {
-      console.log("No such type");
-    }
-  };
-
-  useEffect(() => {
-    categoryState();
-  }, [watch("category")]);
 
   return (
     <TranForm onSubmit={handleSubmit(HandleSubmit)}>
@@ -115,12 +98,8 @@ export default function TransactionForm({
       </BoxWithTextAndInput>
 
       <BoxWithTextAndInput>
-        <SubTitle>From:</SubTitle>
-        <DropDown
-          control={control}
-          name={"accountType"}
-          data={AccountTypeData}
-        />
+        <SubTitle>{transactionType == "expense" ? "From: " : "To: "}</SubTitle>
+        <DropDown control={control} name={"accountType"} data={accounts} />
       </BoxWithTextAndInput>
 
       <BasicButton children={"Add"} />

@@ -20,7 +20,7 @@ const utc = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
 type FormControlData = {
   control: any;
   name: string;
-  data: string[];
+  data: any;
 };
 type FormControl = { control: any; name: string };
 

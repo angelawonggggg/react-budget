@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { GiReceiveMoney } from "react-icons/gi";
-import { Icon } from "../styles/Icon";
+import { useState } from "react";
 
 type Item = {
   date: string;
@@ -10,25 +9,26 @@ type Item = {
   secondTitle: string;
   transactionType: string;
 };
-const TitleData = styled.div`
+const DateStyle = styled.div`
   color: silver;
-  font-size: 15px;
+  font-size: 12px;
 `;
 const Box = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
 `;
 
 const Items = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
 const ItemCategory = styled.div`
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
   line-height: 2;
   font-family: "Roboto", sans-serif;
@@ -36,15 +36,21 @@ const ItemCategory = styled.div`
 
 const Amount = styled.div`
   color: green;
-  font-size: 1.2rem;
+  font-size: 1rem;
+`;
+
+const TransactionDetailsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 1rem;
 `;
 
 export default function TransactionItem({
   date,
   title,
   amount,
-  details,
-  secondTitle,
   transactionType,
 }: Item) {
   const newDate = new Date(date);
@@ -54,26 +60,23 @@ export default function TransactionItem({
     newDate.getMonth() + 1,
     newDate.getDate(),
   ].join("-");
+
   return (
     <Box>
-      <TitleData>{transactionDate}</TitleData>
-      <Items>
-        <ItemCategory>{title}</ItemCategory>
+      <input type="checkbox" />
+
+      <TransactionDetailsContainer>
+        <Items>
+          <DateStyle>{transactionDate}</DateStyle>
+          <ItemCategory>{title}</ItemCategory>
+        </Items>
 
         {transactionType === "income" ? (
           <Amount>+${amount}</Amount>
         ) : (
           <div>${amount}</div>
         )}
-      </Items>
-
-      {transactionType === "income" ? (
-        <Icon>
-          <GiReceiveMoney />
-        </Icon>
-      ) : (
-        ""
-      )}
+      </TransactionDetailsContainer>
     </Box>
   );
 }

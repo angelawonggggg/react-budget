@@ -33,7 +33,7 @@ export const NoteIcon = styled(MdOutlineStickyNote2)`
 `;
 
 const PlusLogo = styled(motion.img)`
-  width: 3.5rem;
+  width: 2.5rem;
 `;
 
 export const MotionIcon = ({ action, image }) => {
@@ -64,7 +64,7 @@ export const ScrollIcon = styled.div`
 `;
 
 const ToggleIcon = styled.span`
-  font-size: 30px;
+  font-size: 25px;
   color: ${(props) => props.color || ""};
   vertical-align: middle;
   position: absolute;

@@ -7,14 +7,6 @@ type Link = {
   children: string;
 };
 
-const StyledLink = styled.a`
-  margin: 0.5rem 0 0 1rem;
-  padding: 0.5rem 0 1rem 0.5rem;
-  &:active {
-    color: black;
-  }
-`;
-
 const MenuLink = styled(motion.a)`
   margin: 0.5rem 0 0 1rem;
   padding: 0.5rem 0 1rem 0.5rem;
@@ -23,13 +15,11 @@ const MenuLink = styled(motion.a)`
   &:last-child {
     border-bottom: none;
   }
+
+  &:hover {
+    color: gray;
+  }
 `;
-const itemVariants = {
-  closed: {
-    opacity: 0,
-  },
-  open: { opacity: 1 },
-};
 
 export const SpecialLink = styled.a`
   text-decoration: underline;
@@ -37,16 +27,6 @@ export const SpecialLink = styled.a`
   color: #138bfc;
 `;
 
-export const RouterLink = ({ href, children }: Link) => (
-  <Link href={href}>
-    <StyledLink>{children}</StyledLink>
-  </Link>
-);
-
 export const HeaderMenuLink = ({ href, children }: Link) => (
-  <Link href={href}>
-    <MenuLink whileHover={{ scale: 1.1 }} variants={itemVariants}>
-      {children}
-    </MenuLink>
-  </Link>
+  <MenuLink href={href}>{children}</MenuLink>
 );

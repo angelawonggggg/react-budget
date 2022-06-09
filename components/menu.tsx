@@ -77,7 +77,6 @@ export default function Menu({ username }: String) {
   const [open, cycleOpen] = useCycle(false, true);
   const formatUsername = username.charAt(0).toUpperCase() + username.slice(1);
   const usernameFirstLetter = formatUsername.charAt(0);
-  console.log(usernameFirstLetter);
 
   return (
     <main>
@@ -86,7 +85,7 @@ export default function Menu({ username }: String) {
           onClick={cycleOpen}
           initial={{ width: 0 }}
           animate={{
-            width: 320,
+            width: 200,
           }}
         >
           {" "}

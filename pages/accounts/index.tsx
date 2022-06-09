@@ -28,9 +28,8 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function AccountPage({ user }: { user: any }) {
-  console.log(user);
+  // console.log(user);
   const [isShowPopup, setIsShowPopup] = useState(false);
-  const [isShowEditPopup, setIsShowEditPopup] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
 
@@ -42,14 +41,10 @@ export default function AccountPage({ user }: { user: any }) {
         console.log(data);
       });
   };
-  useEffect(loadAccounts, [isShowEditPopup]);
+  useEffect(loadAccounts, []);
 
   const togglePopupForm = () => {
     setIsShowPopup(!isShowPopup);
-  };
-
-  const toggleEditForm = () => {
-    setIsShowEditPopup(!isShowEditPopup);
   };
 
   return (
@@ -68,12 +63,7 @@ export default function AccountPage({ user }: { user: any }) {
       )}
 
       {accounts?.map?.((account, idx) => (
-        <AccountDetails
-          key={idx}
-          account={account}
-          toggleEditForm={toggleEditForm}
-          isShowEditPopup={isShowEditPopup}
-        />
+        <AccountDetails key={idx} account={account} />
       ))}
     </div>
   );

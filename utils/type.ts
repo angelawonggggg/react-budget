@@ -1,3 +1,4 @@
+import { ClickAwayListenerProps } from "@material-ui/core";
 import { Account } from "models/accounts";
 
 export type TransactionFormType = {
@@ -8,14 +9,14 @@ export type TransactionFormType = {
 };
 
 export type AccountDetailBox = {
-  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
+  toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
   account: Account;
 };
 
 export type AccountDetail = {
   account: Account;
-  toggleEditForm: (event: React.MouseEvent<SVGAElement>) => void;
-  isShowEditPopup: boolean;
+  // toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
+  // isShowEditPopup: boolean;
 };
 
 export type EditAccount = {
@@ -34,8 +35,9 @@ export type PopupForm = {
 };
 
 export type AccountForm = {
-  accountType: string;
-  balance: number;
+  // accountType: string;
+  // balance: number;
+  account: Account;
   toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
   setBalanceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEventHandler<HTMLFormElement>) => void;

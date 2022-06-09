@@ -30,6 +30,10 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
  };
 
+ button:hover {
+   opacity: 0.8;
+ };
+
  a {
      text-decoration: none;
      margin: 5px 10px;
@@ -52,6 +56,47 @@ export const GlobalStyles = createGlobalStyle`
   border:1px solid #138BFC;
 }
 
+input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+  background-color:#ffffff;
+}
+
+input[type=checkbox]:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+  background-color:#3b3f56;
+}
+input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+
 .card {
    width: 50%;
 }
@@ -66,13 +111,18 @@ select:focus {
    border: blue;
 }
 
+.react-datepicker {
+  border: none;
+  box-shadow: 3px 3px lightgrey;
+}
+
 
 .react-datepicker-wrapper, react-datepicker__input-container, {
   width: 95%;
 }
 
 .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
-  background: beige;
+  background: #91eaf58c;
 }
 
 .react-datepicker__navigation {

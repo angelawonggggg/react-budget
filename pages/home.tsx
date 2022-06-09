@@ -8,6 +8,7 @@ import { ItemWrapper } from "components/styles/Container";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
+import { Button } from "../components/styles/Button";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
@@ -61,7 +62,7 @@ export default function Home({ user }: { user: User }) {
         <title>Budget | Home</title>
       </Head>
 
-      <div>{transactionData.length} TRANSACTIONS</div>
+      {/* <Button color="red">Delete</Button> */}
 
       <ItemWrapper>
         {transactionData
@@ -80,6 +81,11 @@ export default function Home({ user }: { user: User }) {
             </div>
           ))}
       </ItemWrapper>
+      <small>
+        <strong style={{ color: "gray" }}>
+          {transactionData.length} transactions
+        </strong>
+      </small>
 
       <AddTransaction setUpdateData={setUpdateData} />
     </div>

@@ -72,14 +72,10 @@ export const PageTopWrapper = styled.div`
 
 export const ItemWrapper = styled.div`
   min-width: 300px;
-  margin: 10px;
-  border-radius: 10px;
-  border: 10px solid;
-  border-image-slice: 1;
-  border-width: 3px;
+  margin-bottom: 1rem;
 `;
 
-const AccountCard = styled.div`
+const AccountCard = styled.a`
   display: flex;
   align-items: baseline;
   flex-direction: column;
@@ -102,7 +98,7 @@ const AccountCard = styled.div`
 
 const AccountCardIcon = styled.div`
   position: absolute;
-  right: 10px;
+  right: 20px;
   font-size: 1em;
   color: ${(props) => props.theme.text.tertiary};
 
@@ -139,7 +135,7 @@ export const AccountDetailCard = ({
   toggleEditForm,
   account,
 }: AccountDetailBox) => (
-  <AccountCard>
+  <AccountCard href={"/accounts/" + account._id}>
     <AccountCardIcon>
       <TiEdit onClick={toggleEditForm} />
     </AccountCardIcon>

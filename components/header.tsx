@@ -8,12 +8,11 @@ const Navbar = styled.nav`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
   position: sticky;
   top: 0;
   z-index: 10;
   background-color: ${(props) => props.theme.bg.primary};
-  box-shadow: 0 0 10px 2px #57564f;
 `;
 
 const Logo = styled.a`

@@ -1,41 +1,17 @@
 import { AccountDetailCard } from "./styles/Container";
 import { AccountDetail } from "../utils/type";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { EditAccountForm } from "./styles/Form";
 import axios from "axios";
 
-export default function AccountDetails({
-  account,
-  toggleEditForm,
-  isShowEditPopup,
-}: AccountDetail) {
+export default function AccountDetails({ account }: AccountDetail) {
+  // console.log(account);
   const [balanceChange, setBalanceChange] = useState(0);
-  // const [accountExpenseSum, setAccountExpenseSum] = useState([]);
-
-  // const accountExpenseSumList = useRef([]);
-
-  // const fetchTransactions = async (accountType: String) => {
-  //   console.log(accountType);
-  //   const res = await axios.get(`/api/transaction/?transactionType=expense`);
-  //   const data = await res.data.transactions;
-  //   const accountExpenseSum = data
-  //     .filter((transaction) => transaction.accountType === account.accountType)
-  //     .reduce((acc, curr) => acc + curr.amount, 0);
-  //   console.log(accountExpenseSum, account.accountType);
-  //   // return accountExpenseSumList.current.push(accountExpenseSum);
-  // };
-  // console.log(accountExpenseSumList);
-
-  // useEffect(() => {
-  //   fetchTransactions();
-  // });
-
   const newBalance = account.balance + balanceChange;
+  const [isShowEditPopup, setIsShowEditPopup] = useState(false);
 
   const onSubmit = (e): void => {
     e.preventDefault();
-    console.log(account._id, account.balance, balanceChange, newBalance);
-
     axios
       .put(`/api/accounts`, {
         id: account._id,
@@ -45,22 +21,26 @@ export default function AccountDetails({
         console.log(data);
       })
       .finally(() => {
-        toggleEditForm();
+        setIsShowEditPopup(false);
       });
   };
 
   return (
     <>
-      <AccountDetailCard account={account} toggleEditForm={toggleEditForm} />
+      <AccountDetailCard
+        account={account}
+        toggleEditForm={() => {
+          setIsShowEditPopup(true);
+        }}
+      />
       {isShowEditPopup && (
         <EditAccountForm
-          accountType={account.accountType}
-          balance={account.balance}
+          account={account}
           setBalanceChange={(event) =>
             setBalanceChange(parseFloat(event.target.value))
           }
           onSubmit={onSubmit}
-          toggleEditForm={toggleEditForm}
+          toggleEditForm={() => setIsShowEditPopup(false)}
         />
       )}
     </>
