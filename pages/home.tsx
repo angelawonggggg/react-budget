@@ -87,7 +87,7 @@ export default function Home({ user }: { user: User }) {
         </strong>
       </small>
 
-      <AddTransaction setUpdateData={setUpdateData} />
+      <AddTransaction setUpdateData={setUpdateData} user={user} />
     </div>
   );
 }

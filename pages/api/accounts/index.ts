@@ -46,15 +46,39 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "PUT") {
-    const { id, balance } = req.body;
+    const { id, balance, balanceChange, accountType, transactionType } =
+      req.body;
+    if (id) {
+      try {
+        const account = await Accounts.findById(id);
+        account.balance = parseFloat(balance);
+        await account.save();
+        res.status(200).json({ success: true, data: account });
+      } catch (error) {
+        res.status(400).json({ success: false, error: error });
+      }
+    }
 
-    try {
-      const account = await Accounts.findById(id);
-      account.balance = parseFloat(balance);
-      await account.save();
-      res.status(200).json({ success: true, data: account });
-    } catch (error) {
-      res.status(400).json({ success: false, error: error });
+    if (balanceChange && accountType) {
+      try {
+        const account = await Accounts.findOne({
+          userId: user._id,
+          accountType: accountType,
+        });
+
+        account.balance =
+          transactionType == "expense"
+            ? parseFloat(account.balance) - parseFloat(balanceChange)
+            : parseFloat(account.balance) + parseFloat(balanceChange);
+        await account.save();
+
+        res.status(200).json({
+          success: true,
+          data: account,
+        });
+      } catch (error) {
+        res.status(400).json({ success: false, error: error });
+      }
     }
   }
 

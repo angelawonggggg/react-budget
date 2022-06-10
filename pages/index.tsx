@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { SpecialLink } from "components/styles/StyledLink";
-
+import { FormWrapper } from "components/styles/Container";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
@@ -36,20 +36,22 @@ export default function LandingPage({ user }: { user: User }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        <div>{user?.isLoggedIn && <div>{user?.login} Logged in</div>}</div>
+      <FormWrapper>
+        {user?.isLoggedIn && <div>{user?.login} Logged in</div>}
         {!user?.isLoggedIn && (
-          <div>
+          <>
             <Login />
             <div>
-              New here?
-              <Link href="/signUp">
-                <SpecialLink>Sign up</SpecialLink>
-              </Link>
+              <div>
+                New here?{" "}
+                <Link href="/signUp">
+                  <SpecialLink>Sign up</SpecialLink>
+                </Link>
+              </div>
             </div>
-          </div>
+          </>
         )}
-      </div>
+      </FormWrapper>
     </div>
   );
 }

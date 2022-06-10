@@ -29,7 +29,8 @@ export default function AccountDetails({ account }: AccountDetail) {
     <>
       <AccountDetailCard
         account={account}
-        toggleEditForm={() => {
+        toggleEditForm={(event) => {
+          event?.preventDefault();
           setIsShowEditPopup(true);
         }}
       />

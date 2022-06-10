@@ -41,7 +41,7 @@ const SmallText = styled.p`
 
 export const MainText = styled.p`
   text-align: center;
-  font-size: 25px;
+  font-size: 18px;
   margin: 5px 0;
   color: ${(props) => props.theme.text.primary};
 `;
@@ -112,6 +112,7 @@ const AccountDetailName = styled.h1`
   display: block;
   cursor: pointer;
   color: ${(props) => props.theme.text.primary};
+  margin-top: 0;
 `;
 
 const Balance = styled.div`
@@ -129,6 +130,14 @@ const Tag = styled.div`
   padding: 5px;
   border-radius: 10px;
   color: whitesmoke;
+`;
+
+export const FormWrapper = styled.div`
+  width: 40vw;
+  margin: 0 auto;
+  background: ${(props) => props.theme.bg.secondary};
+  padding: 20px;
+  border-radius: 15px;
 `;
 
 export const AccountDetailCard = ({

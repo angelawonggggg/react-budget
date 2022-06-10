@@ -35,6 +35,5 @@ export const BoxWithTextAndInput = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
   margin: 1rem 0;
 `;

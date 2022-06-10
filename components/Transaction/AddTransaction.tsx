@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useCycle, useAnimation } from "framer-motion";
 import { BigCard } from "components/styles/ContainerStyle";
 import { useState } from "react";
 import TransactionForm from "components/Transaction/TransactionForm";
-// import { prependOnceListener } from "process";
 
 const HeadArea = styled.div`
   display: flex;
@@ -35,12 +34,12 @@ const TypeTitle = styled.div`
   border: 1px solid grey;
 `;
 
-const ActiveTitle = styled(TypeTitle)`
-  border-radius: 25px;
-  border: 1px solid grey;
-  background-color: grey;
-  color: white;
-`;
+// const ActiveTitle = styled(TypeTitle)`
+//   border-radius: 25px;
+//   border: 1px solid grey;
+//   background-color: grey;
+//   color: white;
+// `;
 
 const Overlay = styled.div`
   position: fixed;
@@ -52,7 +51,7 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default function AddTransaction({ setUpdateData }) {
+export default function AddTransaction({ setUpdateData, user }) {
   const [type, setType] = useState("Expense");
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -112,6 +111,7 @@ export default function AddTransaction({ setUpdateData }) {
                   setCardOpen={setCardOpen}
                   postType="Income"
                   transactionType="income"
+                  user={user}
                 />
               )}
             </BigCard>

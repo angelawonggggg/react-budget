@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MainText } from "components/styles/Container";
-import { useRouter } from "next/router";
+import { FormButton } from "components/styles/Button";
+import { Input } from "components/styles/Form";
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -27,19 +28,24 @@ export default function LogIn() {
   };
 
   return (
-    <div>
-      <MainText>Log in to your account</MainText>
+    <>
       <div>
-        <label>Username</label>
-        <input type="text" onChange={(e) => setUsername(e.target.value)} />
-      </div>
+        <MainText>Log in to your account</MainText>
+        <div>
+          <label>Username</label>
+          <Input type="text" onChange={(e) => setUsername(e.target.value)} />
+        </div>
 
-      <div>
-        <label>Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-      </div>
+        <div>
+          <label>Password</label>
+          <Input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-      <button onClick={formSubmit}>Submit</button>
-    </div>
+        <FormButton onClick={formSubmit}>Submit</FormButton>
+      </div>
+    </>
   );
 }
