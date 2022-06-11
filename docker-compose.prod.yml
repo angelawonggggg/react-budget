@@ -6,7 +6,7 @@ services:
       - "39800:3000"
     environment:
       - DATABASE_URL=mongodb://db:27017
-    command: next start
+    command: yarn start
   db:
     image: mongo
     volumes:
