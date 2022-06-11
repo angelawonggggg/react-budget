@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "39800:3000"
+    environment:
+      - DATABASE_URL=mongodb://db:27017
+  db:
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  mongo_data:
