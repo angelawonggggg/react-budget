@@ -47,14 +47,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "GET") {
+    const { accountType } = req.query;
     try {
-      const transactions = await AccountTransaction.find({
-        userId: user?._id,
-      });
-      res.status(200).json({
-        status: "success",
-        transactions,
-      });
+      if (accountType) {
+        const transactions = await AccountTransaction.find({
+          userId: user?._id,
+          accountType: accountType,
+        });
+        res.status(200).json({
+          status: "success",
+          transactions,
+        });
+      } else {
+        const transactions = await AccountTransaction.find({
+          userId: user?._id,
+        });
+
+        res.status(200).json({
+          status: "success",
+          transactions,
+        });
+      }
     } catch (error) {
       res.status(500).json({ status: "unsuccess" });
     }

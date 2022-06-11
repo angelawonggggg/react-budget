@@ -30,7 +30,7 @@ const DropDownBox = styled(Select)`
 
 const AmountBox = styled.input`
   margin: 1rem 0;
-  height: 3rem;
+  height: 1rem;
 `;
 const RadioOptionBox = styled(FormControlLabel)`
   width: 8rem;

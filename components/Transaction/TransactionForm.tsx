@@ -21,8 +21,7 @@ const AmountTitle = styled.div`
   align-items: center;
   font-weight: 500;
   font-size: 24px;
-  margin: 1rem 0;
-  height: 3rem;
+  height: 2rem;
 `;
 const SubTitle = styled.div`
   width: 30vw;
@@ -36,6 +35,7 @@ export default function TransactionForm({
   setUpdateData,
   setCardOpen,
   transactionType,
+  user,
 }: TransactionFormType) {
   const [accounts, setAccounts] = useState<Account[]>([]);
 
@@ -57,6 +57,18 @@ export default function TransactionForm({
 
   useEffect(loadAccounts, []);
 
+  const updateAccount = (transaction) => {
+    axios
+      .put("/api/accounts", {
+        accountType: transaction.accountType,
+        balanceChange: transaction.amount,
+        transactionType: transactionType,
+      })
+      .catch((err) => {
+        console.log("Error updating account", err);
+      });
+  };
+
   const HandleSubmit = (data: any) => {
     axios
       .post("/api/transaction", {
@@ -70,6 +82,10 @@ export default function TransactionForm({
         console.log("get data", data);
         setCardOpen(false);
         setUpdateData(data);
+      })
+      .then(() => {
+        updateAccount(data);
+        console.log("updated account");
       })
       .catch((err) => {
         console.log("Error creating a new transaction", err);

@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${(props) => props.theme.bg.primary};
     color: ${(props) => props.theme.text.primary};
     transition: all 0.50s linear;
+    font-size: 13px;
   };
 
   .main {
@@ -23,11 +24,12 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
     background-color: #E94C89;
     color: white;
-    margin: 1em 0;
+    margin: 1em auto;
     padding: 0.5em 1em;
     border-radius: 3px;
     cursor: pointer;
     border: none;
+    font-size: 13px;
  };
 
  button:hover {
@@ -43,11 +45,12 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
     margin: 14px 0 5px 0;
     color: gray;
-    font-size: 15px;
+    font-size: 13px;
  };
 
  input {
-  padding: 5px;
+  padding: 5px 0;
+ 
 
  }
 
@@ -129,7 +132,6 @@ select:focus {
   top: 0; 
   margin: 0;
 }
-
 
 
   }

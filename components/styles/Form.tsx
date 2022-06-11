@@ -1,6 +1,7 @@
 import { TiDelete } from "react-icons/ti";
 import styled from "styled-components";
 import { PopupForm, AccountForm, RegisterFormType } from "../../utils/type";
+import { FormButton } from "./Button";
 
 const Title = styled.h1`
   font-size: 15px;
@@ -38,9 +39,8 @@ const Label = styled.label`
   margin: 5px 0;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   width: 100%;
-  padding: 5px;
 `;
 
 const PopupCard = styled.div`
@@ -60,7 +60,7 @@ const Overlay = styled.div`
   z-index: 999;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 `;
 
 export const GetPopupForm = ({
@@ -95,8 +95,6 @@ export const GetPopupForm = ({
 );
 
 export const EditAccountForm = ({
-  // accountType,
-  // balance,
   account,
   setBalanceChange,
   onSubmit,
@@ -129,10 +127,10 @@ export const RegisterForm = ({
 }: RegisterFormType) => (
   <form onSubmit={handleSubmit}>
     <label htmlFor="">Username</label>
-    <input type="text" defaultValue={username} onChange={setUsername} />
+    <Input type="text" defaultValue={username} onChange={setUsername} />
 
     <label htmlFor="">Password</label>
-    <input type="password" defaultValue={password} onChange={setPassword} />
-    <button value="submit">Submit</button>
+    <Input type="password" defaultValue={password} onChange={setPassword} />
+    <FormButton value="submit">Submit</FormButton>
   </form>
 );

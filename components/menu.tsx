@@ -5,7 +5,6 @@ import { HeaderMenuLink } from "./styles/StyledLink";
 import Logout from "./Logout";
 
 const Navbar = styled(motion.nav)`
-  margin: 20px 0;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@ const Navbar = styled(motion.nav)`
   position: absolute;
   height: 100vh;
   width: 100vw;
-  top: 46px;
+  top: 62px;
   left: 0;
   z-index: 2;
   color: white;
@@ -79,7 +78,7 @@ export default function Menu({ username }: String) {
   const usernameFirstLetter = formatUsername.charAt(0);
 
   return (
-    <main>
+    <>
       {open && (
         <Navbar
           onClick={cycleOpen}
@@ -116,6 +115,6 @@ export default function Menu({ username }: String) {
       ) : (
         <CloseMenuIcon onClick={cycleOpen} />
       )}
-    </main>
+    </>
   );
 }

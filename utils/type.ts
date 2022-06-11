@@ -1,4 +1,4 @@
-import { ClickAwayListenerProps } from "@material-ui/core";
+// import { ClickAwayListenerProps } from "@material-ui/core";
 import { Account } from "models/accounts";
 
 export type TransactionFormType = {
@@ -6,6 +6,7 @@ export type TransactionFormType = {
   setCardOpen: any;
   setUpdateData: any;
   transactionType: string;
+  user: Object;
 };
 
 export type AccountDetailBox = {
@@ -15,8 +16,6 @@ export type AccountDetailBox = {
 
 export type AccountDetail = {
   account: Account;
-  // toggleEditForm: (event: React.MouseEvent<HTMLDivElement>) => void;
-  // isShowEditPopup: boolean;
 };
 
 export type EditAccount = {

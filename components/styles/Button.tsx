@@ -11,6 +11,10 @@ export const Button = styled.button`
     cursor: pointer;
     border: none;
   }`;
+export const FormButton = styled.button`
+  display: block;
+  width: 100%;
+`;
 
 export const BasicButton = ({ children }: ButtonType) => {
   return (
