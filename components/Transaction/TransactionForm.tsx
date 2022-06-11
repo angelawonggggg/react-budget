@@ -102,7 +102,7 @@ export default function TransactionForm({
         <DropDown control={control} name={"accountType"} data={accounts} />
       </BoxWithTextAndInput>
 
-      <BasicButton children={"Add"} />
+      <BasicButton>Add</BasicButton>
     </TranForm>
   );
 }

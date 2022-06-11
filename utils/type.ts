@@ -44,7 +44,7 @@ export type AccountForm = {
 };
 
 export type ButtonType = {
-  children: string;
+  children?: ChildNode;
 };
 
 export type AccountTransaction = {

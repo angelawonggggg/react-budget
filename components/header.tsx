@@ -29,7 +29,7 @@ export default function Header({ username }: String) {
     <Navbar>
       {<Menu username={username} />}
 
-      <Link href="/">
+      <Link href="/" passHref>
         <Logo>Budget</Logo>
       </Link>
     </Navbar>

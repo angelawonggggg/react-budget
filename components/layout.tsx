@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "./header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const isUserLoggedIn = children[1].props.user?.isLoggedIn;

@@ -139,7 +139,7 @@ export const AccountDetailCard = ({
     <AccountCardIcon>
       <TiEdit onClick={toggleEditForm} />
     </AccountCardIcon>
-    <Link href={"/accounts/" + account._id}>
+    <Link href={"/accounts/" + account._id} passHref>
       <div>
         <AccountDetailName>{account.accountType}</AccountDetailName>
         <Balance>{"Balance: $" + account.balance}</Balance>

@@ -54,7 +54,7 @@ export default function Home({ user }: { user: User }) {
 
   useEffect(() => {
     fetchDataFromAPI();
-  }, [updateData]);
+  }, [updateData, fetchDataFromAPI]);
 
   return (
     <div>

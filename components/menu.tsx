@@ -103,7 +103,9 @@ export default function Menu({ username }: String) {
             variants={sideVariants}
           >
             {links.map(({ href, children }, idx) => (
-              <HeaderMenuLink key={idx} href={href} children={children} />
+              <HeaderMenuLink key={idx} href={href}>
+                {children}
+              </HeaderMenuLink>
             ))}
           </RouterList>
         </Navbar>

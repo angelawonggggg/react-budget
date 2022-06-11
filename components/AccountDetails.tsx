@@ -10,7 +10,7 @@ export default function AccountDetails({ account }: AccountDetail) {
   const newBalance = account.balance + balanceChange;
   const [isShowEditPopup, setIsShowEditPopup] = useState(false);
 
-  const onSubmit = (e): void => {
+  const onSubmit = (e: any): void => {
     e.preventDefault();
     axios
       .put(`/api/accounts`, {

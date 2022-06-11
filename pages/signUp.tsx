@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { RegisterForm } from "../components/styles/Form";
 
-export default function signUp() {
+export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

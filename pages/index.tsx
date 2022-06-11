@@ -43,7 +43,7 @@ export default function LandingPage({ user }: { user: User }) {
             <Login />
             <div>
               New here?
-              <Link href="/signUp">
+              <Link href="/signUp" passHref>
                 <SpecialLink>Sign up</SpecialLink>
               </Link>
             </div>

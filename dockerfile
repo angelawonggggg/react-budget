@@ -9,5 +9,6 @@ COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
 COPY . /app
+RUN yarn build
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
