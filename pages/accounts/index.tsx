@@ -28,7 +28,6 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function AccountPage({ user }: { user: any }) {
-  // console.log(user);
   const [isShowPopup, setIsShowPopup] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const total = accounts?.reduce((acc, curr) => acc + curr.balance, 0) ?? 0;
@@ -38,7 +37,6 @@ export default function AccountPage({ user }: { user: any }) {
       .then((res) => res.json())
       .then(({ data }) => {
         setAccounts(data);
-        console.log(data);
       });
   };
   useEffect(loadAccounts, []);

@@ -85,7 +85,6 @@ export default function Statistics({ user }: { user: User }) {
 
   useEffect(() => {
     fetchTransactions();
-    // console.log(data);
   }, []);
 
   return (

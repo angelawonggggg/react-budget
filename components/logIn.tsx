@@ -7,7 +7,6 @@ export default function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const formSubmit = () => {
-    console.log("logging in");
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -20,7 +19,7 @@ export default function LogIn() {
     }).then((res) => {
       if (res.status === 200) {
         window.location.reload();
-        console.log("Login successful");
+        // console.log("Login successful");
       } else {
         console.log("Login failed");
       }
