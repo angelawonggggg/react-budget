@@ -1,7 +1,7 @@
 import Head from "next/head";
-import LineChart from "../components/LineChart";
-import DoughnutChart from "../components/DoughnutChart";
-import Bar from "../components/BarChart";
+import LineChart from "../components/lineChart";
+import DoughnutChart from "../components/doughnutChart";
+import Bar from "../components/barChart";
 import { useEffect, useState } from "react";
 import {
   ChartContainer,

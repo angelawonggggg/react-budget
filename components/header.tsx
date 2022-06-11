@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Menu from "./Menu";
+import Menu from "./menu";
 
 const Navbar = styled.nav`
   padding: 1rem;

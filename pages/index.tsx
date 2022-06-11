@@ -5,7 +5,7 @@ import { FormWrapper } from "components/styles/Container";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { User } from "models/auth";
-import Login from "components/LogIn";
+import Login from "components/logIn";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
