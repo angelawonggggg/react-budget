@@ -30,7 +30,6 @@ export const getServerSideProps = withIronSessionSsr(
 );
 
 export default function Home({ user }: { user: User }) {
-  console.log(user.username);
   const [transactionData, setTransactionData] = useState<AccountTransaction[]>(
     []
   );
@@ -52,6 +51,14 @@ export default function Home({ user }: { user: User }) {
       });
   };
 
+  const deleteTransaction = () => {
+    // axios
+    //   .delete("/api/transaction/", {
+    //   })
+
+    console.log("delete");
+  };
+
   useEffect(() => {
     fetchDataFromAPI();
   }, [updateData, fetchDataFromAPI]);
@@ -61,8 +68,6 @@ export default function Home({ user }: { user: User }) {
       <Head>
         <title>Budget | Home</title>
       </Head>
-
-      {/* <Button color="red">Delete</Button> */}
 
       <ItemWrapper>
         {transactionData
@@ -81,11 +86,14 @@ export default function Home({ user }: { user: User }) {
             </div>
           ))}
       </ItemWrapper>
-      <small>
-        <strong style={{ color: "gray" }}>
-          {transactionData.length} transactions
-        </strong>
-      </small>
+      <div>
+        <small>
+          <strong style={{ color: "gray" }}>
+            {transactionData.length} transactions
+          </strong>
+        </small>
+        <button onClick={deleteTransaction}>Delete</button>
+      </div>
 
       <AddTransaction setUpdateData={setUpdateData} user={user} />
     </div>

@@ -79,13 +79,11 @@ export default function TransactionForm({
         date: data.date,
       })
       .then((data) => {
-        console.log("get data", data);
         setCardOpen(false);
         setUpdateData(data);
       })
       .then(() => {
         updateAccount(data);
-        console.log("updated account");
       })
       .catch((err) => {
         console.log("Error creating a new transaction", err);

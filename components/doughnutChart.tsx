@@ -6,8 +6,6 @@ export default function DoughnutChartComponent({ content }: DoughnutChart) {
   const categoryList: string[] = [];
   const categorySumList: number[] = [];
 
-  // console.log(content);
-
   const getCategories = () => {
     for (let i = 0; i < content.length; i++) {
       if (
@@ -17,7 +15,6 @@ export default function DoughnutChartComponent({ content }: DoughnutChart) {
         categoryList.push(content[i].category);
       }
     }
-    console.log(categoryList);
     return categoryList;
   };
 
