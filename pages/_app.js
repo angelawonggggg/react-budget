@@ -11,14 +11,14 @@ import { sessionOptions } from "lib/session";
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const { user } = req.session;
-    if (user?.isLoggedIn === false) {
+    if (!user?.isLoggedIn) {
       return {
         redirect: {
           destination: "/",
           permanent: false,
         },
         props: {
-          user: user,
+          user: null,
         },
       };
     }

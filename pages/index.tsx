@@ -10,14 +10,14 @@ import Login from "components/logIn";
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
     const { user } = req.session;
-    if (user?.isLoggedIn) {
+    if (!user?.isLoggedIn) {
       return {
         redirect: {
           destination: "/home",
           permanent: false,
         },
         props: {
-          user: user,
+          user: null,
         },
       };
     }
