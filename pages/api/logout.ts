@@ -8,14 +8,15 @@ export default withIronSessionApiRoute(logoutRoute, sessionOptions);
 async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === "POST") {
-      const user = {
-        isLoggedIn: false,
-        username: "",
-      } as User;
-      req.session.user = user;
-      await req.session.save();
+      //   const user = {
+      //     isLoggedIn: false,
+      //     username: "",
+      //   } as User;
+      //   req.session.user = user;
+      await req.session.destroy();
+      // await req.session.save();
 
-      res.json(user);
+      // res.json(user);
       res.status(200).json({ message: "logout success" });
     }
   } catch (error) {

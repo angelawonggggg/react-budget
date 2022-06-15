@@ -3,9 +3,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import AccountTransaction from "../../models/transactions";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "lib/session";
+import mongoose from "mongoose";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await connect();
   const { user } = req.session;
 
   if (!user) {
@@ -13,6 +13,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       error: "Unauthorized",
     });
     return;
+  } else {
+    await connect();
   }
 
   if (req.method === "POST") {

@@ -58,12 +58,12 @@ export default function TransactionItem({
   const transactionDate = [
     newDate.getFullYear(),
     newDate.getMonth() + 1,
-    newDate.getDate(),
+    newDate.getDate() + 1,
   ].join("-");
 
   return (
     <Box>
-      <input type="checkbox" />
+      {/* <input type="checkbox" /> */}
 
       <TransactionDetailsContainer>
         <Items>

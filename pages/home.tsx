@@ -51,17 +51,17 @@ export default function Home({ user }: { user: User }) {
       });
   };
 
-  const deleteTransaction = () => {
-    // axios
-    //   .delete("/api/transaction/", {
-    //   })
+  // const deleteTransaction = () => {
+  //   // axios
+  //   //   .delete("/api/transaction/", {
+  //   //   })
 
-    console.log("delete");
-  };
+  //   console.log("delete");
+  // };
 
   useEffect(() => {
     fetchDataFromAPI();
-  }, [updateData, fetchDataFromAPI]);
+  }, []);
 
   return (
     <div>
@@ -92,7 +92,7 @@ export default function Home({ user }: { user: User }) {
             {transactionData.length} transactions
           </strong>
         </small>
-        <button onClick={deleteTransaction}>Delete</button>
+        {/* <button onClick={deleteTransaction}>Delete</button> */}
       </div>
 
       <AddTransaction setUpdateData={setUpdateData} user={user} />
