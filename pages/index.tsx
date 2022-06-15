@@ -9,7 +9,7 @@ import Login from "components/logIn";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
-    const { user=null } = req.session;
+    const { user = null } = req.session;
     return { props: { user } };
   },
 
@@ -26,7 +26,7 @@ export default function LandingPage({ user }: { user: User }) {
       </Head>
 
       <FormWrapper>
-        {user?.isLoggedIn && <div>{user?.login} Logged in</div>}
+        {user?.isLoggedIn && <div>Logged in as {user?.username}</div>}
         {!user?.isLoggedIn && (
           <>
             <Login />

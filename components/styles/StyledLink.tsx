@@ -7,7 +7,7 @@ type Link = {
   children: string;
 };
 
-const MenuLink = styled(motion.a)`
+const MenuLink = styled.div`
   margin: 0.5rem 0 0 1rem;
   padding: 0.5rem 0 1rem 0.5rem;
   border-bottom: 0.5px solid white;
@@ -28,5 +28,7 @@ export const SpecialLink = styled.a`
 `;
 
 export const HeaderMenuLink = ({ href, children }: Link) => (
-  <MenuLink href={href}>{children}</MenuLink>
+  <Link href={href}>
+    <MenuLink>{children}</MenuLink>
+  </Link>
 );
