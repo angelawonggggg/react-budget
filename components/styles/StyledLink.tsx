@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 type Link = {
   href: string;
