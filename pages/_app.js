@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import Layout from "../components/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToggleTheme } from "../components/styles/Icon";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../components/styles/Global";
@@ -31,7 +31,15 @@ function MyApp({ Component, pageProps, user }) {
   const [isDark, setTheme] = useState(false);
   const themeToggler = () => {
     setTheme(!isDark);
+    localStorage.setItem("lightTheme", isDark);
   };
+
+  useEffect(() => {
+    const selectedTheme = localStorage.getItem("lightTheme");
+    if (selectedTheme) {
+      setTheme(selectedTheme);
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>

@@ -138,6 +138,7 @@ export const FormWrapper = styled.div`
   background: ${(props) => props.theme.bg.secondary};
   padding: 20px;
   border-radius: 15px;
+  max-width: 350px;
 `;
 
 export const AccountDetailCard = ({
